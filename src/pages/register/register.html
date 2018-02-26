@@ -5,14 +5,27 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>register</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Register</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <form (submit)="register()">
+    <input [(ngModel)]="user.username" placeholder="Username" name="username">
+    <br>
+    <input [(ngModel)]="user.password" placeholder="Password" type="password" name="password">
+    <br>
+    <input [(ngModel)]="user.email" placeholder="Email" name="email">
+    <br>
+    <input [(ngModel)]="user.full_name" placeholder="Full name" name="full_name">
+    <br>
+    <button type="submit">Register</button>
+  </form>
 
 </ion-content>

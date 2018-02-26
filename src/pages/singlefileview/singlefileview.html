@@ -7,7 +7,10 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>singlefileview</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>MediaPlayer</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,4 +18,16 @@
 
 <ion-content padding>
 
+  <ion-card>
+    <ion-card-title>{{title}}</ion-card-title>
+    <img [src]="url" (click)="openImage()">
+    <ion-card-content>
+      <ion-item> {{"Description: " + description}}</ion-item>
+      <ion-item> {{"Uploaded by: " + user_id}}</ion-item>  <!-- also add username, fullname too ? -->
+      <ion-item> {{"Added: " + time_added}}</ion-item>
+      <ion-item> {{"File id: " + file_id}}</ion-item>
+      <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
+      <ion-item> {{"Favourited by: " + favourites.user_id}}</ion-item> <!-- USERID/USERNAME -->
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,18 +1,23 @@
-<!--
-  Generated template for the UploadPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>upload</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Upload</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <form (submit)="upload()">
+    <input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)">
+    <br>
+    <input [(ngModel)]="media.title" type="text" name="title">
+    <br>
+    <textarea [(ngModel)]="media.description" name="description"></textarea>
+    <br>
+    <button type="submit">Upload</button>
+  </form>
 
 </ion-content>
