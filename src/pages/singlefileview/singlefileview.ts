@@ -5,6 +5,7 @@ import {MediaProvider} from "../../providers/media/media";
 import {Favourites} from "../../interfaces/favourites";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {Media} from "../../interfaces/media";
+import {Comments} from "../../interfaces/comments";
 
 /**
  * Generated class for the SinglefileviewPage page.
@@ -32,26 +33,13 @@ export class SinglefileviewPage {
     time_added: '',
   };
 
+
   url: string;
-
-  /*title: string;
-  description: string;
-  file_id: number;
-  filename: string;
-  user_id: number;
-  mime_type: string;
-  media_type: string;
-  time_added: string; */
-
-
-  favouriteFile: Favourites = {
-    favourite_id: 0,
-    file_id: 0,
-    user_id: 0
-  };
+  comment: Comments[];
+  filzu_id: number;
+  favouriteID: Favourites[];
 
   ressuponseTemp: any;
-  ressuponseTemp1: any;
   temp: string;
   userIdCounter: number;
 
@@ -65,42 +53,42 @@ export class SinglefileviewPage {
       this.url = this.mediaProvider.uploadUrl + '/' + response['filename'];
       this.ressuponseTemp = response;
       this.mediaFile = this.ressuponseTemp;
+      console.log("THIS IS THE MEDIAFILE ID PART WORKING SO FAR? ?? " + this.mediaFile.file_id);
+      this.filzu_id = response['file_id'];
       /* this.title = response['title'];
        this.description = response['description'];
        this.time_added = response['time_added'];
        this.user_id = response['user_id'];
        this.file_id = response['file_id']; */
+
+      this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
+        this.favouriteID = ressu;
+        //this.userIdCounter = (this.temp.match(/user_id/g) || []).length;
+        //console.log(this.userIdCounter);
+        //this is the same as below.
+        this.userIdCounter = Object.keys(ressu).length;
+      });
+
+      this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
+        console.log("THIS IS THE MEDIAFILE ID PART WORKING SO FAR? ?? " + this.filzu_id);
+        this.comment = resbond;
+        console.log(this.comment);
+      });
     }, (error: HttpErrorResponse) => {
       console.log(error);
-    });
-
-    this.mediaProvider.favouritesByFileId(this.mediaFile.file_id).subscribe(ressu => {
-
-      this.ressuponseTemp1 = ressu;
-      this.favouriteFile = this.ressuponseTemp1;
-      console.log("THIS FAVOURITES " + this.favouriteFile);
-
-      console.log(ressu + "this is ressu");
-      console.log(ressu['this.favouriteFile.user_id']);
-      //this.favourites.user_id = ressu['favourites.user_id'];  //users that liked the photo
-      //this.favourites.favourite_id = ressu['favourites.favourite_id'];
-      //this.favourites.file_id = ressu['favourites.file_id'];
-      //console.log("Favourite objects details: " + this.favourites.file_id + " <-- file id + user id-->  " + this.favourites.user_id + " finally favourites --> " + this.favourites.favourite_id);
-      //console.log("ressu: " + JSON.stringify(ressu));
-
-      //this.temp = JSON.stringify(ressu);
-      //console.log("current temp " + this.temp);
-      //this.userIdCounter = (this.temp.match(/user_id/g) || []).length;
-      //console.log(this.userIdCounter);
-      //this is the same as below.
-      this.userIdCounter = Object.keys(ressu).length;
-
     });
 
   }
 
   openImage() {
     this.photoViewer.show(this.url, this.mediaFile.title);
+  }
+
+  addComment() {
+    this.mediaProvider.addComment(this.filzu_id).subscribe((resbond: Comments[]) => {
+      this.comment = resbond;
+      console.log(this.comment);
+    });
   }
 
 }

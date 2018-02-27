@@ -1,6 +1,7 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {User} from "../../interfaces/user";
+import {tokenKey} from "@angular/core/src/view";
 
 /*
   Generated class for the MediaProvider provider.
@@ -13,11 +14,17 @@ export class MediaProvider {
 
   logged = false;
 
+  newComment: '';
+
   loginUrl = 'http://media.mw.metropolia.fi/wbma/login';
   apiUrl = 'http://media.mw.metropolia.fi/wbma';
   mediaUrl = 'http://media.mw.metropolia.fi/wbma/media';
   uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
   favouriteUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
+
+  settings = {
+    headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
+  };
 
 
   constructor(public http: HttpClient) {
@@ -34,19 +41,11 @@ export class MediaProvider {
   }
 
   public getNewFiles() {
-    const settings = {
-      headers: new HttpHeaders().set('x-access-token',
-        localStorage.getItem('token'))
-    };
-    return this.http.get(this.mediaUrl, settings);
+    return this.http.get(this.mediaUrl, this.settings);
   }
 
   public getOneFile(id) {
-    const settings = {
-      headers: new HttpHeaders().set('x-access-token',
-        localStorage.getItem('token'))
-    };
-    return this.http.get<Array<string>>(this.mediaUrl + '/' + id, settings);
+    return this.http.get<Array<string>>(this.mediaUrl + '/' + id, this.settings);
   }
 
   public register(user) {
@@ -54,25 +53,30 @@ export class MediaProvider {
   }
 
   public login(user) {
-    const settings = {
+    const xsettings = {
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
     };
-    return this.http.post(this.loginUrl, user, settings);
+    return this.http.post(this.loginUrl, user, xsettings);
   }
 
   public uploading(file) {
-    const settings = {
-      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
-    };
-    return this.http.post(this.mediaUrl, file, settings);
+    return this.http.post(this.mediaUrl, file, this.settings);
   }
 
-  public favouritesByFileId(id:number) {
+  public favouritesByFileId(id: number) {
     return this.http.get(this.favouriteUrl + 'file/' + id);
   }
 
-  public getCommentsByFileId(id:number) {
-    return this.http.get(this.mediaUrl + '/comments/file/' + id)
+  public getCommentsByFileId(id: number) {
+    return this.http.get(this.apiUrl + '/comments/file/' + id)
+  }
+
+  public addComment(id: number) {
+    const body = {
+      file_id: id,
+      comment: this.newComment,
+    };
+    return this.http.post(this.apiUrl + '/comments', body, this.settings);
   }
 }
 
