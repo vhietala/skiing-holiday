@@ -13,13 +13,13 @@
   <p>Enjoy some fresh images!</p>
   <div *ngFor="let file of MediaFiles">
     <div>
-      <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="openOnePic(file.file_id)"
+      <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="openOneFile(file.file_id)"
            [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
     </div>
 
     <div *ngIf="file.media_type == 'audio'">
       <div>
-        <audio controls>
+        <audio controls (click)="openOneFile(file.file_id)">
           <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
         </audio>
       </div>
@@ -27,7 +27,7 @@
 
     <div *ngIf="file.media_type == 'video'">
       <div>
-        <video controls width="320" height="240"
+        <video controls width="320" height="240" (click)="openOneFile(file.file_id)"
                [poster]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')">
           <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
           <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">

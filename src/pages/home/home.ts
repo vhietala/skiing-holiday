@@ -44,7 +44,7 @@ export class HomePage {
     });
   }
 
-  openOnePic(id) {
+  openOneFile(id) {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
 

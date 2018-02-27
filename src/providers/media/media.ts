@@ -67,8 +67,12 @@ export class MediaProvider {
     return this.http.post(this.mediaUrl, file, settings);
   }
 
-  public favouritesByFileId(id) {
+  public favouritesByFileId(id:number) {
     return this.http.get(this.favouriteUrl + 'file/' + id);
+  }
+
+  public getCommentsByFileId(id:number) {
+    return this.http.get(this.mediaUrl + '/comments/file/' + id)
   }
 }
 

@@ -20,14 +20,26 @@
 
   <ion-card>
     <ion-card-title>{{title}}</ion-card-title>
-    <img [src]="url" (click)="openImage()">
+    <img [src]="url" *ngIf="mediaFile.media_type == 'image'">
+    <video [src]="url" *ngIf="mediaFile.media_type == 'video'" controls></video>
+    <audio *ngIf="mediaFile.media_type == 'audio'" [src]="url" controls></audio>
     <ion-card-content>
-      <ion-item> {{"Description: " + description}}</ion-item>
-      <ion-item> {{"Uploaded by: " + user_id}}</ion-item>  <!-- also add username, fullname too ? -->
-      <ion-item> {{"Added: " + time_added}}</ion-item>
-      <ion-item> {{"File id: " + file_id}}</ion-item>
-      <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
-      <ion-item> {{"Favourited by: " + favourites.user_id}}</ion-item> <!-- USERID/USERNAME -->
+      <ion-list>
+        <ion-item> {{"Description: " + mediaFile.description}}</ion-item>
+        <ion-item> {{"Uploaded by: " + mediaFile.user_id}}</ion-item>  <!-- also add username, fullname too ? -->
+        <ion-item> {{"Added: " + mediaFile.time_added}}</ion-item>
+        <ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>
+        <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
+        <ion-item> {{"Favourited by: " + favouriteFile.user_id}}</ion-item> <!-- USERID/USERNAME -->
+
+
+        <ion-item> {{ "Comments: " }}</ion-item>
+        <ion-list>
+          <ion-item></ion-item> <!-- comments here --> <!-- *ngfor comment list, add timestamp + sender  -->
+        </ion-list>
+        <ion-input type="text" placeholder="Write a comment..."></ion-input>
+        <button ion-button>Comment</button>
+      </ion-list>
     </ion-card-content>
   </ion-card>
 </ion-content>
