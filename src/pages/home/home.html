@@ -5,9 +5,7 @@
     </button>
     <ion-title>Home</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <p>Enjoy some fresh images!</p>
@@ -16,7 +14,6 @@
       <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="openOneFile(file.file_id)"
            [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
     </div>
-
     <div *ngIf="file.media_type == 'audio'">
       <div>
         <audio controls (click)="openOneFile(file.file_id)">
@@ -24,7 +21,6 @@
         </audio>
       </div>
     </div>
-
     <div *ngIf="file.media_type == 'video'">
       <div>
         <video controls width="320" height="240" (click)="openOneFile(file.file_id)"

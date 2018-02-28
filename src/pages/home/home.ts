@@ -47,5 +47,4 @@ export class HomePage {
   openOneFile(id) {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
-
 }
