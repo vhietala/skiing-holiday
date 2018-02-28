@@ -40,7 +40,7 @@ export class RegisterPage {
       //this.mediaProvider.username = this.user.username;
       //this.mediaProvider.password = this.user.password;
       console.log("username+pw: " + this.user.username + '+' + this.user.password);
-      MediaProvider.removeUserData();
+      this.mediaProvider.removeUserData();
       this.mediaProvider.login(this.user);
       this.mediaProvider.logged = true;
       this.navCtrl.setRoot(HomePage);

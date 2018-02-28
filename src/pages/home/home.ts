@@ -1,30 +1,24 @@
-import { Component } from '@angular/core';
-<<<<<<< HEAD
-import { NavController } from 'ionic-angular';
-=======
+import {Component} from '@angular/core';
 import {NavController, NavParams} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {HttpErrorResponse} from "@angular/common/http";
 import {SinglefileviewPage} from "../singlefileview/singlefileview";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
->>>>>>> 8974bb173595c5a90dfdb116b374d124a4ab62b5
+import {User} from "../../interfaces/user";
+
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-<<<<<<< HEAD
 
-  constructor(public navCtrl: NavController) {
-
-=======
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
   }
 
   files: any;
-  MediaFiles: any;
+  MediaFiles: Media[];
   file: Media = {
     file_id: 0,
     filename: '',
@@ -33,8 +27,12 @@ export class HomePage {
     user_id: 0,
     media_type: '',
     mime_type: '',
-    time_added: ''
+    time_added: '',
+    username: ''
   };
+
+  meeduska: User;
+
 
   ionViewDidLoad() {
     this.mediaProvider.getUserData().subscribe(response => {
@@ -47,15 +45,26 @@ export class HomePage {
   }
 
   displayImages() {
-    this.mediaProvider.getNewFiles().subscribe(response => {
+    this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
       console.log(response);
       this.MediaFiles = response;
+      //make this response type media and try through it?
+      //atm it shows 20 objects and it doenst go throoguh them even i have for loop
+
+      console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
+      for (let i = 0; i < this.MediaFiles.length; i++) {
+        console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
+        this.mediaProvider.getUserInfo(this.MediaFiles[i].user_id).subscribe((ressu: User) => {
+          this.meeduska = ressu;
+          this.MediaFiles[i].username = this.meeduska.username;
+        });
+
+      }
     });
   }
 
   openOneFile(id) {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
->>>>>>> 8974bb173595c5a90dfdb116b374d124a4ab62b5
-  }
 
+  }
 }
