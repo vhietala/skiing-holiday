@@ -26,9 +26,9 @@ export class MyApp {
     this.pages = [
       {title: 'Home', component: HomePage, icon: 'home'},
       {title: 'Login', component: LoginPage, icon: 'log-in'},
-      {title: 'Register', component: RegisterPage, icon: ''},
+      {title: 'Register', component: RegisterPage, icon: 'options'},
       {title: 'Profile', component: ProfilePage, icon: 'contact'},
-      {title: 'Upload', component: UploadPage, icon: ''},
+      {title: 'Upload', component: UploadPage, icon: 'add'},
     ];
 
   }
