@@ -7,12 +7,34 @@
   </ion-navbar>
 </ion-header>
 
+
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
+  <p>Enjoy some fresh images!</p>
+  <div *ngFor="let file of MediaFiles">
+    <div>
+      <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="openOneFile(file.file_id)"
+           [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
+    </div>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+    <div *ngIf="file.media_type == 'audio'">
+      <div>
+        <audio controls (click)="openOneFile(file.file_id)">
+          <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
+        </audio>
+      </div>
+    </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+    <div *ngIf="file.media_type == 'video'">
+      <div>
+        <video controls width="320" height="240" (click)="openOneFile(file.file_id)"
+               [poster]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')">
+          <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
+          <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">
+        </video>
+      </div>
+    </div>
+    <h5>{{ "Title: " + file.title }}</h5>
+    <p>{{ "Description: " + file.description }}</p>
+    <p>{{ "File id: " + file.file_id }}</p>
+  </div>
 </ion-content>

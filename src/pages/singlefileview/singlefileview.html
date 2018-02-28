@@ -1,0 +1,48 @@
+<!--
+  Generated template for the SinglefileviewPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>MediaPlayer</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card>
+    <ion-card-title>{{mediaFile.title}}</ion-card-title>
+    <img [src]="url" *ngIf="mediaFile.media_type == 'image'">
+    <video [src]="url" *ngIf="mediaFile.media_type == 'video'" controls></video>
+    <audio *ngIf="mediaFile.media_type == 'audio'" [src]="url" controls></audio>
+    <ion-card-content>
+      <ion-list>
+        <ion-item> {{"Description: " + mediaFile.description}}</ion-item>
+        <ion-item> {{"Uploaded by: " + mediaFile.user_id}}</ion-item>  <!-- also add username-->
+        <ion-item> {{"Added: " + mediaFile.time_added}}</ion-item>
+        <ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>
+        <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
+        <ion-item-group> {{"Favourited by: "}}</ion-item-group>
+        <ion-list *ngFor="let favouriter of favouriteID">
+          <ion-item-group> {{favouriter.user_id}}</ion-item-group> <!-- USERID (+USERNAME?) -->
+        </ion-list>
+        <ion-item> {{ "Comments: " }}</ion-item>
+        <ion-list *ngFor="let commenterino of comment">
+          <ion-item> {{ commenterino.username + ": " + commenterino.comment + " -Added: " +commenterino.time_added}}
+          </ion-item>
+          <!-- comments here -->
+        </ion-list>
+        <ion-input [(ngModel)]="mediaProvider.newComment" type="text" placeholder="Write a comment..."></ion-input>
+        <button (click)="addComment()" ion-button>Comment</button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

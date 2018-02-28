@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Upload</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <form (submit)="upload()">
+    <input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)">
+    <br>
+    <input [(ngModel)]="media.title" type="text" name="title" placeholder="Title">
+    <br>
+    <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+    <br>
+    <button type="submit">Upload</button>
+  </form>
+
+</ion-content>

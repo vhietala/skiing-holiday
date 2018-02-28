@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -5,6 +6,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
+=======
+import {Component, ViewChild} from '@angular/core';
+import {Nav, Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar';
+import {SplashScreen} from '@ionic-native/splash-screen';
+
+import {HomePage} from '../pages/home/home';
+import {LoginPage} from "../pages/login/login";
+import {RegisterPage} from "../pages/register/register";
+import {ProfilePage} from "../pages/profile/profile";
+import {UploadPage} from "../pages/upload/upload";
+>>>>>>> 8974bb173595c5a90dfdb116b374d124a4ab62b5
 
 @Component({
   templateUrl: 'app.html'
@@ -14,15 +27,27 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
+<<<<<<< HEAD
   pages: Array<{title: string, component: any}>;
+=======
+  pages: Array<{ title: string, component: any }>;
+>>>>>>> 8974bb173595c5a90dfdb116b374d124a4ab62b5
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
+<<<<<<< HEAD
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage }
+=======
+      {title: 'Home', component: HomePage},
+      {title: 'Login', component: LoginPage},
+      {title: 'Register', component: RegisterPage},
+      {title: 'Profile', component: ProfilePage},
+      {title: 'Upload', component: UploadPage},
+>>>>>>> 8974bb173595c5a90dfdb116b374d124a4ab62b5
     ];
 
   }

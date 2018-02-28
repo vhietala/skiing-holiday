@@ -1,6 +1,15 @@
 {
+<<<<<<< HEAD
   "name": "skiing-holiday",
   "app_id": "",
   "type": "ionic-angular",
   "integrations": {}
+=======
+  "name": "MeetUp",
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+>>>>>>> 8974bb173595c5a90dfdb116b374d124a4ab62b5
 }
