@@ -6,6 +6,7 @@ import {Favourites} from "../../interfaces/favourites";
 import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {Media} from "../../interfaces/media";
 import {Comments} from "../../interfaces/comments";
+import {User} from "../../interfaces/user";
 
 /**
  * Generated class for the SinglefileviewPage page.
@@ -42,6 +43,7 @@ export class SinglefileviewPage {
   ressuponseTemp: any;
   temp: string;
   userIdCounter: number;
+  commentGuy: User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
   }
@@ -70,9 +72,14 @@ export class SinglefileviewPage {
       });
 
       this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
-        console.log("THIS IS THE MEDIAFILE ID PART WORKING SO FAR? ?? " + this.filzu_id);
         this.comment = resbond;
-        console.log(this.comment);
+        for (let i = 0; i < this.comment.length; i++) {
+          this.mediaProvider.getUserInfo(this.comment[i].user_id).subscribe((ressu: User) => {
+            this.commentGuy = ressu;
+            this.comment[i].username = this.commentGuy.username;
+          });
+        }
+
       });
     }, (error: HttpErrorResponse) => {
       console.log(error);
@@ -91,6 +98,14 @@ export class SinglefileviewPage {
         this.mediaProvider.newComment = '';
         this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
           this.comment = resbond;
+
+          for (let i = 0; i < this.comment.length; i++) {
+            this.mediaProvider.getUserInfo(this.comment[i].user_id).subscribe((ressu: User) => {
+              this.commentGuy = ressu;
+              this.comment[i].username = this.commentGuy.username;
+            });
+          }
+
         });
       });
     }

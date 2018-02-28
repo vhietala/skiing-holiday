@@ -36,7 +36,7 @@
         </ion-list>
         <ion-item> {{ "Comments: " }}</ion-item>
         <ion-list *ngFor="let commenterino of comment">
-          <ion-item> {{ commenterino.user_id + ": " + commenterino.comment + " Added: " + commenterino.time_added}}
+          <ion-item> {{ commenterino.username + ": " + commenterino.comment + " -Added: " +commenterino.time_added}}
           </ion-item>
           <!-- comments here -->
         </ion-list>

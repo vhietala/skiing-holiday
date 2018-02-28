@@ -22,7 +22,7 @@ export class MediaProvider {
   uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
   favouriteUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
 
-  settings = {
+  tokenSettings = {
     headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
   };
 
@@ -41,11 +41,11 @@ export class MediaProvider {
   }
 
   public getNewFiles() {
-    return this.http.get(this.mediaUrl, this.settings);
+    return this.http.get(this.mediaUrl, this.tokenSettings);
   }
 
   public getOneFile(id) {
-    return this.http.get<Array<string>>(this.mediaUrl + '/' + id, this.settings);
+    return this.http.get<Array<string>>(this.mediaUrl + '/' + id, this.tokenSettings);
   }
 
   public register(user) {
@@ -60,7 +60,7 @@ export class MediaProvider {
   }
 
   public uploading(file) {
-    return this.http.post(this.mediaUrl, file, this.settings);
+    return this.http.post(this.mediaUrl, file, this.tokenSettings);
   }
 
   public favouritesByFileId(id: number) {
@@ -76,7 +76,11 @@ export class MediaProvider {
       file_id: id,
       comment: this.newComment,
     };
-    return this.http.post(this.apiUrl + '/comments', body, this.settings);
+    return this.http.post(this.apiUrl + '/comments', body, this.tokenSettings);
+  }
+
+  public getUserInfo(id: number) {
+    return this.http.get(this.apiUrl + '/users/' + id, this.tokenSettings);
   }
 }
 

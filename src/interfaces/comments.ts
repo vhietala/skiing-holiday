@@ -4,4 +4,5 @@ export interface Comments {
   user_id: number;
   comment: string;
   time_added: string;
+  username: string;
 }
