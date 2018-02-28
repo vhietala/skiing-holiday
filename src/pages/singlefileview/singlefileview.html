@@ -36,7 +36,8 @@
         </ion-list>
         <ion-item> {{ "Comments: " }}</ion-item>
         <ion-list *ngFor="let commenterino of comment">
-          <ion-item> {{ commenterino.comment }} {{commenterino.time_added}} {{commenterino.user_id}}</ion-item>
+          <ion-item> {{ commenterino.user_id + ": " + commenterino.comment + " Added: " + commenterino.time_added}}
+          </ion-item>
           <!-- comments here -->
         </ion-list>
         <ion-input [(ngModel)]="mediaProvider.newComment" type="text" placeholder="Write a comment..."></ion-input>
