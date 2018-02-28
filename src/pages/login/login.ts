@@ -4,19 +4,9 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {HomePage} from "../home/home";
 import {MediaProvider} from "../../providers/media/media";
 import {RegisterPage} from "../register/register";
+import {AboutPage} from "../about/about";
 
-/**
- * Generated class for the LoginPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
-
-interface User {
-
-}
-
+interface User {}
 
 @IonicPage()
 @Component({
@@ -47,9 +37,9 @@ export class LoginPage {
   }
 
   public login() {
-    //console.log('uname: ' + this.user.username);
+    // console.log('uname: ' + this.user.username);
     // console.log('pwd: ' + this.password);
-    /*const body = {
+    /* const body = {
       username: this.user.username,
       password: this.user.password,
     }; */
@@ -63,7 +53,11 @@ export class LoginPage {
     });
   }
 
-  pushRegister(){
+  public pushRegister(){
     this.navCtrl.push(RegisterPage);
+  }
+
+  public pushAbout() {
+    this.navCtrl.push(AboutPage);
   }
 }

@@ -10,6 +10,7 @@ import {ProfilePage} from "../pages/profile/profile";
 import {UploadPage} from "../pages/upload/upload";
 import {LogoutPage} from "../pages/logout/logout";
 import {ListPage} from "../pages/list/list";
+import {AboutPage} from "../pages/about/about";
 
 
 @Component({
@@ -34,6 +35,7 @@ export class MyApp {
       {title: 'Profile', component: ProfilePage},
       {title: 'Upload', component: UploadPage},
       {title: 'Logout', component: LogoutPage},
+      {title: 'About', component: AboutPage},
     ];
   }
 
