@@ -8,4 +8,5 @@ export interface Media {
   mime_type: string;
   media_type: string;
   time_added: string;
+  username: string;
 }

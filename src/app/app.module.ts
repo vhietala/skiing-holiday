@@ -20,6 +20,8 @@ import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "../pipes/pipes.module";
 import {AboutPage} from "../pages/about/about";
+import {LogoutPage} from "../pages/logout/logout";
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import {AboutPage} from "../pages/about/about";
     UploadPage,
     SinglefileviewPage,
     AboutPage,
+    LogoutPage,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import {AboutPage} from "../pages/about/about";
     UploadPage,
     SinglefileviewPage,
     AboutPage,
+    LogoutPage
   ],
   providers: [
     StatusBar,
