@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {HomePage} from "../home/home";
 import {MediaProvider} from "../../providers/media/media";
+import {RegisterPage} from "../register/register";
 
 /**
  * Generated class for the LoginPage page.
@@ -60,5 +61,9 @@ export class LoginPage {
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
+  }
+
+  pushRegister(){
+    this.navCtrl.push(RegisterPage);
   }
 }
