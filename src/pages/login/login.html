@@ -8,18 +8,18 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-item id="logo-container">
+  <div text-center padding id="logo-container">
     <img id="meetup-logo" src="../../assets/imgs/meetuplogotransparent.png">
-  </ion-item>
-  <p>Want to know more about <a (click)="pushAbout()">MeetUp and it's creators? </a></p>
+  </div>
+  <p text-center>Want to know more about <a (click)="pushAbout()">MeetUp and it's creators? </a></p>
   <form (submit)="login()">
     <ion-input [(ngModel)]="user.username" placeholder="Username" type="text" name="username"></ion-input>
     <br>
     <ion-input [(ngModel)]="user.password" placeholder="Password" type="password" name="password"></ion-input>
     <br>
     <ion-buttons>
-      <button ion-button block outline type="submit">Login</button>
-      <button ion-button block outline (click)="pushRegister()">Create an account</button>
+      <button ion-button block type="submit">Login</button>
+      <button ion-button block (click)="pushRegister()">Create an account</button>
     </ion-buttons>
   </form>
 </ion-content>

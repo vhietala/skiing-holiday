@@ -4,6 +4,7 @@ import {User} from "../../interfaces/user";
 import {MediaProvider} from "../../providers/media/media";
 import {HomePage} from "../home/home";
 import {HttpErrorResponse} from "@angular/common/http";
+import {LoginPage} from "../login/login";
 
 @IonicPage()
 @Component({
@@ -42,4 +43,7 @@ export class RegisterPage {
     });
   }
 
+  public pushLogin(){
+    this.navCtrl.push(LoginPage);
+  }
 }

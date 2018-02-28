@@ -42,7 +42,7 @@ import {LogoutPage} from "../pages/logout/logout";
     HttpClientModule,
     FormsModule,
     HttpModule,
-    PipesModule
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -55,7 +55,7 @@ import {LogoutPage} from "../pages/logout/logout";
     UploadPage,
     SinglefileviewPage,
     AboutPage,
-    LogoutPage
+    LogoutPage,
   ],
   providers: [
     StatusBar,

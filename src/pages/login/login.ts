@@ -53,11 +53,11 @@ export class LoginPage {
     });
   }
 
-  pushRegister(){
+  public pushRegister(){
     this.navCtrl.push(RegisterPage);
   }
 
-  pushAbout() {
+  public pushAbout() {
     this.navCtrl.push(AboutPage);
   }
 }
