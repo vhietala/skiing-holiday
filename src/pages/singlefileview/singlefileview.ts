@@ -32,6 +32,7 @@ export class SinglefileviewPage {
     mime_type: '',
     media_type: '',
     time_added: '',
+    username: ''
   };
 
 
@@ -43,6 +44,7 @@ export class SinglefileviewPage {
   ressuponseTemp: any;
   temp: string;
   userIdCounter: number;
+  commentCounter: number;
   commentGuy: User;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
@@ -73,6 +75,7 @@ export class SinglefileviewPage {
 
       this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
         this.comment = resbond;
+        this.commentCounter = Object.keys(resbond).length;
         for (let i = 0; i < this.comment.length; i++) {
           this.mediaProvider.getUserInfo(this.comment[i].user_id).subscribe((ressu: User) => {
             this.commentGuy = ressu;

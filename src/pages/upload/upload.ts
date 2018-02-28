@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
@@ -30,7 +30,8 @@ export class UploadPage {
     user_id: 0,
     media_type: '',
     mime_type: '',
-    time_added: ''
+    time_added: '',
+    username: '',
   };
 
 

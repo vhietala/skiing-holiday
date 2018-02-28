@@ -8,6 +8,7 @@ import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {ProfilePage} from "../pages/profile/profile";
 import {UploadPage} from "../pages/upload/upload";
+import {LogoutPage} from "../pages/logout/logout";
 
 @Component({
   templateUrl: 'app.html'
@@ -29,6 +30,7 @@ export class MyApp {
       {title: 'Register', component: RegisterPage},
       {title: 'Profile', component: ProfilePage},
       {title: 'Upload', component: UploadPage},
+      {title: 'Logout', component: LogoutPage},
     ];
 
   }

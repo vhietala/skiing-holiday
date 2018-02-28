@@ -1,7 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {User} from "../../interfaces/user";
-import {tokenKey} from "@angular/core/src/view";
 
 /*
   Generated class for the MediaProvider provider.
@@ -36,7 +35,7 @@ export class MediaProvider {
     return this.http.get<User>(this.apiUrl + '/users/user', {headers: headers});
   }
 
-  public static removeUserData() {
+  public removeUserData() {
     localStorage.removeItem('token');
   }
 
