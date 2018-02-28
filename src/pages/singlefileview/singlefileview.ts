@@ -85,9 +85,12 @@ export class SinglefileviewPage {
   }
 
   addComment() {
-    this.mediaProvider.addComment(this.filzu_id).subscribe((resbond: Comments[]) => {
-      this.comment = resbond;
-      console.log(this.comment);
+    this.mediaProvider.addComment(this.filzu_id).subscribe(response => {
+      console.log(response);
+      this.mediaProvider.newComment = '';
+      this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
+        this.comment = resbond;
+      });
     });
   }
 
