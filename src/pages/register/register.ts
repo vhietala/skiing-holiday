@@ -43,7 +43,7 @@ export class RegisterPage {
     });
   }
 
-  public pushLogin(){
-    this.navCtrl.push(LoginPage);
+  public setLogin(){
+    this.navCtrl.setRoot(LoginPage);
   }
 }

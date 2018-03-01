@@ -55,5 +55,4 @@ export class UploadPage {
     console.log(evt.target.files[0]);
     this.file = evt.target.files[0];
   }
-
 }

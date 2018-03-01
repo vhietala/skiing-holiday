@@ -12,17 +12,24 @@
     <img id="meetup-logo" src="../../assets/imgs/meetuplogotransparent.png">
   </div>
   <form (submit)="register()">
-    <ion-input [(ngModel)]="user.username" placeholder="Username" name="username" required></ion-input>
-    <br>
-    <ion-input [(ngModel)]="user.password" placeholder="Password" type="password" name="password" required></ion-input>
-    <br>
-    <ion-input [(ngModel)]="user.email" placeholder="Email" name="email"></ion-input>
-    <br>
-    <ion-input [(ngModel)]="user.full_name" placeholder="Full name" name="full_name"></ion-input>
-    <br>
-    <ion-buttons>
-      <button ion-button block type="submit">Register</button>
-      <button ion-button block (click)="pushLogin()">Already have an account?</button>
-    </ion-buttons>
+    <ion-input [(ngModel)]="user.username" placeholder="Username" name="username" required></ion-input><br>
+    <ion-input [(ngModel)]="user.password" placeholder="Password" type="password" name="password" required></ion-input><br>
+    <ion-input [(ngModel)]="user.email" placeholder="Email" name="email"></ion-input><br>
+    <ion-input [(ngModel)]="user.full_name" placeholder="Full name" name="full_name"></ion-input><br>
+    <button ion-button block type="submit">Register</button>
+    <button ion-button block (click)="setLogin()">Already have an account?</button>
   </form>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <button ion-button clear>About</button>
+      </ion-col>
+      <ion-col>
+        <button ion-button clear>Contact</button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

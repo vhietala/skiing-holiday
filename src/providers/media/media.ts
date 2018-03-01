@@ -15,6 +15,7 @@ export class MediaProvider {
   mediaUrl = 'http://media.mw.metropolia.fi/wbma/media';
   uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
   favouriteUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
+  tagUrl = 'http://media.mw.metropolia.fi/wbma/tags/';
 
   tokenSettings = {
     headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
