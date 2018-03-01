@@ -16,7 +16,7 @@ export class HomePage {
 
   files: any;
   MediaFiles: any;
-  file: Media = {
+  file: Media;/* = {
     file_id: 0,
     filename: '',
     title: '',
@@ -25,7 +25,7 @@ export class HomePage {
     media_type: '',
     mime_type: '',
     time_added: ''
-  };
+  };*/
 
   ionViewDidLoad() {
     this.mediaProvider.getUserData().subscribe(response => {
@@ -38,7 +38,7 @@ export class HomePage {
   }
 
   displayImages() {
-    this.mediaProvider.getNewFiles().subscribe(response => {
+    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
     });

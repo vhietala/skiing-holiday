@@ -13,6 +13,7 @@ import {tokenKey} from "@angular/core/src/view";
 export class MediaProvider {
 
   logged = false;
+  meetupTag = 'shmu';
 
   newComment: '';
 
@@ -77,6 +78,18 @@ export class MediaProvider {
       comment: this.newComment,
     };
     return this.http.post(this.apiUrl + '/comments', body, this.settings);
+  }
+
+  public getByTag(tag: string) {
+    return this.http.get(this.apiUrl + '/tags/' + tag);
+  }
+
+  public setTag(tag: string, id: number) {
+    const body = {
+      file_id: id,
+      tag: tag
+    }
+    return this.http.post( this.apiUrl + '/tags', body, this.settings );
   }
 }
 
