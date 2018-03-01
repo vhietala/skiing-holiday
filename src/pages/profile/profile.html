@@ -1,9 +1,9 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profile</ion-title>
+    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 

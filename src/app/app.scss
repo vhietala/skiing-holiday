@@ -16,7 +16,9 @@
 // automatically applied to the <body> element in the app.
 
 ion-header {
-
+  ion-navbar {
+    background-color: #013b63;
+  }
 }
 ion-footer {
   text-align: center;
