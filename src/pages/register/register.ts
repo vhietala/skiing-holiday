@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {User} from "../../interfaces/user";
 import {MediaProvider} from "../../providers/media/media";
 import {HomePage} from "../home/home";
@@ -34,7 +34,9 @@ export class RegisterPage {
       //this.mediaProvider.username = this.user.username;
       //this.mediaProvider.password = this.user.password;
       console.log("username+pw: " + this.user.username + '+' + this.user.password);
-      this.mediaProvider.removeUserData();
+      if (this.hasToken()) {
+        this.mediaProvider.removeUserData();
+      }
       this.mediaProvider.login(this.user);
       this.mediaProvider.logged = true;
       this.navCtrl.setRoot(HomePage);
@@ -43,7 +45,11 @@ export class RegisterPage {
     });
   }
 
-  public setLogin(){
+  public hasToken() {
+    return localStorage.getItem('token') !== null;
+  }
+
+  public setLogin() {
     this.navCtrl.setRoot(LoginPage);
   }
 }

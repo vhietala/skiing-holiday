@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the UploadPage page.
@@ -54,6 +55,11 @@ export class UploadPage {
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
+    setTimeout(() =>
+      {
+        this.navCtrl.setRoot(HomePage);
+      },
+      3500);
   }
 
   public setFile(evt) {
