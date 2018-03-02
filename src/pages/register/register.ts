@@ -27,6 +27,10 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
+  public hasToken() {
+    return localStorage.getItem('token') !== null;
+  }
+
   public register() {
     console.log(this.user);
     this.mediaProvider.register(this.user).subscribe(response => {
@@ -34,7 +38,9 @@ export class RegisterPage {
       //this.mediaProvider.username = this.user.username;
       //this.mediaProvider.password = this.user.password;
       console.log("username+pw: " + this.user.username + '+' + this.user.password);
-      this.mediaProvider.removeUserData();
+      if (this.hasToken()) {
+        this.mediaProvider.removeUserData();
+      }
       this.mediaProvider.login(this.user);
       this.mediaProvider.logged = true;
       this.navCtrl.setRoot(HomePage);

@@ -8,6 +8,8 @@ export class MediaProvider {
 
   logged = false;
   meetupTag = 'shmu';
+  profileimgTag = 'shmuProfile';
+  activityTag = 'shmuActivity';
 
   newComment: '';
 

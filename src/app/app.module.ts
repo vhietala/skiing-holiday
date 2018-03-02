@@ -21,6 +21,9 @@ import {HttpModule} from "@angular/http";
 import {PipesModule} from "../pipes/pipes.module";
 import {AboutPage} from "../pages/about/about";
 import {LogoutPage} from "../pages/logout/logout";
+import {TabsPage} from "../pages/tabs/tabs";
+import {ActivityfeedPage} from "../pages/activityfeed/activityfeed";
+import {MeetupfeedPage} from "../pages/meetupfeed/meetupfeed";
 
 
 @NgModule({
@@ -35,6 +38,9 @@ import {LogoutPage} from "../pages/logout/logout";
     SinglefileviewPage,
     AboutPage,
     LogoutPage,
+    TabsPage,
+    ActivityfeedPage,
+    MeetupfeedPage,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +62,9 @@ import {LogoutPage} from "../pages/logout/logout";
     SinglefileviewPage,
     AboutPage,
     LogoutPage,
+    TabsPage,
+    ActivityfeedPage,
+    MeetupfeedPage,
   ],
   providers: [
     StatusBar,
