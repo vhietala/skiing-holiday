@@ -5,9 +5,7 @@
     </button>
     <ion-title>Upload</ion-title>
   </ion-navbar>
-
 </ion-header>
-
 
 <ion-content padding>
   <form (submit)="upload()">
@@ -17,7 +15,6 @@
     <br>
     <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
     <br>
-    <button type="submit">Upload</button>
+    <button ion-button clear type="submit">Upload</button>
   </form>
-
 </ion-content>

@@ -1,14 +1,24 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profile</ion-title>
+    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  <div>
-    <p>Welcome {{ profileName }}</p>
+  <div padding text-center class="profile-img-container">
+    <ion-avatar>
+      <img src="" alt="profileimg"/>
+    </ion-avatar>
+    <h3>{{ profileName }}</h3>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button clear>About</button>
+    <button ion-button clear>Contact</button>
+  </ion-toolbar>
+</ion-footer>

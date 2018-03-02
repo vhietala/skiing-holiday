@@ -40,7 +40,7 @@ export class HomePage {
       this.displayImages();
     }, (error: HttpErrorResponse) => {
       console.log(error);
-      this.navCtrl.push(LoginPage);
+      this.navCtrl.setRoot(LoginPage);
     });
   }
 

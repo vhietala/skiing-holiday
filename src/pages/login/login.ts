@@ -25,7 +25,7 @@ export class LoginPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad LoginPage');
-    if (localStorage.getItem('token') !== null) {
+    if (this.hasToken()) {
       this.mediaProvider.getUserData().subscribe(response => {
         console.log('Welcome ' + response['username']);
         this.navCtrl.setRoot(HomePage);
@@ -35,6 +35,11 @@ export class LoginPage {
       });
     }
   }
+
+  public hasToken() {
+    return localStorage.getItem('token') !== null;
+  }
+
 
   public login() {
     // console.log('uname: ' + this.user.username);
