@@ -7,6 +7,7 @@ import {User} from "../../interfaces/user";
 export class MediaProvider {
 
   logged = false;
+  meetupTag = 'shmu';
 
   newComment: '';
 
@@ -75,6 +76,18 @@ export class MediaProvider {
 
   public getUserInfo(id: number) {
     return this.http.get(this.apiUrl + '/users/' + id, this.tokenSettings);
+  }
+
+  public getByTag(tag: string) {
+    return this.http.get(this.apiUrl + '/tags/' + tag);
+  }
+
+  public setTag(tag: string, id: number) {
+    const body = {
+      file_id: id,
+      tag: tag
+    }
+    return this.http.post( this.apiUrl + '/tags', body, this.tokenSettings );
   }
 }
 

@@ -18,18 +18,21 @@ export class HomePage {
   }
 
   files: any;
-  MediaFiles: Media[];
-  file: Media = {
-    file_id: 0,
-    filename: '',
-    title: '',
-    description: '',
-    user_id: 0,
-    media_type: '',
-    mime_type: '',
-    time_added: '',
-    username: ''
-  };
+  //MediaFiles: Media[];
+  //file: Media = {
+  MediaFiles: any;
+  file: Media;
+  /* = {
+      file_id: 0,
+      filename: '',
+      title: '',
+      description: '',
+      user_id: 0,
+      media_type: '',
+      mime_type: '',
+      time_added: '',
+      username: ''
+    }; */
 
   meeduska: User;
 
@@ -45,7 +48,9 @@ export class HomePage {
   }
 
   displayImages() {
-    this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
+
+    //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
+    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
       //make this response type media and try through it?
@@ -58,7 +63,6 @@ export class HomePage {
           this.meeduska = ressu;
           this.MediaFiles[i].username = this.meeduska.username;
         });
-
       }
     });
   }

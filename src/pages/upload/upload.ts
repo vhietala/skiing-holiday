@@ -46,6 +46,11 @@ export class UploadPage {
     formData.append('file', this.file);
     this.mediaProvider.uploading(formData).subscribe(response => {
       console.log(response);
+      //console.log(response.file_id);
+      //myfileid = response.file_id;
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response["file_id"]).subscribe(response => {
+        console.log(response);
+      });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });

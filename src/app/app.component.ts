@@ -2,15 +2,12 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from "../pages/login/login";
 import {RegisterPage} from "../pages/register/register";
 import {ProfilePage} from "../pages/profile/profile";
 import {UploadPage} from "../pages/upload/upload";
 import {LogoutPage} from "../pages/logout/logout";
-import {ListPage} from "../pages/list/list";
-import {AboutPage} from "../pages/about/about";
 
 
 @Component({
@@ -21,21 +18,20 @@ export class MyApp {
 
   rootPage: any = HomePage;
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, component: any , icon: string}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      {title: 'Login', component: LoginPage},
-      {title: 'Register', component: RegisterPage},
-      {title: 'Profile', component: ProfilePage},
-      {title: 'Upload', component: UploadPage},
-      {title: 'Logout', component: LogoutPage},
-      {title: 'About', component: AboutPage},
+      {title: 'Home', component: HomePage, icon: 'home'},
+      {title: 'Login', component: LoginPage, icon: 'log-in'},
+      {title: 'Register', component: RegisterPage, icon: 'options'},
+      {title: 'Profile', component: ProfilePage, icon: 'contact'},
+      {title: 'Upload', component: UploadPage, icon: 'add'},
+      {title: 'Logout', component: LogoutPage, icon: 'add'},
+
     ];
   }
 
