@@ -30,7 +30,7 @@ export class MyApp {
       {title: 'Register', component: RegisterPage, icon: 'options'},
       {title: 'Profile', component: ProfilePage, icon: 'contact'},
       {title: 'Upload', component: UploadPage, icon: 'add'},
-      {title: 'Logout', component: LogoutPage, icon: 'add'},
+      {title: 'Logout', component: LogoutPage, icon: 'log-out'},
 
     ];
   }
