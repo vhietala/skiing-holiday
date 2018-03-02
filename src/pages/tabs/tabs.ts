@@ -6,13 +6,13 @@ import {MeetupfeedPage} from "../meetupfeed/meetupfeed";
 
 @IonicPage()
 @Component({
-  template: `
-    <ion-tabs class="tabs-basic">
-      <ion-tab tabTitle="Profile" [root]="profilePage"></ion-tab>
-      <ion-tab tabTitle="Activity" [root]="activityFeed"></ion-tab>
-      <ion-tab tabTitle="MeetUp" [root]="meetupFeed"></ion-tab>
-    </ion-tabs>
-`})
+  template: `    
+      <ion-tabs tabsPlacement="top" class="tabs-basic">
+        <ion-tab tabTitle="Profile" [root]="profilePage"></ion-tab>
+        <ion-tab tabTitle="Activity" [root]="activityFeed"></ion-tab>
+        <ion-tab tabTitle="MeetUp" [root]="meetupFeed"></ion-tab>
+      </ion-tabs>
+  `})
 
 export class TabsPage {
 
