@@ -12,8 +12,8 @@ log.txt
 .vscode/
 npm-debug.log*
 
-ionic.config.json
-package.json
+.ionic.config.json
+.package.json
 .idea/
 .sourcemaps/
 .sass-cache/
