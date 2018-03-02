@@ -12,6 +12,7 @@ log.txt
 .vscode/
 npm-debug.log*
 
+.package-lock.json
 .ionic.config.json
 .package.json
 .idea/
