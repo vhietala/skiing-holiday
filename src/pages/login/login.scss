@@ -1,8 +1,17 @@
 page-login {
-  #logo-container {
 
+  .login-text {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
   }
-  #meetup-login {
-    width: 100%;
+
+  ion-content {
+    background-image: url("../../assets/imgs/background-login.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    //filter: blur(5px) brightness(0.5);
+
   }
 }

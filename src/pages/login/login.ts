@@ -5,6 +5,7 @@ import {HomePage} from "../home/home";
 import {MediaProvider} from "../../providers/media/media";
 import {RegisterPage} from "../register/register";
 import {AboutPage} from "../about/about";
+import {TabsPage} from "../tabs/tabs";
 
 interface User {}
 
@@ -51,7 +52,7 @@ export class LoginPage {
     this.mediaProvider.login(this.user).subscribe(response => {
       console.log(response['token']);
       localStorage.setItem('token', response['token']);
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(TabsPage);
       this.mediaProvider.logged = true;
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);

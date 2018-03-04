@@ -7,11 +7,11 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="page-content" padding>
   <div text-center padding id="logo-container">
     <img id="meetup-logo" src="./assets/imgs/meetuplogotransparent.png">
   </div>
-  <p text-center>Want to know more about <a (click)="pushAbout()">MeetUp and it's creators? </a></p>
+  <p class="login-text" text-center>Want to know more about <a (click)="pushAbout()">MeetUp and it's creators? </a></p>
   <form (submit)="login()">
     <ion-input [(ngModel)]="user.username" placeholder="Username" type="text" name="username"></ion-input><br>
     <ion-input [(ngModel)]="user.password" placeholder="Password" type="password" name="password"></ion-input><br>

@@ -1,9 +1,55 @@
 page-profile {
-  ion-avatar {
-    width: 50%;
 
-    img {
-      width: 100%;
+  #profileimg-container {
+    margin: auto;
+    text-align: center;
+
+    #profile-avatar {
+      width: 50%;
+      margin: auto;
+      text-align: center;
+      border-radius: 50%;
+
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  #aboutme-container {
+    margin: auto;
+    text-align: center;
+  }
+
+  #activity-card {
+    margin: auto;
+    text-align: center;
+  }
+
+  #meetup-card {
+    margin: auto;
+    text-align: center;
+  }
+
+  ion-scroll {
+    white-space: nowrap;
+    height: 100px;
+  }
+
+  #activity-list {
+
+    width: 500px;
+    display: flex;
+    flex-wrap: nowrap;
+
+    ion-item {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    ion-avatar {
+      margin: auto;
     }
   }
 
