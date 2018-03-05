@@ -98,5 +98,9 @@ export class MediaProvider {
     };
     return this.http.post(this.favouriteUrl, body, this.tokenSettings);
   }
+
+  public deleteFavouite(id: number) {
+    return this.http.delete(this.favouriteUrl + 'file/' + id, this.tokenSettings);
+  }
 }
 
