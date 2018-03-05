@@ -88,7 +88,7 @@ export class MediaProvider {
     const body = {
       file_id: id,
       tag: tag
-    }
+    };
     return this.http.post( this.apiUrl + '/tags', body, this.tokenSettings );
   }
 }

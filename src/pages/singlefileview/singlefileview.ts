@@ -95,7 +95,7 @@ export class SinglefileviewPage {
   }
 
   addComment() {
-    if (this.mediaProvider.newComment != '') {
+    if (this.mediaProvider.newComment != null) {
       this.mediaProvider.addComment(this.filzu_id).subscribe(response => {
         console.log(response);
         this.mediaProvider.newComment = '';

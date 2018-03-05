@@ -49,10 +49,6 @@ export class RegisterPage {
     });
   }
 
-  public hasToken() {
-    return localStorage.getItem('token') !== null;
-  }
-
   public setLogin() {
     this.navCtrl.setRoot(LoginPage);
   }
