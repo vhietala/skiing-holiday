@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
+import {Camera} from "@ionic-native/camera";
 
 @IonicPage()
 @Component({
@@ -11,7 +12,7 @@ import {MediaProvider} from "../../providers/media/media";
 export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
-              public actionSheetCtrl: ActionSheetController) {
+              public actionSheetCtrl: ActionSheetController, private camera: Camera) {
   }
 
   profileName = '';
@@ -34,7 +35,19 @@ export class ProfilePage {
           role: 'destructive',
           handler: () => {
             console.log('Upload clicked');
-          }
+            console.log(this.camera.)
+            const formData: FormData = new FormData();
+              formData.append('title', this.media.title);
+              formData.append('file', this.file);
+              this.mediaProvider.uploading(formData).subscribe(response => {
+                console.log(response);
+                this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response["file_id"]).subscribe(response => {
+                  console.log(response);
+                });
+              }, (error: HttpErrorResponse) => {
+                console.log(error.error.message);
+              });
+            }
         },{
           text: 'delete current image',
           handler: () => {
