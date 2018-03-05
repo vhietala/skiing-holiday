@@ -35,19 +35,8 @@ export class ProfilePage {
           role: 'destructive',
           handler: () => {
             console.log('Upload clicked');
-            console.log(this.camera.)
-            const formData: FormData = new FormData();
-              formData.append('title', this.media.title);
-              formData.append('file', this.file);
-              this.mediaProvider.uploading(formData).subscribe(response => {
-                console.log(response);
-                this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response["file_id"]).subscribe(response => {
-                  console.log(response);
-                });
-              }, (error: HttpErrorResponse) => {
-                console.log(error.error.message);
-              });
-            }
+            this.camera.getPicture();
+          }
         },{
           text: 'delete current image',
           handler: () => {
