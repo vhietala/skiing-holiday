@@ -3,6 +3,7 @@ import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import {errorHandler} from "@angular/platform-browser/src/browser";
 
 @IonicPage()
 @Component({
@@ -43,6 +44,8 @@ export class ProfilePage {
             console.log('Upload clicked');
             this.camera.getPicture(this.cameraOptions).then((imageData) => {
               console.log(imageData);
+            }, (error: HttpErrorResponse) => {
+              console.log(error.error.message);
             });
           }
         },{
