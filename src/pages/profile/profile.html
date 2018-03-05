@@ -8,12 +8,64 @@
 </ion-header>
 
 <ion-content padding>
-  <div padding text-center class="profile-img-container">
-    <ion-avatar>
-      <img src="" alt="profileimg"/>
+  <div id="profileimg-container">
+    <ion-avatar id="profile-avatar">
+      <button id="uploadimg-btn"><img src="./assets/imgs/profileimg.png" alt="profileimg"/></button>
     </ion-avatar>
-    <h3>{{ profileName }}</h3>
+    <h3 id="profile-name">{{ profileName }}</h3>
   </div>
+
+  <div id="aboutme-container">
+    <p class="profile-headings">About me</p>
+    <p id="aboutme-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim tempor.
+      Vivamus gravida, purus vitae sollicitudin maximus, lorem sem sodales nunc, et laoreet turpis leo vel neque.
+      Donec laoreet at risus non bibendum. Etiam erat elit, placerat id quam tempus, facilisis feugiat leo.
+      Curabitur congue fermentum mi, interdum pellentesque dolor venenatis sit amet.
+      Duis sit amet dolor a diam tristique molestie sit amet at neque.</p>
+  </div>
+
+  <ion-card id="activity-card">
+    <ion-card-header>Activities</ion-card-header>
+    <ion-card-content>
+      <ion-scroll scrollX="true">
+        <ion-list id="activity-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="../../assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="../../assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="../../assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card id="meetup-card">
+    <ion-card-header>Meet Ups</ion-card-header>
+    <ion-card-content>
+      <ion-scroll scrollX="true"></ion-scroll>
+      <ion-list>
+        <ion-item>
+          <ion-avatar item-start>
+            <img src="img/avatar-cher.png">
+          </ion-avatar>
+          <p>Ugh. As if.</p>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer>

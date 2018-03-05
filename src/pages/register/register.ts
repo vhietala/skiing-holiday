@@ -27,6 +27,10 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
+  public hasToken() {
+    return localStorage.getItem('token') !== null;
+  }
+
   public register() {
     console.log(this.user);
     this.mediaProvider.register(this.user).subscribe(response => {
