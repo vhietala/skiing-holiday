@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
-import {Camera} from "@ionic-native/camera";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 
 @IonicPage()
 @Component({
@@ -16,6 +16,12 @@ export class ProfilePage {
   }
 
   profileName = '';
+  cameraOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.DATA_URL,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE
+  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -35,7 +41,9 @@ export class ProfilePage {
           role: 'destructive',
           handler: () => {
             console.log('Upload clicked');
-            this.camera.getPicture();
+            this.camera.getPicture(this.cameraOptions).then((imageData) => {
+              console.log(imageData);
+            });
           }
         },{
           text: 'delete current image',
