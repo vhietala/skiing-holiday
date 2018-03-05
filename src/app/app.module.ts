@@ -24,6 +24,7 @@ import {LogoutPage} from "../pages/logout/logout";
 import {TabsPage} from "../pages/tabs/tabs";
 import {ActivityfeedPage} from "../pages/activityfeed/activityfeed";
 import {MeetupfeedPage} from "../pages/meetupfeed/meetupfeed";
+import {Camera} from "@ionic-native/camera";
 
 
 @NgModule({
@@ -73,6 +74,7 @@ import {MeetupfeedPage} from "../pages/meetupfeed/meetupfeed";
     MediaProvider,
     HttpClientModule,
     PhotoViewer,
+    Camera,
   ]
 })
 export class AppModule {

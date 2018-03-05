@@ -7,9 +7,10 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="upload-action-sheet">
   <div id="profileimg-container">
     <ion-avatar id="profile-avatar">
+      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="./assets/imgs/profileimg.png" alt="profileimg"/></button>
       <button id="uploadimg-btn"><img src="{{mediaProvider.mediaUrl}}+{{profilePicture}}" alt="profileimg"/></button>
     </ion-avatar>
     <h3 id="profile-name">{{ profileName }}</h3>
@@ -31,19 +32,19 @@
         <ion-list id="activity-list">
           <ion-item>
             <ion-avatar>
-              <img src="../../assets/imgs/hockey.png" alt="activity-img">
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
               <p>Hockey</p>
             </ion-avatar>
           </ion-item>
           <ion-item>
             <ion-avatar>
-              <img src="../../assets/imgs/hockey.png" alt="activity-img">
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
               <p>Hockey</p>
             </ion-avatar>
           </ion-item>
           <ion-item>
             <ion-avatar>
-              <img src="../../assets/imgs/hockey.png" alt="activity-img">
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
               <p>Hockey</p>
             </ion-avatar>
           </ion-item>
@@ -56,12 +57,24 @@
     <ion-card-header>Meet Ups</ion-card-header>
     <ion-card-content>
       <ion-scroll scrollX="true"></ion-scroll>
-      <ion-list>
+      <ion-list id="meetup-list">
         <ion-item>
-          <ion-avatar item-start>
-            <img src="img/avatar-cher.png">
+          <ion-avatar>
+            <img src="./assets/imgs/hockey.png" alt="activity-img">
+            <p>Hockey</p>
           </ion-avatar>
-          <p>Ugh. As if.</p>
+        </ion-item>
+        <ion-item>
+          <ion-avatar>
+            <img src="./assets/imgs/hockey.png" alt="activity-img">
+            <p>Hockey</p>
+          </ion-avatar>
+        </ion-item>
+        <ion-item>
+          <ion-avatar>
+            <img src="./assets/imgs/hockey.png" alt="activity-img">
+            <p>Hockey</p>
+          </ion-avatar>
         </ion-item>
       </ion-list>
     </ion-card-content>

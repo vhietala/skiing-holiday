@@ -29,7 +29,7 @@ export class LoginPage {
     if (this.hasToken()) {
       this.mediaProvider.getUserData().subscribe(response => {
         console.log('Welcome ' + response['username']);
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TabsPage);
         this.mediaProvider.logged = true;
       }, (error: HttpErrorResponse) => {
         console.log(error);
@@ -40,7 +40,6 @@ export class LoginPage {
   public hasToken() {
     return localStorage.getItem('token') !== null;
   }
-
 
   public login() {
     // console.log('uname: ' + this.user.username);
