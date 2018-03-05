@@ -3,7 +3,6 @@ import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
-import {errorHandler} from "@angular/platform-browser/src/browser";
 
 @IonicPage()
 @Component({
@@ -17,12 +16,6 @@ export class ProfilePage {
   }
 
   profileName = '';
-  cameraOptions: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
-  }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -42,18 +35,14 @@ export class ProfilePage {
           role: 'destructive',
           handler: () => {
             console.log('Upload clicked');
-            this.camera.getPicture(this.cameraOptions).then((imageData) => {
-              console.log(imageData);
-            }, (error: HttpErrorResponse) => {
-              console.log(error.error.message);
-            });
+            this.uploadProfileImg();
           }
-        },{
+        }, {
           text: 'delete current image',
           handler: () => {
             console.log('Delete clicked');
           }
-        },{
+        }, {
           text: 'Cancel',
           role: 'cancel',
           handler: () => {
@@ -64,6 +53,59 @@ export class ProfilePage {
     });
     actionSheet.present();
   }
+
+  uploadProfileImg() {
+
+    const formData: FormData = new FormData();
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      var contentType = 'image/png';
+      var blob = this.b64toBlob(base64Image, contentType);
+      formData.append("blob",blob);
+      this.mediaProvider.uploading(formData).subscribe(response => {
+        console.log(response);
+        this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response["file_id"]).subscribe(response => {
+          console.log(response);
+        }, (error:HttpErrorResponse) => {
+          console.log(error.error.message);
+        });
+      })
+    }, (err) => {
+      // Handle error
+    });
+  }
+
+  b64toBlob(b64Data, contentType='', sliceSize=512) {
+    const byteCharacters = atob(b64Data);
+    const byteArrays = [];
+
+    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      const slice = byteCharacters.slice(offset, offset + sliceSize);
+
+      const byteNumbers = new Array(slice.length);
+      for (let i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+
+      const byteArray = new Uint8Array(byteNumbers);
+
+      byteArrays.push(byteArray);
+    }
+
+    const blob = new Blob(byteArrays, {type: contentType});
+    return blob;
+  }
+
+
 }
 
 //load images (user id)
