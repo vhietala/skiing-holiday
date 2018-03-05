@@ -1,5 +1,9 @@
 page-profile {
 
+  .upload-action-sheet {
+    text-align: center;
+    color: #013b63;
+  }
   #profileimg-container {
     margin: auto;
     text-align: center;
@@ -22,12 +26,7 @@ page-profile {
     text-align: center;
   }
 
-  #activity-card {
-    margin: auto;
-    text-align: center;
-  }
-
-  #meetup-card {
+  #activity-card, #meetup-card {
     margin: auto;
     text-align: center;
   }
@@ -37,7 +36,7 @@ page-profile {
     height: 100px;
   }
 
-  #activity-list {
+  #activity-list, #meetup-list {
 
     width: 500px;
     display: flex;

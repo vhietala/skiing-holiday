@@ -2,9 +2,9 @@ import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {User} from "../../interfaces/user";
 import {MediaProvider} from "../../providers/media/media";
-import {HomePage} from "../home/home";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LoginPage} from "../login/login";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -43,7 +43,7 @@ export class RegisterPage {
       }
       this.mediaProvider.login(this.user);
       this.mediaProvider.logged = true;
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(TabsPage);
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });

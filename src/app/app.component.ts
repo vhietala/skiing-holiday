@@ -7,6 +7,7 @@ import {ProfilePage} from "../pages/profile/profile";
 import {UploadPage} from "../pages/upload/upload";
 import {LogoutPage} from "../pages/logout/logout";
 import {TabsPage} from "../pages/tabs/tabs";
+import {LoginPage} from "../pages/login/login";
 
 
 @Component({
@@ -15,7 +16,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = TabsPage;
+  rootPage: any = LoginPage;
 
   pages: Array<{ title: string, component: any , icon: string}>;
 
