@@ -14,6 +14,7 @@ export class ProfilePage {
   }
 
   profileName = '';
+  profilePicture = '';
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -21,6 +22,18 @@ export class ProfilePage {
       this.profileName = response['username'];
     }, (error: HttpErrorResponse) => {
       console.log(error);
+    })
+    this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
+      const profilePictures = response['files'];
+      for (let i=0;i<profilePictures.length;i++){
+        let userId = '';
+        this.mediaProvider.getUserData().subscribe(response=>{
+          userId=response['user_id'];
+        });
+        if (profilePictures[i]['user_id']== userId){
+          this.profilePicture=profilePictures[i];
+        }
+      }
     })
   }
 }
