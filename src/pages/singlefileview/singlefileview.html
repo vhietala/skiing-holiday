@@ -26,7 +26,7 @@
     <ion-card-content>
       <ion-list>
         <ion-item> {{"Description: " + mediaFile.description}}</ion-item>
-        <ion-item> {{"Uploaded by: " + mediaFile.user_id}}</ion-item>  <!-- also add username-->
+        <ion-item> {{"Uploaded by: " + mediaFile.user_id + " name: " + mediaFile.username}}</ion-item>  <!-- also add username-->
         <ion-item> {{"Added: " + mediaFile.time_added}}</ion-item>
         <ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>
         <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
@@ -42,6 +42,8 @@
         </ion-list>
         <ion-input [(ngModel)]="mediaProvider.newComment" type="text" placeholder="Write a comment..."></ion-input>
         <button (click)="addComment()" ion-button>Comment</button>
+        <button (click)="addFavourite()" ion-button icon-start><ion-icon name="heart-outline"></ion-icon>Favourite</button>
+        <button (click)="deleteFavourite()" ion-button icon-start><ion-icon name="heart"></ion-icon>Delete Favourite</button>
       </ion-list>
     </ion-card-content>
   </ion-card>

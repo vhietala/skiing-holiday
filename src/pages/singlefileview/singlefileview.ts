@@ -42,6 +42,7 @@ export class SinglefileviewPage {
   favouriteID: Favourites[];
 
   ressuponseTemp: any;
+  ressuponseTemp1: User;
   temp: string;
   userIdCounter: number;
   commentCounter: number;
@@ -64,6 +65,11 @@ export class SinglefileviewPage {
        this.time_added = response['time_added'];
        this.user_id = response['user_id'];
        this.file_id = response['file_id']; */
+      this.mediaProvider.getUserInfo(this.mediaFile.user_id).subscribe((ressu: User) => {
+        this.ressuponseTemp1 = ressu;
+        this.mediaFile.username = this.ressuponseTemp1.username;
+      });
+
 
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
@@ -71,6 +77,7 @@ export class SinglefileviewPage {
         //console.log(this.userIdCounter);
         //this is the same as below.
         this.userIdCounter = Object.keys(ressu).length;
+
       });
 
       this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
@@ -114,4 +121,12 @@ export class SinglefileviewPage {
     }
   }
 
+  addFavourite() {
+    this.mediaProvider.addFavourite(this.filzu_id);
+    /*this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
+      this.favouriteID = ressu;
+      this.userIdCounter = Object.keys(ressu).length;
+    }); */
+
+  }
 }
