@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 
@@ -10,7 +10,8 @@ import {MediaProvider} from "../../providers/media/media";
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
+              public actionSheetCtrl: ActionSheetController) {
   }
 
   profileName = '';
@@ -22,6 +23,33 @@ export class ProfilePage {
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
+  }
+
+  uploadImgActionSheet() {
+    let actionSheet = this.actionSheetCtrl.create({
+      cssClass: 'upload-action-sheet',
+      buttons: [
+        {
+          text: 'upload new image',
+          role: 'destructive',
+          handler: () => {
+            console.log('Upload clicked');
+          }
+        },{
+          text: 'delete current image',
+          handler: () => {
+            console.log('Delete clicked');
+          }
+        },{
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }
 
