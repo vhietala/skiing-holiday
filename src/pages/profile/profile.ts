@@ -74,11 +74,12 @@ export class ProfilePage {
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       let contentType = 'image/jpg';
       let blob = this.b64toBlob(base64Image, contentType);
-      formData.append("blob", blob);
-      // this.file= new File(blob[0],'profilePic.png',null);
+      let filename = imageData.filename;
+      this.file = this.blobToFile(blob, filename);
     }, (err) => {
       console.log(err);
     });
+    formData.append("file", this.file);
     formData.append('title', 'profile pic');
     formData.append('description', '');
     // formData.append('file', this.file );
@@ -114,6 +115,16 @@ export class ProfilePage {
     }
     const blob = new Blob(byteArrays, {type: contentType});
     return blob;
+  }
+
+  public blobToFile = (theBlob: Blob, fileName:string): File => {
+    var b: any = theBlob;
+    //A Blob() is almost a File() - it's just missing the two properties below which we will add
+    b.lastModifiedDate = new Date();
+    b.name = fileName;
+
+    //Cast to a File() type
+    return <File>theBlob;
   }
 }
 
