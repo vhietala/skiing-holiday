@@ -48,12 +48,13 @@ export class ActivityfeedPage {
     });
   }
 
-  displayImages() {
+  public displayImages() {
 
     //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
     this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
+      this.MediaFiles.reverse();
       //make this response type media and try through it?
       //atm it shows 20 objects and it doenst go throoguh them even i have for loop
 
