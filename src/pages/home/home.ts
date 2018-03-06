@@ -50,7 +50,8 @@ export class HomePage {
   displayImages() {
 
     //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
-    this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
+    //this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
+    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
       //make this response type media and try through it?
@@ -71,9 +72,13 @@ export class HomePage {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
 
-  getSearchedMedia() {
+  getSearchedMedia(value: string) {
     //connect descr + title jotenki tähä
-    this.mediaProvider.searchImages().subscribe(response => {
+    const body = {
+      title: value,
+      description: value
+    };
+    this.mediaProvider.searchImages(body).subscribe(response => {
       this.MediaFiles = response;
     });
   }

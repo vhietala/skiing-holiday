@@ -103,10 +103,10 @@ export class MediaProvider {
     return this.http.delete(this.favouriteUrl + 'file/' + id, this.tokenSettings);
   }
 
-  public searchImages(titleoptional?: string, descriptionoptional?: string) {
+  public searchImages(descrtitle: Object) {
     const body = {
-      title: titleoptional,
-      description: descriptionoptional
+      title: descrtitle,
+      description: descrtitle
     };
     return this.http.post(this.mediaUrl + '/search', body, this.tokenSettings);
   }
