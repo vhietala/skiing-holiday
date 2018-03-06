@@ -88,8 +88,19 @@ export class MediaProvider {
     const body = {
       file_id: id,
       tag: tag
-    }
+    };
     return this.http.post( this.apiUrl + '/tags', body, this.tokenSettings );
+  }
+
+  public addFavourite(id: number) {
+    const body = {
+      file_id: id
+    };
+    return this.http.post(this.favouriteUrl, body, this.tokenSettings);
+  }
+
+  public deleteFavouite(id: number) {
+    return this.http.delete(this.favouriteUrl + 'file/' + id, this.tokenSettings);
   }
 }
 

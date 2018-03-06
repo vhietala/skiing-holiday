@@ -40,8 +40,10 @@ export class SinglefileviewPage {
   comment: Comments[];
   filzu_id: number;
   favouriteID: Favourites[];
+  favTemp: User;
 
   ressuponseTemp: any;
+  ressuponseTemp1: User;
   temp: string;
   userIdCounter: number;
   commentCounter: number;
@@ -64,6 +66,11 @@ export class SinglefileviewPage {
        this.time_added = response['time_added'];
        this.user_id = response['user_id'];
        this.file_id = response['file_id']; */
+      this.mediaProvider.getUserInfo(this.mediaFile.user_id).subscribe((ressu: User) => {
+        this.ressuponseTemp1 = ressu;
+        this.mediaFile.username = this.ressuponseTemp1.username;
+      });
+
 
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
@@ -71,6 +78,12 @@ export class SinglefileviewPage {
         //console.log(this.userIdCounter);
         //this is the same as below.
         this.userIdCounter = Object.keys(ressu).length;
+        for (let i = 0; i < this.favouriteID.length; i++) {
+          this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
+            this.favTemp = ressu;
+            this.favouriteID[i].username = this.favTemp.username;
+          });
+        }
       });
 
       this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
@@ -95,12 +108,13 @@ export class SinglefileviewPage {
   }
 
   addComment() {
-    if (this.mediaProvider.newComment != '') {
+    if (this.mediaProvider.newComment != null) {
       this.mediaProvider.addComment(this.filzu_id).subscribe(response => {
         console.log(response);
         this.mediaProvider.newComment = '';
         this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
           this.comment = resbond;
+          this.commentCounter = Object.keys(resbond).length;
 
           for (let i = 0; i < this.comment.length; i++) {
             this.mediaProvider.getUserInfo(this.comment[i].user_id).subscribe((ressu: User) => {
@@ -114,4 +128,33 @@ export class SinglefileviewPage {
     }
   }
 
+  addFavourite() {
+    this.mediaProvider.addFavourite(this.filzu_id).subscribe(response => {
+      this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
+        this.favouriteID = ressu;
+        this.userIdCounter = Object.keys(ressu).length;
+        for (let i = 0; i < this.favouriteID.length; i++) {
+          this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
+            this.favTemp = ressu;
+            this.favouriteID[i].username = this.favTemp.username;
+          });
+        }
+      });
+    });
+  }
+
+  deleteFavourite() {
+    this.mediaProvider.deleteFavouite(this.filzu_id).subscribe(response => {
+      this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
+        this.favouriteID = ressu;
+        this.userIdCounter = Object.keys(ressu).length;
+        for (let i = 0; i < this.favouriteID.length; i++) {
+          this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
+            this.favTemp = ressu;
+            this.favouriteID[i].username = this.favTemp.username;
+          });
+        }
+      });
+    });
+  }
 }
