@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear (click)="dismiss()">cancel</button>
+    </ion-buttons>
+    <ion-title>Upload</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form (submit)="upload()">
+    <input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)">
+    <br>
+    <input [(ngModel)]="media.title" type="text" name="title" placeholder="Title">
+    <br>
+    <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+    <br>
+    <button ion-button clear type="submit">Upload</button>
+  </form>
+</ion-content>

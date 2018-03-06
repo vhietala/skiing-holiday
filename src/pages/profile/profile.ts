@@ -6,6 +6,7 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 import {TabsPage} from "../tabs/tabs";
 import {UploadPage} from "../upload/upload";
 import {AboutPage} from "../about/about";
+import {UploadActivityPage} from "../upload-activity/upload-activity";
 
 @IonicPage()
 @Component({
@@ -18,6 +19,7 @@ export class ProfilePage {
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
               public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+
     this.pushAbout = AboutPage;
   }
 
@@ -36,12 +38,17 @@ export class ProfilePage {
     })
   }
 
-  presentModal() {
+  public modalUploadMeetup() {
     let modal = this.modalCtrl.create(UploadPage);
     modal.present();
   }
 
-  uploadImgActionSheet() {
+  public modalUploadActivity() {
+    let modal = this.modalCtrl.create(UploadActivityPage);
+    modal.present();
+  }
+
+  public uploadImgActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       cssClass: 'upload-action-sheet',
       buttons: [

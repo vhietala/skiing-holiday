@@ -25,6 +25,7 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {ActivityfeedPage} from "../pages/activityfeed/activityfeed";
 import {MeetupfeedPage} from "../pages/meetupfeed/meetupfeed";
 import {Camera} from "@ionic-native/camera";
+import {UploadActivityPage} from "../pages/upload-activity/upload-activity";
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import {Camera} from "@ionic-native/camera";
     TabsPage,
     ActivityfeedPage,
     MeetupfeedPage,
+    UploadActivityPage,
   ],
   imports: [
     BrowserModule,
@@ -66,6 +68,7 @@ import {Camera} from "@ionic-native/camera";
     TabsPage,
     ActivityfeedPage,
     MeetupfeedPage,
+    UploadActivityPage,
   ],
   providers: [
     StatusBar,
