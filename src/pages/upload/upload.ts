@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
@@ -19,7 +19,8 @@ import {HomePage} from "../home/home";
 })
 export class UploadPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController,
+              public navParams: NavParams, public mediaProvider: MediaProvider) {
   }
 
   file: File;
@@ -60,6 +61,10 @@ export class UploadPage {
         this.navCtrl.setRoot(HomePage);
       },
       3500);
+  }
+
+  public dismiss() {
+    this.viewCtrl.dismiss();
   }
 
   public setFile(evt) {

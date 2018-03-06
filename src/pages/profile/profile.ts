@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ActionSheetController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
-import {HomePage} from "../home/home";
 import {TabsPage} from "../tabs/tabs";
+import {UploadPage} from "../upload/upload";
 
 @IonicPage()
 @Component({
@@ -13,8 +13,8 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
-              public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+  constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
+              public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
   }
 
   profileName = '';
@@ -30,6 +30,11 @@ export class ProfilePage {
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
+  }
+
+  presentModal() {
+    let modal = this.modalCtrl.create(UploadPage);
+    modal.present();
   }
 
   uploadImgActionSheet() {
@@ -63,6 +68,7 @@ export class ProfilePage {
   uploadProfileImg() {
     const formData: FormData = new FormData();
     const options: CameraOptions = {
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       quality: 100,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
@@ -73,17 +79,15 @@ export class ProfilePage {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      let contentType = 'image/jpg';
+      let contentType = 'image/jpeg';
       let blob = this.b64toBlob(base64Image, contentType);
       let filename = imageData.filename;
       this.file = this.blobToFile(blob, filename);
     }, (err) => {
       console.log(err);
     });
-    formData.append("file", this.file);
+    formData.append('file', this.file);
     formData.append('title', 'profile pic');
-    formData.append('description', '');
-    // formData.append('file', this.file );
     this.mediaProvider.uploading(formData).subscribe(response => {
       console.log(response);
       //console.log(response.file_id);
