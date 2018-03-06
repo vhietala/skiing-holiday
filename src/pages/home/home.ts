@@ -50,11 +50,11 @@ export class HomePage {
   displayImages() {
 
     //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
-    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
+    this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
       //make this response type media and try through it?
-      //atm it shows 20 objects and it doenst go throoguh them even i have for loop
+      //atm it shows 20 objects and it doesn't go through them even i have for loop
 
       console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
       for (let i = 0; i < this.MediaFiles.length; i++) {

@@ -1,9 +1,5 @@
 page-profile {
 
-  .upload-action-sheet {
-    text-align: center;
-    color: #013b63;
-  }
   #profileimg-container {
     margin: auto;
     text-align: center;
@@ -31,11 +27,6 @@ page-profile {
     text-align: center;
   }
 
-  ion-scroll {
-    white-space: nowrap;
-    height: 100px;
-  }
-
   #activity-list, #meetup-list {
 
     width: 500px;
@@ -50,6 +41,16 @@ page-profile {
     ion-avatar {
       margin: auto;
     }
+  }
+
+  .side-scroll {
+    white-space: nowrap;
+    height: 100px;
+  }
+
+  .upload-action-sheet {
+    text-align: center;
+    color: #013b63;
   }
 
 }

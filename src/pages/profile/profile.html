@@ -25,9 +25,13 @@
   </div>
 
   <ion-card id="activity-card">
-    <ion-card-header>Activities</ion-card-header>
+    <ion-card-header>Activities
+      <ion-buttons end>
+        <button class="new-btn" ion-button clear>new</button>
+      </ion-buttons>
+    </ion-card-header>
     <ion-card-content>
-      <ion-scroll scrollX="true">
+      <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="activity-list">
           <ion-item>
             <ion-avatar>
@@ -54,28 +58,32 @@
 
   <ion-card id="meetup-card">
     <ion-card-header>Meet Ups</ion-card-header>
+    <ion-buttons end>
+      <button class="new-btn" ion-button clear>new</button>
+    </ion-buttons>
     <ion-card-content>
-      <ion-scroll scrollX="true"></ion-scroll>
-      <ion-list id="meetup-list">
-        <ion-item>
-          <ion-avatar>
-            <img src="./assets/imgs/hockey.png" alt="activity-img">
-            <p>Hockey</p>
-          </ion-avatar>
-        </ion-item>
-        <ion-item>
-          <ion-avatar>
-            <img src="./assets/imgs/hockey.png" alt="activity-img">
-            <p>Hockey</p>
-          </ion-avatar>
-        </ion-item>
-        <ion-item>
-          <ion-avatar>
-            <img src="./assets/imgs/hockey.png" alt="activity-img">
-            <p>Hockey</p>
-          </ion-avatar>
-        </ion-item>
-      </ion-list>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="meetup-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
     </ion-card-content>
   </ion-card>
 </ion-content>

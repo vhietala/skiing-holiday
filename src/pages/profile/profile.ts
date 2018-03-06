@@ -55,7 +55,6 @@ export class ProfilePage {
   }
 
   uploadProfileImg() {
-
     const formData: FormData = new FormData();
     const options: CameraOptions = {
       quality: 100,
@@ -68,9 +67,11 @@ export class ProfilePage {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
-      let contentType = 'image/png';
+      let contentType = 'image/jpeg';
       let blob = this.b64toBlob(base64Image, contentType);
-      formData.append("blob",blob);
+      formData.append('file',blob);
+      formData.append('title', 'testTitle');
+      formData.append('description', '');
       this.mediaProvider.uploading(formData).subscribe(response => {
         console.log(response);
         this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response["file_id"]).subscribe(response => {
@@ -79,8 +80,6 @@ export class ProfilePage {
           console.log(error.error.message);
         });
       })
-    }, (err) => {
-      // Handle error
     });
   }
 
