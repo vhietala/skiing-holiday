@@ -89,7 +89,7 @@ export class MediaProvider {
       file_id: id,
       tag: tag
     };
-    return this.http.post( this.apiUrl + '/tags', body, this.tokenSettings );
+    return this.http.post(this.apiUrl + '/tags', body, this.tokenSettings);
   }
 
   public addFavourite(id: number) {
@@ -101,6 +101,14 @@ export class MediaProvider {
 
   public deleteFavouite(id: number) {
     return this.http.delete(this.favouriteUrl + 'file/' + id, this.tokenSettings);
+  }
+
+  public searchImages(titleoptional?: string, descriptionoptional?: string) {
+    const body = {
+      title: titleoptional,
+      description: descriptionoptional
+    };
+    return this.http.post(this.mediaUrl + '/search', body, this.tokenSettings);
   }
 }
 

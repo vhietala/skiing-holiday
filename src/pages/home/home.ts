@@ -70,4 +70,11 @@ export class HomePage {
   openOneFile(id) {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
+
+  getSearchedMedia() {
+    //connect descr + title jotenki tähä
+    this.mediaProvider.searchImages().subscribe(response => {
+      this.MediaFiles = response;
+    });
+  }
 }
