@@ -34,10 +34,12 @@
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="activity-list">
           <ion-item>
-            <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
-            </ion-avatar>
+            <button ion-button clear (click)="modalActivity()">
+              <ion-avatar>
+                <img src="./assets/imgs/hockey.png" alt="activity-img">
+                <p>Hockey</p>
+              </ion-avatar>
+            </button>
           </ion-item>
         </ion-list>
       </ion-scroll>
@@ -53,10 +55,12 @@
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="meetup-list">
           <ion-item>
-            <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
-            </ion-avatar>
+            <button ion-button clear (click)="modalMeetup()">
+              <ion-avatar>
+                <img src="./assets/imgs/hockey.png" alt="activity-img">
+                <p>Hockey</p>
+              </ion-avatar>
+            </button>
           </ion-item>
         </ion-list>
       </ion-scroll>
@@ -66,6 +70,5 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button clear [navPush]="pushAbout">About & Contact</button>
   </ion-toolbar>
 </ion-footer>

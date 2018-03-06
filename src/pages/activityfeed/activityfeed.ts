@@ -15,9 +15,7 @@ import {AboutPage} from "../about/about";
 })
 export class ActivityfeedPage {
 
-  pushAbout: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
-    this.pushAbout = AboutPage;
   }
 
   files: any;

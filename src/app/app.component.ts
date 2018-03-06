@@ -4,10 +4,10 @@ import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {HomePage} from '../pages/home/home';
 import {ProfilePage} from "../pages/profile/profile";
-import {UploadPage} from "../pages/upload/upload";
 import {LogoutPage} from "../pages/logout/logout";
 import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
+import {AboutPage} from "../pages/about/about";
 
 
 @Component({
@@ -27,7 +27,7 @@ export class MyApp {
     this.pages = [
       {title: 'Home', component: HomePage, icon: 'home'},
       {title: 'Profile', component: ProfilePage, icon: 'contact'},
-      {title: 'Upload', component: UploadPage, icon: 'add'},
+      {title: 'About & Contact', component: AboutPage, icon: 'add'},
       {title: 'Logout', component: LogoutPage, icon: 'log-out'},
       {title: 'Tabs', component: TabsPage, icon: 'settings'},
     ];

@@ -1,17 +1,65 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle *ngIf="!hasToken">
+    <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
+    <ion-searchbar></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="upload-action-sheet">
+  <div id="activityImg-container">
+    <ion-avatar id="profile-avatar">
+      <img src="../../assets/imgs/hockey.png" alt="profileimg"/>
+    </ion-avatar>
+    <h3 id="profile-name">{{ profileName }}</h3>
+  </div>
+
+  <div id="about-activity-container">
+    <p class="activity-headings">Activity name</p>
+    <p id="about-activity-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim tempor.
+        Vivamus gravida, purus vitae sollicitudin maximus, lorem sem sodales nunc, et laoreet turpis leo vel neque.
+        Donec laoreet at risus non bibendum.</p>
+  </div>
+
+  <ion-card id="users">
+    <ion-card-header>Users in this Activity</ion-card-header>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="users-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="../../assets/imgs/profileimg.png" alt="profile-img">
+              <p>username</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card id="meetup-card">
+    <ion-card-header>Meet Ups</ion-card-header>
+    <ion-buttons end>
+      <button class="new-btn" ion-button clear (click)="modalUploadMeetup()">new</button>
+    </ion-buttons>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="meetup-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button clear [navPush]="pushAbout">About & Contact</button>
   </ion-toolbar>
 </ion-footer>
+

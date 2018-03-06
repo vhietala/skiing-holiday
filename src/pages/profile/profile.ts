@@ -5,8 +5,9 @@ import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {TabsPage} from "../tabs/tabs";
 import {UploadPage} from "../upload/upload";
-import {AboutPage} from "../about/about";
 import {UploadActivityPage} from "../upload-activity/upload-activity";
+import {ActivityPage} from "../activity/activity";
+import {SinglefileviewPage} from "../singlefileview/singlefileview";
 
 @IonicPage()
 @Component({
@@ -15,12 +16,12 @@ import {UploadActivityPage} from "../upload-activity/upload-activity";
 })
 export class ProfilePage {
 
-  pushAbout: any;
+  pushActivity: any;
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
               public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
 
-    this.pushAbout = AboutPage;
+    this.pushActivity = ActivityPage;
   }
 
   profileName = '';
@@ -45,6 +46,16 @@ export class ProfilePage {
 
   public modalUploadActivity() {
     let modal = this.modalCtrl.create(UploadActivityPage);
+    modal.present();
+  }
+
+  public modalActivity() {
+    let modal = this.modalCtrl.create(ActivityPage);
+    modal.present();
+  }
+
+  public modalMeetup() {
+    let modal = this.modalCtrl.create(SinglefileviewPage);
     modal.present();
   }
 
