@@ -16,7 +16,10 @@ interface User {}
 })
 export class LoginPage {
 
+  pushAbout: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+    this.pushAbout = AboutPage;
   }
 
   user: User = {
@@ -60,9 +63,5 @@ export class LoginPage {
 
   public pushRegister(){
     this.navCtrl.push(RegisterPage);
-  }
-
-  public pushAbout() {
-    this.navCtrl.push(AboutPage);
   }
 }

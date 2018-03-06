@@ -1,12 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ActivityPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {AboutPage} from "../about/about";
 
 @IonicPage()
 @Component({
@@ -15,7 +9,10 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ActivityPage {
 
+  pushAbout: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.pushAbout = AboutPage;
   }
 
   ionViewDidLoad() {

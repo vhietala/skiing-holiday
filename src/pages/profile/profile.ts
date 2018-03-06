@@ -5,6 +5,7 @@ import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {TabsPage} from "../tabs/tabs";
 import {UploadPage} from "../upload/upload";
+import {AboutPage} from "../about/about";
 
 @IonicPage()
 @Component({
@@ -13,8 +14,11 @@ import {UploadPage} from "../upload/upload";
 })
 export class ProfilePage {
 
+  pushAbout: any;
+
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
               public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+    this.pushAbout = AboutPage;
   }
 
   profileName = '';
@@ -42,11 +46,18 @@ export class ProfilePage {
       cssClass: 'upload-action-sheet',
       buttons: [
         {
-          text: 'upload new image',
+          text: 'Take a new Picture',
           role: 'destructive',
           handler: () => {
-            console.log('Upload clicked');
-            this.uploadProfileImg();
+            console.log('Take image clicked');
+            this.takeProfileImg();
+          }
+        }, {
+          text: 'Choose from gallery',
+          role: 'destructive',
+          handler: () => {
+            console.log('Choose image clicked');
+            this.chooseProfileImg();
           }
         }, {
           text: 'delete current image',
@@ -65,7 +76,7 @@ export class ProfilePage {
     actionSheet.present();
   }
 
-  uploadProfileImg() {
+  public chooseProfileImg() {
     const formData: FormData = new FormData();
     const options: CameraOptions = {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -104,6 +115,10 @@ export class ProfilePage {
         this.navCtrl.setRoot(TabsPage);
       },
       3500);
+  }
+
+  public takeProfileImg() {
+
   }
 
   private b64toBlob(b64Data, contentType='', sliceSize=512) {

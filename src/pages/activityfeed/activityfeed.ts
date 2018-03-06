@@ -6,6 +6,7 @@ import {User} from "../../interfaces/user";
 import {Media} from "../../interfaces/media";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
+import {AboutPage} from "../about/about";
 
 @IonicPage()
 @Component({
@@ -14,7 +15,9 @@ import {MediaProvider} from "../../providers/media/media";
 })
 export class ActivityfeedPage {
 
+  pushAbout: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+    this.pushAbout = AboutPage;
   }
 
   files: any;

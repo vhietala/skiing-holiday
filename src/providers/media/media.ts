@@ -25,7 +25,7 @@ export class MediaProvider {
 
 
   constructor(public http: HttpClient) {
-    console.log('Hello MediaProvider Provider');
+
   }
 
   public getUserData() {

@@ -5,6 +5,7 @@ import {MediaProvider} from "../../providers/media/media";
 import {HttpErrorResponse} from "@angular/common/http";
 import {LoginPage} from "../login/login";
 import {TabsPage} from "../tabs/tabs";
+import {AboutPage} from "../about/about";
 
 @IonicPage()
 @Component({
@@ -13,7 +14,10 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class RegisterPage {
 
+  pushAbout: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+    this.pushAbout = AboutPage;
   }
 
   user: User = {

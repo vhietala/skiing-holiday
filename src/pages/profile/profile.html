@@ -27,7 +27,7 @@
   <ion-card id="activity-card">
     <ion-card-header>Activities
       <ion-buttons end>
-        <button class="new-btn" ion-button clear (click)="presentModal()">new</button>
+        <button class="new-btn"ion-button clear (click)="presentModal()">new</button>
       </ion-buttons>
     </ion-card-header>
     <ion-card-content>
@@ -66,7 +66,6 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button clear>About</button>
-    <button ion-button clear>Contact</button>
+    <button ion-button clear [navPush]="pushAbout">About & Contact</button>
   </ion-toolbar>
 </ion-footer>

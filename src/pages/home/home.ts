@@ -6,6 +6,7 @@ import {SinglefileviewPage} from "../singlefileview/singlefileview";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
 import {User} from "../../interfaces/user";
+import {AboutPage} from "../about/about";
 
 
 @Component({
@@ -14,7 +15,10 @@ import {User} from "../../interfaces/user";
 })
 export class HomePage {
 
+  pushAbout: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+    this.pushAbout = AboutPage;
   }
 
   files: any;
