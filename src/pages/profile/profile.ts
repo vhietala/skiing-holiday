@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {HomePage} from "../home/home";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -96,7 +97,7 @@ export class ProfilePage {
       console.log(error.error.message);
     });
     setTimeout(() => {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TabsPage);
       },
       3500);
   }
