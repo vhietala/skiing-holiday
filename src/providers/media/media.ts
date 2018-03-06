@@ -12,6 +12,7 @@ export class MediaProvider {
   activityTag = 'shmuActivity';
 
   newComment: '';
+  searchText: '';
 
   loginUrl = 'http://media.mw.metropolia.fi/wbma/login';
   apiUrl = 'http://media.mw.metropolia.fi/wbma';
@@ -103,10 +104,10 @@ export class MediaProvider {
     return this.http.delete(this.favouriteUrl + 'file/' + id, this.tokenSettings);
   }
 
-  public searchImages(descrtitle: Object) {
+  public searchImages() {
     const body = {
-      title: descrtitle,
-      description: descrtitle
+      title: this.searchText,
+      description: this.searchText
     };
     return this.http.post(this.mediaUrl + '/search', body, this.tokenSettings);
   }

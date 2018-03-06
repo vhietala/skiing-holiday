@@ -36,7 +36,6 @@ export class HomePage {
 
   meeduska: User;
 
-
   ionViewDidLoad() {
     this.mediaProvider.getUserData().subscribe(response => {
       console.log('Welcome ' + response['full_name']);
@@ -73,13 +72,12 @@ export class HomePage {
   }
 
   getSearchedMedia(value: string) {
-    //connect descr + title jotenki tähä
-    const body = {
-      title: value,
-      description: value
-    };
-    this.mediaProvider.searchImages(body).subscribe(response => {
+    //connectaa meetup tagi viel tähän ni GG.
+    console.log(value);
+    this.mediaProvider.searchImages().subscribe(response => {
+      console.log(response);
       this.MediaFiles = response;
+      console.log("Searching media: " + this.MediaFiles);
     });
   }
 }
