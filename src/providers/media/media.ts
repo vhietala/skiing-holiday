@@ -102,5 +102,9 @@ export class MediaProvider {
   public deleteFavouite(id: number) {
     return this.http.delete(this.favouriteUrl + 'file/' + id, this.tokenSettings);
   }
+
+  public deleteFile(id:number){
+    return this.http.delete(this.apiUrl+'/media/' + id,this.tokenSettings);
+  }
 }
 

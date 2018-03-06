@@ -3,6 +3,7 @@ import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import {HomePage} from "../home/home";
 
 @IonicPage()
 @Component({
@@ -11,13 +12,15 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 })
 export class ProfilePage {
 
-  public base64Image: string;
-
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
               public actionSheetCtrl: ActionSheetController, private camera: Camera) {
   }
 
   profileName = '';
+  profilePicture: string;
+  profilePictureID: number;
+  userId = '';
+  file: File;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -68,23 +71,33 @@ export class ProfilePage {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
-      this.base64Image = 'data:image/jpeg;base64,' + imageData;
-      let contentType = 'image/jpeg';
-      let blob = this.b64toBlob(this.base64Image, contentType);
-      formData.append('file', blob);
-      formData.append('title', 'testTitle');
-      formData.append('description', '');
-      this.mediaProvider.uploading(formData).subscribe(response => {
-        console.log(response);
-        this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response["file_id"]).subscribe(response => {
-          console.log(response);
-        }, (error:HttpErrorResponse) => {
-          console.log(error.error.message);
-        });
-      })
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      let contentType = 'image/jpg';
+      let blob = this.b64toBlob(base64Image, contentType);
+      formData.append("blob", blob);
+      // this.file= new File(blob[0],'profilePic.png',null);
     }, (err) => {
       console.log(err);
     });
+    formData.append('title', 'profile pic');
+    formData.append('description', '');
+    // formData.append('file', this.file );
+    this.mediaProvider.uploading(formData).subscribe(response => {
+      console.log(response);
+      //console.log(response.file_id);
+      //myfileid = response.file_id;
+      this.mediaProvider.deleteFile(this.profilePictureID);
+      this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response['file_id']).subscribe(response2 => {
+        console.log(response2);
+      });
+      this.profilePictureID=response['file_id'];
+    }, (error: HttpErrorResponse) => {
+      console.log(error.error.message);
+    });
+    setTimeout(() => {
+        this.navCtrl.setRoot(HomePage);
+      },
+      3500);
   }
 
   private b64toBlob(b64Data, contentType='', sliceSize=512) {
