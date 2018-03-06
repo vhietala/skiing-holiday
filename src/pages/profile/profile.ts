@@ -11,6 +11,8 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 })
 export class ProfilePage {
 
+  public base64Image: string;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
               public actionSheetCtrl: ActionSheetController, private camera: Camera) {
   }
@@ -66,10 +68,10 @@ export class ProfilePage {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.base64Image = 'data:image/jpeg;base64,' + imageData;
       let contentType = 'image/jpeg';
-      let blob = this.b64toBlob(base64Image, contentType);
-      formData.append('file',blob);
+      let blob = this.b64toBlob(this.base64Image, contentType);
+      formData.append('file', blob);
       formData.append('title', 'testTitle');
       formData.append('description', '');
       this.mediaProvider.uploading(formData).subscribe(response => {
@@ -80,6 +82,8 @@ export class ProfilePage {
           console.log(error.error.message);
         });
       })
+    }, (err) => {
+      console.log(err);
     });
   }
 
