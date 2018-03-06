@@ -84,11 +84,15 @@ export class MediaProvider {
     return this.http.get(this.apiUrl + '/tags/' + tag);
   }
 
+  public deleteFile(id:number){
+    return this.http.delete(this.apiUrl+'/media/' + id,this.tokenSettings);
+  }
+
   public setTag(tag: string, id: number) {
     const body = {
       file_id: id,
       tag: tag
-    }
+    };
     return this.http.post( this.apiUrl + '/tags', body, this.tokenSettings );
   }
 }
