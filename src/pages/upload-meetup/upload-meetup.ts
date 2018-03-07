@@ -1,20 +1,20 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
+import {HomePage} from "../home/home";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
-import {HomePage} from "../home/home";
-
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
-  selector: 'page-upload',
-  templateUrl: 'upload.html',
+  selector: 'page-upload-activity',
+  templateUrl: 'upload-activity.html',
 })
-export class UploadPage {
+export class UploadMeetupPage {
 
-  constructor(public viewCtrl: ViewController, public navCtrl: NavController,
-              public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public viewCtrl: ViewController, public mediaProvider: MediaProvider) {
   }
 
   file: File;
@@ -30,9 +30,8 @@ export class UploadPage {
     username: '',
   };
 
-
   ionViewDidLoad() {
-    console.log('ionViewDidLoad Upload0Page');
+    console.log('ionViewDidLoad UploadActivityPage');
   }
 
   public upload() {
@@ -44,7 +43,7 @@ export class UploadPage {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
-      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
+      this.mediaProvider.setTag(this.mediaProvider.meetingTag,response['file_id']).subscribe( response => {
         console.log(response);
       });
     }, (error: HttpErrorResponse) => {
@@ -52,7 +51,7 @@ export class UploadPage {
     });
     setTimeout(() =>
       {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TabsPage);
       },
       3500);
   }
@@ -65,4 +64,5 @@ export class UploadPage {
     console.log(evt.target.files[0]);
     this.file = evt.target.files[0];
   }
+
 }

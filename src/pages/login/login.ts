@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
-import {HomePage} from "../home/home";
 import {MediaProvider} from "../../providers/media/media";
 import {RegisterPage} from "../register/register";
 import {AboutPage} from "../about/about";

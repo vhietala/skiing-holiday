@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
+    <button ion-button clear (click)="dismiss()">
+      <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-searchbar></ion-searchbar>
   </ion-navbar>
@@ -33,7 +33,7 @@
         <ion-list id="users-list">
           <ion-item>
             <ion-avatar>
-              <img src="../../assets/imgs/profileimg.png" alt="profile-img">
+              <img src="./assets/imgs/profileimg.png" alt="profile-img">
               <p>username</p>
             </ion-avatar>
           </ion-item>

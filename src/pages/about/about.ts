@@ -15,4 +15,8 @@ export class AboutPage {
     console.log('ionViewDidLoad AboutPage');
   }
 
+  public hasToken() {
+    return localStorage.getItem('token') !== null;
+  }
+
 }

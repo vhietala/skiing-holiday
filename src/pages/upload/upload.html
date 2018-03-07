@@ -11,9 +11,9 @@
   <form (submit)="upload()">
     <input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)">
     <br>
-    <input [(ngModel)]="media.title" type="text" name="title" placeholder="Title">
+    <ion-input [(ngModel)]="media.title" type="text" name="title" placeholder="Title"></ion-input>
     <br>
-    <textarea [(ngModel)]="media.description" name="description" placeholder="Description"></textarea>
+    <ion-textarea [(ngModel)]="media.description" name="description" placeholder="Description"></ion-textarea>
     <br>
     <button ion-button clear type="submit">Upload</button>
   </form>

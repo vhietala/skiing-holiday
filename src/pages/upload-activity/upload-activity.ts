@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {HomePage} from "../home/home";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -42,7 +43,7 @@ export class UploadActivityPage {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
-      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response["file_id"]).subscribe(response => {
+      this.mediaProvider.setTag(this.mediaProvider.activityTag,response['file_id']).subscribe( response => {
         console.log(response);
       });
     }, (error: HttpErrorResponse) => {
@@ -50,7 +51,7 @@ export class UploadActivityPage {
     });
     setTimeout(() =>
       {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TabsPage);
       },
       3500);
   }

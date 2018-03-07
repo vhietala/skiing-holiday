@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Favourites} from "../../interfaces/favourites";
@@ -8,12 +8,6 @@ import {Media} from "../../interfaces/media";
 import {Comments} from "../../interfaces/comments";
 import {User} from "../../interfaces/user";
 
-/**
- * Generated class for the SinglefileviewPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -49,7 +43,8 @@ export class SinglefileviewPage {
   commentCounter: number;
   commentGuy: User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+              public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
   }
 
   ionViewDidLoad() {
@@ -156,5 +151,9 @@ export class SinglefileviewPage {
         }
       });
     });
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

@@ -27,7 +27,7 @@ export class MyApp {
     this.pages = [
       {title: 'Home', component: HomePage, icon: 'home'},
       {title: 'Profile', component: ProfilePage, icon: 'contact'},
-      {title: 'About & Contact', component: AboutPage, icon: 'add'},
+      {title: 'About & Contact', component: AboutPage, icon: 'help'},
       {title: 'Logout', component: LogoutPage, icon: 'log-out'},
       {title: 'Tabs', component: TabsPage, icon: 'settings'},
     ];

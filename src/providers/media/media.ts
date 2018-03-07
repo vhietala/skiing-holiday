@@ -10,6 +10,7 @@ export class MediaProvider {
   meetupTag = 'shmu';
   profileimgTag = 'shmuProfile';
   activityTag = 'shmuActivity';
+  meetingTag = 'shmuMeeting';
 
   newComment: '';
 
