@@ -53,6 +53,7 @@ export class HomePage {
     this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
+      this.MediaFiles.reverse();
       //make this response type media and try through it?
       //atm it shows 20 objects and it doesn't go through them even i have for loop
 
@@ -78,6 +79,13 @@ export class HomePage {
       console.log(response);
       this.MediaFiles = response;
       console.log("Searching media: " + this.MediaFiles);
+      for (let i = 0; i < this.MediaFiles.length; i++) {
+        console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
+        this.mediaProvider.getUserInfo(this.MediaFiles[i].user_id).subscribe((ressu: User) => {
+          this.meeduska = ressu;
+          this.MediaFiles[i].username = this.meeduska.username;
+        });
+      }
     });
   }
 }
