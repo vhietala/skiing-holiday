@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
-import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {ActionSheetController, IonicPage, NavController, NavParams, Platform, Toast} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
 import {HomePage} from "../home/home";
+
 
 @IonicPage()
 @Component({
@@ -13,7 +14,7 @@ import {HomePage} from "../home/home";
 export class ProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
-              public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+              public actionSheetCtrl: ActionSheetController, private camera: Camera, public platform: Platform) {
   }
 
   profileName = '';
@@ -21,6 +22,8 @@ export class ProfilePage {
   profilePictureID: number;
   userId = '';
   file: File;
+
+  formData: FormData;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -84,44 +87,49 @@ export class ProfilePage {
 
 //        const formData: FormData = new FormData();
     const options: CameraOptions = {
+      //sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     };
 
     this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      let contentType = 'image/png';
-      let blob = this.b64toBlob(base64Image, contentType);
-      //formData.append("blob", blob);
-      this.file= new File(blob[0],'profilePic.png',null);
 
+      console.log('imageData =' + imageData);
+      this.file = imageData;
+      this.profilePicture=imageData;
+      //this.profilePicture=this.file['filename'];
+      this.formData.append('file',imageData);
     }, (err) => {
       // Handle error
+      //this.presentToast('Error while loading image');
+      console.log("photo error");
     });
-    const formData: FormData = new FormData();
-    formData.append('title', 'profile pic');
-    formData.append('description', '');
-    formData.append('file', this.file );
-    this.mediaProvider.uploading(formData).subscribe(response => {
+    //const formData: FormData = new FormData();
+    this.formData.append('title', 'profile pic');
+    //formData.append('description', '');
+    //this.formData.append('file', this.file);
+    this.mediaProvider.uploading(this.formData).subscribe(response => {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
-      this.mediaProvider.deleteFile(this.profilePictureID);
+      //this.mediaProvider.deleteFile(this.profilePictureID);
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response3 => {
+        console.log(response3);
+      });
       this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response['file_id']).subscribe(response2 => {
         console.log(response2);
       });
-      this.profilePictureID=response['file_id'];
+      this.profilePictureID = response['file_id'];
+      this.profilePicture = this.mediaProvider.mediaUrl + response['filename'];
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
     setTimeout(() => {
         this.navCtrl.setRoot(HomePage);
       },
-      3500);
+      12000);
   }
 
   private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
@@ -140,9 +148,15 @@ export class ProfilePage {
     return blob;
   }
 
+  private createFileName() {
+    var d = new Date(),
+      n = d.getTime(),
+      newFileName = n + ".jpg";
+    return newFileName;
+  }
+
 
 }
-
 
 
 //load images (user id)
