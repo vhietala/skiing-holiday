@@ -1,20 +1,30 @@
 <ion-header>
   <ion-navbar>
     <ion-buttons start>
-      <button ion-button clear (click)="dismiss()">cancel</button>
+      <button ion-button clear [navPush]="pushTabs">cancel</button>
     </ion-buttons>
     <ion-title>Create a new Activity</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  <form (submit)="upload()">
+<ion-content padding text-center>
+  <form padding (submit)="uploadMeetup()">
+    <ion-item>
+      <ion-label>Choose the activity</ion-label>
+      <input [(ngModel)]="activity" name="activity">
+        <ion-select>
+          <ion-option *ngFor="let activity of activities">{{ activity }}</ion-option>
+        </ion-select>
+    </ion-item>
+    <ion-label>Choose an image</ion-label>
     <input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)">
     <br>
-    <ion-input [(ngModel)]="media.title" type="text" name="title" placeholder="Title"></ion-input>
+    <ion-label>Choose a name for Meet Up</ion-label>
+    <ion-input [(ngModel)]="media.title" type="text" name="title" placeholder="required"></ion-input>
     <br>
-    <ion-textarea [(ngModel)]="media.description" name="description" placeholder="Description"></ion-textarea>
+    <ion-label>Choose a description for Meet Up</ion-label>
+    <ion-textarea [(ngModel)]="media.description" name="description" placeholder="optional"></ion-textarea>
     <br>
-    <button ion-button clear type="submit">Upload</button>
+    <button ion-button color="secondary" type="submit">Create new Meet Up</button>
   </form>
 </ion-content>

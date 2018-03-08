@@ -10,12 +10,15 @@
 <ion-content padding class="upload-action-sheet">
   <div id="activityImg-container">
     <ion-avatar id="profile-avatar">
-      <img src="../../assets/imgs/hockey.png" alt="profileimg"/>
+      <img src="./assets/imgs/hockey.png" alt="profileimg"/>
     </ion-avatar>
     <h3 id="profile-name">Activity name</h3>
     <ion-buttons end="">
-      <button ion-button clear>
+      <button ion-button clear (click)="favourite()">
         <ion-icon name="star"></ion-icon>
+      </button>
+      <button ion-button clear (click)="unFavourite()">
+        <ion-icon name="arrow-down"></ion-icon>
       </button>
     </ion-buttons>
   </div>
@@ -44,9 +47,6 @@
 
   <ion-card id="meetup-card">
     <ion-card-header>Meet Ups</ion-card-header>
-    <ion-buttons end>
-      <button class="new-btn" ion-button clear (click)="modalUploadMeetup()">new</button>
-    </ion-buttons>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="meetup-list">
@@ -63,7 +63,5 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-  </ion-toolbar>
 </ion-footer>
 

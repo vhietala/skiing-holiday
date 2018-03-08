@@ -54,7 +54,7 @@ export class HomePage {
   displayImages() {
 
     //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
-    this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
+    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
       //make this response type media and try through it?

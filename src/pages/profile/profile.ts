@@ -8,6 +8,9 @@ import {UploadPage} from "../upload/upload";
 import {UploadActivityPage} from "../upload-activity/upload-activity";
 import {ActivityPage} from "../activity/activity";
 import {SinglefileviewPage} from "../singlefileview/singlefileview";
+import {UploadMeetupPage} from "../upload-meetup/upload-meetup";
+import {Media} from "../../interfaces/media";
+import {User} from "../../interfaces/user";
 
 @IonicPage()
 @Component({
@@ -24,33 +27,31 @@ export class ProfilePage {
     this.pushActivity = ActivityPage;
   }
 
+  favourites: any;
+  activities: any;
+  meetups: any;
+  activity: Media;
+  meetup: Media;
+
   profileName = '';
   profilePicture: string;
   profilePictureID: number;
-  userId = '';
+  userId: number;
   file: File;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
     this.mediaProvider.getUserData().subscribe(response => {
       this.profileName = response['username'];
+      this.userId = response['user_id'];
+      this.displayFavActivities(this.userId);
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
   }
 
-  public modalUploadMeetup() {
-    let modal = this.modalCtrl.create(UploadPage);
-    modal.present();
-  }
-
-  public modalUploadActivity() {
-    let modal = this.modalCtrl.create(UploadActivityPage);
-    modal.present();
-  }
-
-  public modalActivity() {
-    let modal = this.modalCtrl.create(ActivityPage);
+  public modalActivity(id) {
+    let modal = this.modalCtrl.create(ActivityPage, {activityId: id});
     modal.present();
   }
 
@@ -125,7 +126,7 @@ export class ProfilePage {
       this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response['file_id']).subscribe(response2 => {
         console.log(response2);
       });
-      this.profilePictureID=response['file_id'];
+      this.profilePictureID = response['file_id'];
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
@@ -139,7 +140,7 @@ export class ProfilePage {
 
   }
 
-  private b64toBlob(b64Data, contentType='', sliceSize=512) {
+  private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
@@ -155,7 +156,7 @@ export class ProfilePage {
     return blob;
   }
 
-  public blobToFile = (theBlob: Blob, fileName:string): File => {
+  public blobToFile = (theBlob: Blob, fileName: string): File => {
     var b: any = theBlob;
     //A Blob() is almost a File() - it's just missing the two properties below which we will add
     b.lastModifiedDate = new Date();
@@ -163,6 +164,17 @@ export class ProfilePage {
 
     //Cast to a File() type
     return <File>theBlob;
+  }
+
+  public displayFavActivities(id: number) {
+    this.mediaProvider.getFavourites().subscribe(response => {
+      this.favourites = response;
+      for (let data of this.favourites) {
+        if (data['user_id'] === id) {
+          this.activities.add(data);
+        }
+      }
+    });
   }
 }
 

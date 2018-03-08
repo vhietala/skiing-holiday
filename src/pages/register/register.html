@@ -1,10 +1,4 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle *ngIf="!hasToken">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
-  </ion-navbar>
 </ion-header>
 
 <ion-content padding>
@@ -16,13 +10,13 @@
     <ion-input [(ngModel)]="user.password" placeholder="Password" type="password" name="password" required></ion-input><br>
     <ion-input [(ngModel)]="user.email" placeholder="Email" name="email"></ion-input><br>
     <ion-input [(ngModel)]="user.full_name" placeholder="Full name" name="full_name"></ion-input><br>
-    <button ion-button block type="submit">Register</button>
-    <button ion-button block (click)="setLogin()">Already have an account?</button>
+    <button ion-button color="light" block outline strong type="submit">Register</button>
+    <button ion-button color="light" block outline strong (click)="setLogin()">Already have an account?</button>
   </form>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar >
     <button ion-button clear [navPush]="pushAbout">About & Contact</button>
   </ion-toolbar>
 </ion-footer>

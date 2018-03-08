@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
-import {HomePage} from "../home/home";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
 import {TabsPage} from "../tabs/tabs";
+import {ActivityPage} from "../activity/activity";
 
 @IonicPage()
 @Component({
@@ -13,8 +13,10 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class UploadActivityPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  pushTabs: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController,
               public viewCtrl: ViewController, public mediaProvider: MediaProvider) {
+    this.pushTabs = TabsPage;
   }
 
   file: File;
@@ -34,7 +36,7 @@ export class UploadActivityPage {
     console.log('ionViewDidLoad UploadActivityPage');
   }
 
-  public upload() {
+  public uploadActivity() {
     const formData: FormData = new FormData();
     formData.append('title', this.media.title);
     formData.append('description', this.media.description);
@@ -43,7 +45,13 @@ export class UploadActivityPage {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag,response['file_id']).subscribe( response => {
+        console.log(response);
+      });
       this.mediaProvider.setTag(this.mediaProvider.activityTag,response['file_id']).subscribe( response => {
+        console.log(response);
+      });
+      this.mediaProvider.setTag(this.media.title.toLowerCase(),response['file_title']).subscribe( response => {
         console.log(response);
       });
     }, (error: HttpErrorResponse) => {
@@ -51,9 +59,18 @@ export class UploadActivityPage {
     });
     setTimeout(() =>
       {
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.push(ActivityPage);
+        let toast = this.toastCtrl.create({
+          message: 'New activity created',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
       },
-      3500);
+      1000);
   }
 
   public dismiss() {
@@ -64,5 +81,4 @@ export class UploadActivityPage {
     console.log(evt.target.files[0]);
     this.file = evt.target.files[0];
   }
-
 }

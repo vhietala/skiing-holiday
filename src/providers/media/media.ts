@@ -8,15 +8,15 @@ export class MediaProvider {
 
   logged = false;
   meetupTag = 'shmu';
-  profileimgTag = 'shmuProfile';
-  activityTag = 'shmuActivity';
-  meetingTag = 'shmuMeeting';
+  profileimgTag = 'shmuprofile';
+  activityTag = 'shmuactivity';
+  meetingTag = 'shmumeeting';
 
   newComment: '';
 
-  loginUrl = 'http://media.mw.metropolia.fi/wbma/login';
-  apiUrl = 'http://media.mw.metropolia.fi/wbma';
-  mediaUrl = 'http://media.mw.metropolia.fi/wbma/media';
+  loginUrl = 'http://media.mw.metropolia.fi/wbma/login/';
+  apiUrl = 'http://media.mw.metropolia.fi/wbma/';
+  mediaUrl = 'http://media.mw.metropolia.fi/wbma/media/';
   uploadUrl = 'http://media.mw.metropolia.fi/wbma/uploads/';
   favouriteUrl = 'http://media.mw.metropolia.fi/wbma/favourites/';
 
@@ -31,7 +31,7 @@ export class MediaProvider {
 
   public getUserData() {
     const headers = new HttpHeaders().set('x-access-token', localStorage.getItem('token'));
-    return this.http.get<User>(this.apiUrl + '/users/user', {headers: headers});
+    return this.http.get<User>(this.apiUrl + 'users/user', {headers: headers});
   }
 
   public removeUserData() {
@@ -43,11 +43,11 @@ export class MediaProvider {
   }
 
   public getOneFile(id) {
-    return this.http.get<Array<string>>(this.mediaUrl + '/' + id, this.tokenSettings);
+    return this.http.get<Array<string>>(this.mediaUrl + id, this.tokenSettings);
   }
 
   public register(user) {
-    return this.http.post(this.apiUrl + '/users', user);
+    return this.http.post(this.apiUrl + 'users', user);
   }
 
   public login(user) {
@@ -66,7 +66,7 @@ export class MediaProvider {
   }
 
   public getCommentsByFileId(id: number) {
-    return this.http.get(this.apiUrl + '/comments/file/' + id)
+    return this.http.get(this.apiUrl + 'comments/file/' + id)
   }
 
   public addComment(id: number) {
@@ -74,15 +74,15 @@ export class MediaProvider {
       file_id: id,
       comment: this.newComment,
     };
-    return this.http.post(this.apiUrl + '/comments', body, this.tokenSettings);
+    return this.http.post(this.apiUrl + 'comments', body, this.tokenSettings);
   }
 
   public getUserInfo(id: number) {
-    return this.http.get(this.apiUrl + '/users/' + id, this.tokenSettings);
+    return this.http.get(this.apiUrl + 'users/' + id, this.tokenSettings);
   }
 
   public getByTag(tag: string) {
-    return this.http.get(this.apiUrl + '/tags/' + tag);
+    return this.http.get(this.apiUrl + 'tags/' + tag);
   }
 
   public setTag(tag: string, id: number) {
@@ -90,7 +90,7 @@ export class MediaProvider {
       file_id: id,
       tag: tag
     };
-    return this.http.post( this.apiUrl + '/tags', body, this.tokenSettings );
+    return this.http.post( this.apiUrl + 'tags', body, this.tokenSettings );
   }
 
   public addFavourite(id: number) {
@@ -105,7 +105,12 @@ export class MediaProvider {
   }
 
   public deleteFile(id:number){
-    return this.http.delete(this.apiUrl+'/media/' + id,this.tokenSettings);
+    return this.http.delete(this.apiUrl+' media/' + id,this.tokenSettings);
   }
+
+  public getFavourites(){
+    return this.http.get(this.favouriteUrl + '', this.tokenSettings);
+  }
+
 }
 

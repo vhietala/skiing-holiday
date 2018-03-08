@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button clear (click)="dismiss()">
+    <button ion-button (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
     <ion-title>MediaPlayer</ion-title>
@@ -9,7 +9,6 @@
 
 
 <ion-content padding>
-
   <ion-card>
     <ion-card-title>{{mediaFile.title}}</ion-card-title>
     <img [src]="url" *ngIf="mediaFile.media_type == 'image'">

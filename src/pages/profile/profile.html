@@ -25,19 +25,15 @@
   </div>
 
   <ion-card id="activity-card">
-    <ion-card-header>Activities
-      <ion-buttons end>
-        <button class="new-btn"ion-button clear (click)="modalUploadActivity()">new</button>
-      </ion-buttons>
-    </ion-card-header>
+    <ion-card-header>Activities</ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="activity-list">
-          <ion-item>
-            <button ion-button clear (click)="modalActivity()">
+          <ion-item *ngFor="let activity of activities">
+            <button ion-button clear (click)="modalActivity(activity.file_id)">
               <ion-avatar>
                 <img src="./assets/imgs/hockey.png" alt="activity-img">
-                <p>Hockey</p>
+                <p>{{ activity.title}}</p>
               </ion-avatar>
             </button>
           </ion-item>
@@ -48,17 +44,14 @@
 
   <ion-card id="meetup-card">
     <ion-card-header>Meet Ups</ion-card-header>
-    <ion-buttons end>
-      <button class="new-btn" ion-button clear (click)="modalUploadMeetup()">new</button>
-    </ion-buttons>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="meetup-list">
-          <ion-item>
+          <ion-item *ngFor="let meetup of meetups">
             <button ion-button clear (click)="modalMeetup()">
               <ion-avatar>
-                <img src="./assets/imgs/hockey.png" alt="activity-img">
-                <p>Hockey</p>
+                <img [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')" alt="activity-img">
+                <p>{{ meetup.title}}</p>
               </ion-avatar>
             </button>
           </ion-item>
@@ -66,9 +59,18 @@
       </ion-scroll>
     </ion-card-content>
   </ion-card>
+
+  <ion-card id="gallery-card">
+    <ion-card-header>Image Gallery</ion-card-header>
+    <ion-card-content>
+      <ion-list id="">
+        <ion-item>
+          <img src="../../assets/imgs/background2.jpg" alt="activity-img">
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-  </ion-toolbar>
 </ion-footer>

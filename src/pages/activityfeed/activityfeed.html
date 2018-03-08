@@ -12,19 +12,19 @@
   <ion-card *ngFor="let file of MediaFiles">
     <ion-card-title>{{file.title}}</ion-card-title>
     <ion-card-content>
-      <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="openOneFile(file.file_id)"
+      <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="modalOpenImg(file.file_id)"
            [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
     </ion-card-content>
     <div *ngIf="file.media_type == 'audio'">
       <ion-card-content>
-        <audio controls (click)="openOneFile(file.file_id)">
+        <audio controls (click)="modalOpenImg(file.file_id)">
           <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
         </audio>
       </ion-card-content>
     </div>
     <div *ngIf="file.media_type == 'video'">
       <ion-card-content>
-        <video controls width="320" height="240" (click)="openOneFile(file.file_id)"
+        <video controls width="320" height="240" (click)="modalOpenImg(file.file_id)"
                [poster]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')">
           <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
           <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">

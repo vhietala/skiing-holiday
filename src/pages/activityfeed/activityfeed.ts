@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import {SinglefileviewPage} from "../singlefileview/singlefileview";
 import {User} from "../../interfaces/user";
 import {Media} from "../../interfaces/media";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
-import {AboutPage} from "../about/about";
+import {ActivityPage} from "../activity/activity";
 
 @IonicPage()
 @Component({
@@ -15,7 +15,8 @@ import {AboutPage} from "../about/about";
 })
 export class ActivityfeedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public modalCtrl: ModalController, public mediaProvider: MediaProvider) {
   }
 
   files: any;
@@ -48,6 +49,11 @@ export class ActivityfeedPage {
     });
   }
 
+  public modalOpenImg(id) {
+    let modal = this.modalCtrl.create(SinglefileviewPage, {mediaplayerid: id});
+    modal.present();
+  }
+
   public displayImages() {
 
     //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
@@ -57,7 +63,6 @@ export class ActivityfeedPage {
       this.MediaFiles.reverse();
       //make this response type media and try through it?
       //atm it shows 20 objects and it doenst go throoguh them even i have for loop
-
       console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
       for (let i = 0; i < this.MediaFiles.length; i++) {
         console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");

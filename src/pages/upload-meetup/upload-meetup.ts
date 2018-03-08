@@ -1,21 +1,27 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
-import {HomePage} from "../home/home";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
 import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
-  selector: 'page-upload-activity',
-  templateUrl: 'upload-activity.html',
+  selector: 'page-upload-meetup',
+  templateUrl: 'upload-meetup.html',
 })
 export class UploadMeetupPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  pushTabs: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController,
               public viewCtrl: ViewController, public mediaProvider: MediaProvider) {
+    this.pushTabs = TabsPage;
   }
+
+  activities: any;
+  activity: Media;
+  userId: '';
 
   file: File;
   media: Media = {
@@ -34,7 +40,7 @@ export class UploadMeetupPage {
     console.log('ionViewDidLoad UploadActivityPage');
   }
 
-  public upload() {
+  public uploadMeetup() {
     const formData: FormData = new FormData();
     formData.append('title', this.media.title);
     formData.append('description', this.media.description);
@@ -43,26 +49,45 @@ export class UploadMeetupPage {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
-      this.mediaProvider.setTag(this.mediaProvider.meetingTag,response['file_id']).subscribe( response => {
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
+        console.log(response);
+      });
+      this.mediaProvider.setTag(this.mediaProvider.meetingTag, response['file_id']).subscribe(response => {
         console.log(response);
       });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
-    setTimeout(() =>
-      {
+    setTimeout(() => {
         this.navCtrl.setRoot(TabsPage);
+        let toast = this.toastCtrl.create({
+          message: 'New activity created',
+          duration: 3000,
+          position: 'top'
+        });
+        toast.onDidDismiss(() => {
+          console.log('Dismissed toast');
+        });
+        toast.present();
       },
       3500);
   }
 
-  public dismiss() {
-    this.viewCtrl.dismiss();
-  }
-
-  public setFile(evt) {
+  setFile(evt) {
     console.log(evt.target.files[0]);
     this.file = evt.target.files[0];
   }
 
+  getFavouritedActivities() {
+    this.mediaProvider.getUserData().subscribe(response => {
+      this.userId = response['user_id'];
+      this.mediaProvider.getFavourites().subscribe( response => {
+        this.activities = response;
+      });
+    });
+  }
+
+  favourite() {
+
+  }
 }

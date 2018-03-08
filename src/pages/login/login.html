@@ -1,22 +1,16 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle *ngIf="!hasToken">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
-  </ion-navbar>
 </ion-header>
 
-<ion-content class="page-content" padding>
+<ion-content class="scroll-content" padding>
   <div text-center padding id="logo-container">
     <img id="meetup-logo" src="./assets/imgs/meetuplogotransparent.png">
   </div>
-  <p class="login-text" text-center>Want to know more about <a (click)="pushAbout()">MeetUp and it's creators? </a></p>
+  <p class="login-text" text-center>Want to know more about <a [navPush]="pushAbout">MeetUp and it's creators? </a></p>
   <form (submit)="login()">
-    <ion-input [(ngModel)]="user.username" placeholder="Username" type="text" name="username"></ion-input><br>
+    <ion-input outline [(ngModel)]="user.username" placeholder="Username" type="text" name="username"></ion-input><br>
     <ion-input [(ngModel)]="user.password" placeholder="Password" type="password" name="password"></ion-input><br>
-    <button ion-button color="default" block type="submit">Login</button>
-    <button ion-button color="default" block (click)="pushRegister()">Create an account</button>
+    <button ion-button color="light" block outline strong type="submit">Login</button>
+    <button ion-button color="light" block outline strong (click)="pushRegister()">Create an account</button>
   </form>
 </ion-content>
 
