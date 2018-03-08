@@ -3,7 +3,8 @@
     <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
+    <ion-searchbar *ngIf="!hasToken" [(ngModel)]="mediaProvider.searchText"
+                   (search)="getSearchedMedia(searchText)"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 

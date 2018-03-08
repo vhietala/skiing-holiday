@@ -54,8 +54,6 @@ export class HomePage {
       console.log(response);
       this.MediaFiles = response;
       this.MediaFiles.reverse();
-      //make this response type media and try through it?
-      //atm it shows 20 objects and it doesn't go through them even i have for loop
 
       console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
       for (let i = 0; i < this.MediaFiles.length; i++) {
