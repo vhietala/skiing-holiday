@@ -22,6 +22,7 @@ export class ProfilePage {
   profilePictureID: number;
   userId = '';
   file: File;
+  postthis: string;
 
   formData: FormData;
 
@@ -30,22 +31,30 @@ export class ProfilePage {
     this.mediaProvider.getUserData().subscribe(response => {
       this.profileName = response['username'];
       this.userId = response['user_id'];
+      //this.postthis = this.userId;
     }, (error: HttpErrorResponse) => {
       console.log(error);
     });
-    this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
-      const profilePictures = response['files'];
-      console.log(response);
-      if (response['length'] > 0) {
+    this.postthis = this.profilePicture;
 
-        for (let picture in profilePictures) {
-          if (picture['user_id'] == this.userId) {
-            this.profilePicture = this.mediaProvider.mediaUrl + picture['filename'];
-            this.profilePictureID = picture['file_id']
-          } else {
-            this.profilePicture = "./assets/imgs/profileimg.png";
+    this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
+      //const profilePictures = response['files'];
+      console.log(response);
+      this.postthis = response['length'];
+      this.postthis = response[0]['user_id'];
+
+      if (response['length']>0) {
+        //this.postthis=response[0]['user_id'];
+          for(let i=0;i<response['length'];i++) {
+            if (response[i]['user_id'] == this.userId) {
+              this.postthis = "here 2";
+              this.profilePicture = this.mediaProvider.uploadUrl + '/' + response[i]['filename'];
+              this.profilePictureID = response[i]['file_id'];
+            } else {
+              //this.postthis = "here3";
+              this.profilePicture = "./assets/imgs/profileimg.png";
+            }
           }
-        }
       } else {
         this.profilePicture = "./assets/imgs/profileimg.png";
       }
@@ -53,6 +62,7 @@ export class ProfilePage {
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
+    this.postthis=this.profilePicture;
   }
 
   uploadImgActionSheet() {
@@ -114,15 +124,18 @@ export class ProfilePage {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
-      //this.mediaProvider.deleteFile(this.profilePictureID);
-      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response3 => {
-        console.log(response3);
+      this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response=>{
+        console.log(response);
       });
+/*      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response3 => {
+        console.log(response3);
+      });*/
       this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response['file_id']).subscribe(response2 => {
         console.log(response2);
+        this.profilePictureID = response2['file_id'];
       });
-      this.profilePictureID = response['file_id'];
-      this.profilePicture = this.mediaProvider.mediaUrl + response['filename'];
+      //this.profilePictureID = response['file_id'];
+      //this.profilePicture = this.mediaProvider.mediaUrl + response['filename'];
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
@@ -132,32 +145,9 @@ export class ProfilePage {
       12000);
   }
 
-/*  private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
-    const byteCharacters = atob(b64Data);
-    const byteArrays = [];
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-    const blob = new Blob(byteArrays, {type: contentType});
-    return blob;
-  }
-
-  private createFileName() {
-    var d = new Date(),
-      n = d.getTime(),
-      newFileName = n + ".jpg";
-    return newFileName;
-  }*/
 
 
 }
 
 
-//load images (user id)
 
