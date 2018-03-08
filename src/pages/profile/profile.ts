@@ -132,7 +132,7 @@ export class ProfilePage {
       12000);
   }
 
-  private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
+/*  private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
@@ -153,7 +153,7 @@ export class ProfilePage {
       n = d.getTime(),
       newFileName = n + ".jpg";
     return newFileName;
-  }
+  }*/
 
 
 }
