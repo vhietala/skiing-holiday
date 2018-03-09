@@ -28,9 +28,11 @@ export class ProfilePage {
   }
 
   favourites: any;
-  activities: any;
+  activities: any = [];
+  tempActivities: any;
   meetups: any;
   activity: Media;
+  tagList: any;
   meetup: Media;
 
   profileName = '';
@@ -38,13 +40,15 @@ export class ProfilePage {
   profilePictureID: number;
   userId: number;
   file: File;
+  activityName: string;
+  activityMedia: Media;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
     this.mediaProvider.getUserData().subscribe(response => {
       this.profileName = response['username'];
       this.userId = response['user_id'];
-      this.displayFavActivities(this.userId);
+      this.displayFavActivities();
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
@@ -166,13 +170,38 @@ export class ProfilePage {
     return <File>theBlob;
   }
 
-  public displayFavActivities(id: number) {
-    this.mediaProvider.getFavourites().subscribe(response => {
-      this.favourites = response;
-      for (let data of this.favourites) {
-        if (data['user_id'] === id) {
-          this.activities.add(data);
+  public displayFavActivities() {
+    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe( response => {
+      console.log(response);
+      this.tagList = response;
+      this.mediaProvider.getFavourites().subscribe( response2 => {
+        console.log(response2);
+        this.favourites = response2;
+        for (let i = 0; i < this.favourites.length; i++) {
+          //console.log(this.favourites[i]);
+          for (let j = 0; j < this.tagList.length; j++) {
+            //console.log(this.tagList[j]);
+            if (this.favourites[i].file_id === this.tagList[j].file_id) {
+              console.log(this.tagList[j]);
+              this.activities.push(this.tagList[j]);
+            } else {
+
+            }
+          }
         }
+      });
+    }, (error:HttpErrorResponse) => {
+      console.log(error.error.message);
+    });
+  }
+
+  public emptyActivities() {
+    this.mediaProvider.getFavourites().subscribe(response => {
+      //console.log(response);
+      this.favourites = response;
+      this.activities = '';
+      for (let data of this.favourites) {
+        this.mediaProvider.apiUrl + 'tags/file/' + data['file_id'].tag == this.mediaProvider.activityTag;
       }
     });
   }

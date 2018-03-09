@@ -32,8 +32,8 @@
           <ion-item *ngFor="let activity of activities">
             <button ion-button clear (click)="modalActivity(activity.file_id)">
               <ion-avatar>
-                <img src="./assets/imgs/hockey.png" alt="activity-img">
-                <p>{{ activity.title}}</p>
+                <img [src]="mediaProvider.uploadUrl + (activity?.filename | thumbnail: 'largeThumb')" alt="activity-img">
+                <p>{{activity.title}}</p>
               </ion-avatar>
             </button>
           </ion-item>
@@ -51,7 +51,7 @@
             <button ion-button clear (click)="modalMeetup()">
               <ion-avatar>
                 <img [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')" alt="activity-img">
-                <p>{{ meetup.title}}</p>
+                <p>title</p>
               </ion-avatar>
             </button>
           </ion-item>
@@ -63,7 +63,7 @@
   <ion-card id="gallery-card">
     <ion-card-header>Image Gallery</ion-card-header>
     <ion-card-content>
-      <ion-list id="">
+      <ion-list id="gallery-list">
         <ion-item>
           <img src="../../assets/imgs/background2.jpg" alt="activity-img">
         </ion-item>

@@ -29,8 +29,7 @@ page-profile {
 
   #activity-list, #meetup-list {
 
-    width: 500px;
-    display: flex;
+    display: inline-block;
     flex-wrap: nowrap;
 
     ion-item {

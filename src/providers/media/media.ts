@@ -82,7 +82,11 @@ export class MediaProvider {
   }
 
   public getByTag(tag: string) {
-    return this.http.get(this.apiUrl + 'tags/' + tag);
+    return this.http.get(this.apiUrl + 'tags/' + tag, this.tokenSettings);
+  }
+
+  public getTagByFileId(id: number) {
+    return this.http.get(this.apiUrl + 'tags/file/' + id, this.tokenSettings);
   }
 
   public setTag(tag: string, id: number) {
