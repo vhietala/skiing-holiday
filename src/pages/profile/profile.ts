@@ -3,6 +3,8 @@ import {ActionSheetController, IonicPage, NavController, NavParams} from 'ionic-
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
+import {Media} from "../../interfaces/media";
+import {SinglefileviewPage} from "../singlefileview/singlefileview";
 
 @IonicPage()
 @Component({
@@ -12,6 +14,9 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 export class ProfilePage {
 
   public base64Image: string;
+  uplfiles: any;
+  uploadedFiles: any;
+  file: Media;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
               public actionSheetCtrl: ActionSheetController, private camera: Camera) {
@@ -23,6 +28,7 @@ export class ProfilePage {
     console.log('ionViewDidLoad ProfilePage');
     this.mediaProvider.getUserData().subscribe(response => {
       this.profileName = response['username'];
+      this.getUserImages();
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
@@ -78,7 +84,7 @@ export class ProfilePage {
         console.log(response);
         this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response["file_id"]).subscribe(response => {
           console.log(response);
-        }, (error:HttpErrorResponse) => {
+        }, (error: HttpErrorResponse) => {
           console.log(error.error.message);
         });
       })
@@ -87,7 +93,7 @@ export class ProfilePage {
     });
   }
 
-  private b64toBlob(b64Data, contentType='', sliceSize=512) {
+  private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
     const byteArrays = [];
     for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
@@ -101,6 +107,19 @@ export class ProfilePage {
     }
     const blob = new Blob(byteArrays, {type: contentType});
     return blob;
+  }
+
+
+  public getUserImages() {
+    this.mediaProvider.getUsersMedia().subscribe(response => {
+      console.log(response);
+      this.uploadedFiles = response;
+      this.uploadedFiles.reverse();
+    });
+  }
+
+  openOneFile(id) {
+    this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
 }
 

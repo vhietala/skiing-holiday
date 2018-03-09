@@ -89,6 +89,38 @@
       </ion-scroll>
     </ion-card-content>
   </ion-card>
+
+  <ion-card id="gallery-card">
+    <ion-card-header>Image Gallery</ion-card-header>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+          <ion-list id="gallery-list">
+            <ion-item *ngFor="let file of uploadedFiles">
+              <ion-avatar>
+                <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="openOneFile(file.file_id)"
+                     [src]="mediaProvider.uploadUrl + file?.filename"/>
+              </ion-avatar>
+
+              <audio *ngIf="file.media_type == 'audio'" controls (click)="openOneFile(file.file_id)">
+                <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
+              </audio>
+
+              <ion-avatar>
+                <video *ngIf="file.media_type == 'video'" controls width="320" height="240"
+                       (click)="openOneFile(file.file_id)"
+                       [poster]="mediaProvider.uploadUrl + file?.filename">
+                  <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
+                  <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">
+                </video>
+              </ion-avatar>
+            </ion-item>
+
+          </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
+
+
 </ion-content>
 
 <ion-footer>

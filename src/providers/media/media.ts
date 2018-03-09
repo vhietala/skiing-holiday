@@ -111,5 +111,9 @@ export class MediaProvider {
     };
     return this.http.post(this.mediaUrl + '/search', body, this.tokenSettings);
   }
+
+  public getUsersMedia() {
+    return this.http.get(this.mediaUrl + '/user', this.tokenSettings);
+  }
 }
 

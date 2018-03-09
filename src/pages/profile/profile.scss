@@ -22,14 +22,14 @@ page-profile {
     text-align: center;
   }
 
-  #activity-card, #meetup-card {
+  #activity-card, #meetup-card, #gallery-card {
     margin: auto;
     text-align: center;
   }
 
-  #activity-list, #meetup-list {
+  #activity-list, #meetup-list, #gallery-list {
 
-    width: 500px;
+    width: 2000px;  //FIX THIS TO BE REASONABLE
     display: flex;
     flex-wrap: nowrap;
 
