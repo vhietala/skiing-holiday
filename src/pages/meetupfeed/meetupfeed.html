@@ -9,6 +9,7 @@
 </ion-header>
 
 <ion-content padding>
+  <p>Enjoy some fresh images!</p>
   <ion-card *ngFor="let file of MediaFiles">
     <ion-card-title>{{file.title}}</ion-card-title>
     <ion-card-content>
@@ -31,7 +32,7 @@
         </video>
       </ion-card-content>
     </div>
-    <h5>{{"Uploader: " + file.username + " (" + file.user_id + ")"}}</h5>
+    <h5>{{"Uploader: " + file.user_id + " username " + file.username}}</h5>
     <p>{{ "Description: " + file.description }}</p>
     <p>{{ "File id: " + file.file_id }}</p>
   </ion-card>
@@ -39,6 +40,7 @@
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button clear [navPush]="pushAbout">About & Contact</button>
+    <button ion-button clear>About</button>
+    <button ion-button clear>Contact</button>
   </ion-toolbar>
 </ion-footer>

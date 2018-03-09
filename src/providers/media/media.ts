@@ -13,6 +13,7 @@ export class MediaProvider {
   meetingTag = 'shmumeeting';
 
   newComment: '';
+  searchText: '';
 
   loginUrl = 'http://media.mw.metropolia.fi/wbma/login/';
   apiUrl = 'http://media.mw.metropolia.fi/wbma/';
@@ -116,5 +117,12 @@ export class MediaProvider {
     return this.http.get(this.favouriteUrl + '', this.tokenSettings);
   }
 
+  public searchImages() {
+    const body = {
+      title: this.searchText,
+      description: this.searchText
+    };
+    return this.http.post(this.mediaUrl + '/search', body, this.tokenSettings);
+  }
 }
 

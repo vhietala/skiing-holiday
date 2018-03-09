@@ -3,7 +3,8 @@
     <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
+    <ion-searchbar *ngIf="!hasToken" [(ngModel)]="mediaProvider.searchText"
+                   (search)="getSearchedMedia(searchText)"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
@@ -17,7 +18,8 @@
 
   <div id="aboutme-container">
     <p class="profile-headings">About me</p>
-    <p id="aboutme-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim tempor.
+    <p id="aboutme-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim
+      tempor.
       Vivamus gravida, purus vitae sollicitudin maximus, lorem sem sodales nunc, et laoreet turpis leo vel neque.
       Donec laoreet at risus non bibendum. Etiam erat elit, placerat id quam tempus, facilisis feugiat leo.
       Curabitur congue fermentum mi, interdum pellentesque dolor venenatis sit amet.
