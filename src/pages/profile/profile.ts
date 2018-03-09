@@ -24,7 +24,7 @@ export class ProfilePage {
   file: File;
   postthis: string;
 
-  formData: FormData;
+  //formData: FormData;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -40,21 +40,21 @@ export class ProfilePage {
     this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
       //const profilePictures = response['files'];
       console.log(response);
-      this.postthis = response['length'];
-      this.postthis = response[0]['user_id'];
+      //this.postthis = response['length'];
+      //this.postthis = response[0]['user_id'];
 
-      if (response['length']>0) {
+      if (response['length'] > 0) {
         //this.postthis=response[0]['user_id'];
-          for(let i=0;i<response['length'];i++) {
-            if (response[i]['user_id'] == this.userId) {
-              this.postthis = "here 2";
-              this.profilePicture = this.mediaProvider.uploadUrl + '/' + response[i]['filename'];
-              this.profilePictureID = response[i]['file_id'];
-            } else {
-              //this.postthis = "here3";
-              this.profilePicture = "./assets/imgs/profileimg.png";
-            }
+        for (let i = 0; i < response['length']; i++) {
+          if (response[i]['user_id'] == this.userId) {
+            //this.postthis = "here 2";
+            this.profilePicture = this.mediaProvider.uploadUrl + '/' + response[i]['filename'];
+            this.profilePictureID = response[i]['file_id'];
+          } else {
+            //this.postthis = "here3";
+            this.profilePicture = "./assets/imgs/profileimg.png";
           }
+        }
       } else {
         this.profilePicture = "./assets/imgs/profileimg.png";
       }
@@ -62,7 +62,7 @@ export class ProfilePage {
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
-    this.postthis=this.profilePicture;
+    //this.postthis = this.profilePicture;
   }
 
   uploadImgActionSheet() {
@@ -95,7 +95,7 @@ export class ProfilePage {
 
   uploadProfileImg() {
 
-//        const formData: FormData = new FormData();
+    //const formData: FormData = new FormData();
     const options: CameraOptions = {
       //sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
       quality: 100,
@@ -107,44 +107,48 @@ export class ProfilePage {
     this.camera.getPicture(options).then((imageData) => {
 
       console.log('imageData =' + imageData);
-      this.file = imageData;
-      this.profilePicture=imageData;
+      //this.file = imageData;
+      //this.profilePicture = imageData;
       //this.profilePicture=this.file['filename'];
-      this.formData.append('file',imageData);
+      if (this.platform.is("android")) {
+        imageData = "file://" + imageData
+      }
+      this.file = imageData;
+      const formData: FormData = new FormData();
+      formData.append('title', 'profile pic');
+      formData.append('description', 'profile pic');
+      formData.append('file', imageData);
+      this.postthis = 'uploading next';
+
+      this.mediaProvider.uploading(formData).subscribe(response => {
+        this.postthis = response.toString();
+        console.log(response);
+        //console.log(response.file_id);
+        //myfileid = response.file_id;
+        /*this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response2 => {
+          console.log(response2);
+        });*/
+
+        this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response[0]['file_id']).subscribe(response2 => {
+          console.log(response2);
+          this.profilePictureID = response2[0]['file_id'];
+        },(error3)=>{
+          this.postthis = 'something went wrong with tagging!'
+        });
+        this.profilePictureID = response[0]['file_id'];
+        this.profilePicture = this.mediaProvider.mediaUrl + response[0]['filename'];
+      }, (error: HttpErrorResponse) => {
+        this.postthis=error.error.message;
+        console.log(error.error.message);
+      });
+
     }, (err) => {
       // Handle error
       //this.presentToast('Error while loading image');
       console.log("photo error");
     });
-    //const formData: FormData = new FormData();
-    this.formData.append('title', 'profile pic');
-    //formData.append('description', '');
-    //this.formData.append('file', this.file);
-    this.mediaProvider.uploading(this.formData).subscribe(response => {
-      console.log(response);
-      //console.log(response.file_id);
-      //myfileid = response.file_id;
-      this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response=>{
-        console.log(response);
-      });
-/*      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response3 => {
-        console.log(response3);
-      });*/
-      this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response['file_id']).subscribe(response2 => {
-        console.log(response2);
-        this.profilePictureID = response2['file_id'];
-      });
-      //this.profilePictureID = response['file_id'];
-      //this.profilePicture = this.mediaProvider.mediaUrl + response['filename'];
-    }, (error: HttpErrorResponse) => {
-      console.log(error.error.message);
-    });
-    setTimeout(() => {
-        this.navCtrl.setRoot(HomePage);
-      },
-      12000);
-  }
 
+  }
 
 
 }
