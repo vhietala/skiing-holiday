@@ -29,13 +29,15 @@ page-profile {
 
   #activity-list, #meetup-list, #gallery-list {
 
-    width: 2000px;  //FIX THIS TO BE REASONABLE
+    //width: 2000px;  //FIX THIS TO BE REASONABLE
+    //width: 2000px;  //FIX THIS TO BE REASONABLE
+    width: fit-content;
     display: flex;
     flex-wrap: nowrap;
 
     ion-item {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
     }
 
     ion-avatar {
