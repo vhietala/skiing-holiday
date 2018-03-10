@@ -41,36 +41,52 @@ export class UploadActivityPage {
     formData.append('title', this.media.title);
     formData.append('description', this.media.description);
     formData.append('file', this.file);
-    this.mediaProvider.uploading(formData).subscribe(response => {
+    this.mediaProvider.getByTag(this.media.title.toLowerCase()).subscribe( response => {
       console.log(response);
-      //console.log(response.file_id);
-      //myfileid = response.file_id;
-      this.mediaProvider.setTag(this.mediaProvider.meetupTag,response['file_id']).subscribe( response => {
-        console.log(response);
-      });
-      this.mediaProvider.setTag(this.mediaProvider.activityTag,response['file_id']).subscribe( response => {
-        console.log(response);
-      });
-      this.mediaProvider.setTag(this.media.title.toLowerCase(),response['file_title']).subscribe( response => {
-        console.log(response);
-      });
-    }, (error: HttpErrorResponse) => {
-      console.log(error.error.message);
-    });
-    setTimeout(() =>
-      {
-        this.navCtrl.push(ActivityPage);
-        let toast = this.toastCtrl.create({
-          message: 'New activity created',
+      if (!response) {
+        this.mediaProvider.uploading(formData).subscribe(response => {
+          //console.log(response);
+          //console.log(response.file_id);
+          //myfileid = response.file_id;
+          if (this.media.title.toLowerCase())
+            this.mediaProvider.setTag(this.mediaProvider.meetupTag,response['file_id']).subscribe( response => {
+              //console.log(response);
+            });
+          this.mediaProvider.setTag(this.mediaProvider.activityTag,response['file_id']).subscribe( response => {
+            //console.log(response);
+          });
+          this.mediaProvider.setTag(this.media.title.toLowerCase(),response['file_title']).subscribe( response => {
+            //console.log(response);
+          });
+        }, (error: HttpErrorResponse) => {
+          console.log(error.error.message);
+        });
+        setTimeout(() =>
+          {
+            this.navCtrl.push(ActivityPage);
+            let toast = this.toastCtrl.create({
+              message: 'New activity created',
+              duration: 3000,
+              position: 'top'
+            });
+            toast.onDidDismiss(() => {
+              console.log('Dismissed toast');
+            });
+            toast.present();
+          },
+          1000);
+      } else {
+        let toast = this.toastCtrl.create( {
+          message: 'This activity already exists!',
           duration: 3000,
           position: 'top'
         });
-        toast.onDidDismiss(() => {
-          console.log('Dismissed toast');
+        toast.onDidDismiss( () => {
+          console.log('Dismissed toast')
         });
-        toast.present();
-      },
-      1000);
+        toast.present()
+      }
+    });
   }
 
   public dismiss() {

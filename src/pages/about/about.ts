@@ -8,7 +8,10 @@ import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular
 })
 export class AboutPage {
 
+  pushAbout: any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController) {
+    this.pushAbout = AboutPage;
   }
 
   ionViewDidLoad() {

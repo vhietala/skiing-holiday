@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content padding>
-  <form (submit)="upload()">
+  <form id="upload-form" (submit)="upload()">
     <input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)">
     <br>
     <ion-input [(ngModel)]="media.title" type="text" name="title" placeholder="Title"></ion-input>

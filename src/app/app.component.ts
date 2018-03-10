@@ -31,7 +31,6 @@ export class MyApp {
       {title: 'Profile', component: ProfilePage, icon: 'contact'},
       {title: 'Create a new Activity', component: UploadActivityPage, icon: ''},
       {title: 'Create a new Meet Up', component: UploadMeetupPage, icon: ''},
-      {title: 'About & Contact', component: AboutPage, icon: 'help'},
       {title: 'Logout', component: LogoutPage, icon: 'log-out'},
     ];
   }

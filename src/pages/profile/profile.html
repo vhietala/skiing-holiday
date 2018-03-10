@@ -30,7 +30,7 @@
     <ion-card-header>Activities</ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
-        <ion-list id="activity-list">
+        <ion-list id="activity-list" *ngIf="activities.length > 0">
           <ion-item *ngFor="let activity of activities">
             <button ion-button clear (click)="modalActivity(activity.file_id)">
               <ion-avatar>
@@ -48,7 +48,7 @@
     <ion-card-header>Meet Ups</ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
-        <ion-list id="meetup-list">
+        <ion-list id="meetup-list" *ngIf="meetups.length > 0">
           <ion-item *ngFor="let meetup of meetups">
             <button ion-button clear (click)="modalMeetup()">
               <ion-avatar>
