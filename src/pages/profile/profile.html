@@ -52,8 +52,8 @@
           <ion-item *ngFor="let meetup of meetups">
             <button ion-button clear (click)="modalMeetup()">
               <ion-avatar>
-                <img [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')" alt="activity-img">
-                <p>title</p>
+                <img [src]="mediaProvider.uploadUrl + (meetup?.filename | thumbnail: 'largeThumb')" alt="meetup-img">
+                <p>{{meetup.title}}</p>
               </ion-avatar>
             </button>
           </ion-item>

@@ -3,14 +3,9 @@ import {ActionSheetController, IonicPage, ModalController, NavController, NavPar
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
-import {TabsPage} from "../tabs/tabs";
-import {UploadPage} from "../upload/upload";
-import {UploadActivityPage} from "../upload-activity/upload-activity";
 import {ActivityPage} from "../activity/activity";
 import {SinglefileviewPage} from "../singlefileview/singlefileview";
-import {UploadMeetupPage} from "../upload-meetup/upload-meetup";
 import {Media} from "../../interfaces/media";
-import {User} from "../../interfaces/user";
 
 @IonicPage()
 @Component({
@@ -29,8 +24,7 @@ export class ProfilePage {
 
   favourites: any;
   activities: any = [];
-  tempActivities: any;
-  meetups: any;
+  meetups: any = [];
   activity: Media;
   tagList: any;
   meetup: Media;
@@ -40,8 +34,6 @@ export class ProfilePage {
   profilePictureID: number;
   userId: number;
   file: File;
-  activityName: string;
-  activityMedia: Media;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -54,17 +46,17 @@ export class ProfilePage {
     })
   }
 
-  public modalActivity(id) {
+  modalActivity(id) {
     let modal = this.modalCtrl.create(ActivityPage, {activityId: id});
     modal.present();
   }
 
-  public modalMeetup() {
+  modalMeetup() {
     let modal = this.modalCtrl.create(SinglefileviewPage);
     modal.present();
   }
 
-  public uploadImgActionSheet() {
+  uploadImgActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       cssClass: 'upload-action-sheet',
       buttons: [
@@ -73,14 +65,14 @@ export class ProfilePage {
           role: 'destructive',
           handler: () => {
             console.log('Take image clicked');
-            this.takeProfileImg();
+            //this.takeProfileImg();
           }
         }, {
           text: 'Choose from gallery',
           role: 'destructive',
           handler: () => {
             console.log('Choose image clicked');
-            this.chooseProfileImg();
+            //this.chooseProfileImg();
           }
         }, {
           text: 'delete current image',
@@ -99,7 +91,7 @@ export class ProfilePage {
     actionSheet.present();
   }
 
-  public chooseProfileImg() {
+  /*chooseProfileImg() {
     const formData: FormData = new FormData();
     const options: CameraOptions = {
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
@@ -140,9 +132,9 @@ export class ProfilePage {
       3500);
   }
 
-  public takeProfileImg() {
+  takeProfileImg() {
 
-  }
+  }*/
 
   private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
@@ -160,7 +152,7 @@ export class ProfilePage {
     return blob;
   }
 
-  public blobToFile = (theBlob: Blob, fileName: string): File => {
+  blobToFile = (theBlob: Blob, fileName: string): File => {
     var b: any = theBlob;
     //A Blob() is almost a File() - it's just missing the two properties below which we will add
     b.lastModifiedDate = new Date();
@@ -170,7 +162,7 @@ export class ProfilePage {
     return <File>theBlob;
   }
 
-  public displayFavActivities() {
+   displayFavActivities() {
     this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe( response => {
       console.log(response);
       this.tagList = response;
@@ -195,7 +187,32 @@ export class ProfilePage {
     });
   }
 
-  public emptyActivities() {
+  displayFavMeetups() {
+    this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe( response => {
+      console.log(response);
+      this.tagList = response;
+      this.mediaProvider.getFavourites().subscribe( response2 => {
+        console.log(response2);
+        this.favourites = response2;
+        for (let i = 0; i < this.favourites.length; i++) {
+          //console.log(this.favourites[i]);
+          for (let j = 0; j < this.tagList.length; j++) {
+            //console.log(this.tagList[j]);
+            if (this.favourites[i].file_id === this.tagList[j].file_id) {
+              console.log(this.tagList[j]);
+              this.meetups.push(this.tagList[j]);
+            } else {
+
+            }
+          }
+        }
+      });
+    }, (error:HttpErrorResponse) => {
+      console.log(error.error.message);
+    });
+  }
+
+  emptyActivities() {
     this.mediaProvider.getFavourites().subscribe(response => {
       //console.log(response);
       this.favourites = response;

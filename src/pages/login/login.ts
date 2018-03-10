@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {RegisterPage} from "../register/register";
@@ -15,10 +15,7 @@ interface User {}
 })
 export class LoginPage {
 
-  pushAbout: any;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
-    this.pushAbout = AboutPage;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider, public modalCtrl: ModalController) {
   }
 
   user: User = {
@@ -39,11 +36,17 @@ export class LoginPage {
     }
   }
 
-  public hasToken() {
+  modalAbout() {
+      let modal = this.modalCtrl.create(AboutPage);
+      modal.present();
+  }
+
+
+  hasToken() {
     return localStorage.getItem('token') !== null;
   }
 
-  public login() {
+  login() {
     // console.log('uname: ' + this.user.username);
     // console.log('pwd: ' + this.password);
     /* const body = {
@@ -60,7 +63,7 @@ export class LoginPage {
     });
   }
 
-  public pushRegister(){
+  pushRegister(){
     this.navCtrl.push(RegisterPage);
   }
 }

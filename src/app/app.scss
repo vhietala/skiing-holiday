@@ -15,8 +15,12 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+$color-app-blue: #2271da;
+$color-app-grey: #535453;
+
+
 .toolbar-background {
-  background-color: #D7F1FC;
+  background-color: #f2f2f8;
 }
 
 ion-footer {

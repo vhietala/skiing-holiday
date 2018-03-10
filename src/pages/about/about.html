@@ -1,10 +1,7 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle *ngIf="!hasToken">
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
-  </ion-navbar>
+  <button ion-button clear (click)="dismiss()">
+    <ion-icon name="arrow-back"></ion-icon>
+  </button>
 </ion-header>
 
 <ion-content padding>

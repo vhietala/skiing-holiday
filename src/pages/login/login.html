@@ -5,17 +5,26 @@
   <div text-center padding id="logo-container">
     <img id="meetup-logo" src="./assets/imgs/meetuplogotransparent.png">
   </div>
-  <p class="login-text" text-center>Want to know more about <a [navPush]="pushAbout">MeetUp and it's creators? </a></p>
-  <form (submit)="login()">
-    <ion-input outline [(ngModel)]="user.username" placeholder="Username" type="text" name="username"></ion-input><br>
-    <ion-input [(ngModel)]="user.password" placeholder="Password" type="password" name="password"></ion-input><br>
-    <button ion-button color="light" block outline strong type="submit">Login</button>
-    <button ion-button color="light" block outline strong (click)="pushRegister()">Create an account</button>
+  <form id="loginform"(submit)="login()">
+    <ion-item>
+      <ion-label floating>username</ion-label>
+      <ion-input outline [(ngModel)]="user.username" type="text" name="username"></ion-input>
+    </ion-item>
+    <ion-item padding>
+      <ion-label floating>password</ion-label>
+      <ion-input outline [(ngModel)]="user.password" type="password" name="password"></ion-input>
+    </ion-item>
+    <ion-buttons>
+      <button ion-button color="darkish" outline id="login" class=slide type="submit">Login</button>
+      <button ion-button color="darkish" outline id="register" class=slide (click)="pushRegister()">Create an account</button>
+    </ion-buttons>
+    <!--<button ion-button color="light" block outline strong type="submit">Login</button>
+    <button ion-button color="light" block outline strong (click)="pushRegister()">Create an account</button>-->
   </form>
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
-    <button ion-button clear [navPush]="pushAbout">About & Contact</button>
+    <button ion-button color="secondary" strong clear (click)="modalAbout()">About & Contact</button>
   </ion-toolbar>
 </ion-footer>
