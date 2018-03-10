@@ -25,7 +25,7 @@
     <audio *ngIf="mediaFile.media_type == 'audio'" [src]="url" controls></audio>
     <ion-card-content>
       <ion-list>
-        <ion-item> {{"Description: " + mediaFile.description}}</ion-item>
+        <ion-item text-wrap> {{"Description: " + mediaFile.description}}</ion-item>
         <ion-item> {{"Uploaded by: " + mediaFile.username + " (" + mediaFile.user_id + ")"}}</ion-item>
         <!-- also add username-->
         <ion-item> {{"Added: "}} {{mediaFile.time_added | date: 'dd:MM:yy hh:mm a'}}</ion-item>
