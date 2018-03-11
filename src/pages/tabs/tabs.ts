@@ -6,7 +6,7 @@ import {ActivityfeedPage} from "../activityfeed/activityfeed";
 @IonicPage()
 @Component({
   template: `    
-      <ion-tabs tabsPlacement="top" class="tabs-basic">
+      <ion-tabs color="secondary" tabsPlacement="top" class="tabs-basic">
         <ion-tab tabTitle="Profile" [root]="profilePage"></ion-tab>
         <ion-tab tabTitle="Activity Feed" [root]="activityFeed"></ion-tab>
       </ion-tabs>

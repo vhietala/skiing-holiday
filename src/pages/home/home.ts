@@ -52,13 +52,12 @@ export class HomePage {
 
   displayImages() {
     this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
-      console.log(response);
+      //console.log(response);
       this.MediaFiles = response;
       this.MediaFiles.reverse();
-
-      console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
+      //console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
       for (let i = 0; i < this.MediaFiles.length; i++) {
-        console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
+        //console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
         this.mediaProvider.getUserInfo(this.MediaFiles[i].user_id).subscribe((ressu: User) => {
           this.meeduska = ressu;
           this.MediaFiles[i].username = this.meeduska.username;
@@ -73,13 +72,13 @@ export class HomePage {
 
   getSearchedMedia(value: string) {
     //connectaa meetup tagi viel tähän ni GG.
-    console.log(value);
+    //console.log(value);
     this.mediaProvider.searchImages().subscribe(response => {
-      console.log(response);
+      //console.log(response);
       this.MediaFiles = response;
       console.log("Searching media: " + this.MediaFiles);
       for (let i = 0; i < this.MediaFiles.length; i++) {
-        console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
+        //console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
         this.mediaProvider.getUserInfo(this.MediaFiles[i].user_id).subscribe((ressu: User) => {
           this.meeduska = ressu;
           this.MediaFiles[i].username = this.meeduska.username;

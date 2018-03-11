@@ -1,26 +1,26 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button (click)="dismiss()">
+  <div style="display: inline-flex">
+    <button clear ion-button (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-title>MediaPlayer</ion-title>
-  </ion-navbar>
+    <ion-title>{{mediaFile.title}}</ion-title>
+  </div>
 </ion-header>
 
 
 <ion-content padding>
   <ion-card>
-    <ion-card-title>{{mediaFile.title}}</ion-card-title>
+    <!--<ion-card-title>{{mediaFile.title}}</ion-card-title>-->
     <img [src]="url" *ngIf="mediaFile.media_type == 'image'">
     <video [src]="url" *ngIf="mediaFile.media_type == 'video'" controls></video>
     <audio *ngIf="mediaFile.media_type == 'audio'" [src]="url" controls></audio>
     <ion-card-content>
       <ion-list>
-        <ion-item> {{"Description: " + mediaFile.description}}</ion-item>
+        <ion-item> {{mediaFile.description}}</ion-item>
         <ion-item> {{"Uploaded by: " + mediaFile.username + " (" + mediaFile.user_id + ")"}}</ion-item>
         <!-- also add username-->
         <ion-item> {{"Added: " + mediaFile.time_added }}</ion-item>
-        <ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>
+        <!--<ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>-->
         <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
         <ion-list *ngFor="let favouriter of favouriteID">
           <ion-item-group> {{favouriter.username + " (" + favouriter.user_id + ")"}}</ion-item-group>
@@ -43,6 +43,7 @@
           <ion-icon name="heart"></ion-icon>
           Delete Favourite
         </button>
+        <ion-toggle [(ngModel)]="favouriteToggle"></ion-toggle>
       </ion-list>
     </ion-card-content>
   </ion-card>

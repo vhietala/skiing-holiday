@@ -162,19 +162,19 @@ export class ProfilePage {
     return <File>theBlob;
   }
 
-   displayFavActivities() {
-    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe( response => {
-      console.log(response);
+  displayFavActivities() {
+    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
+      //console.log(response);
       this.tagList = response;
-      this.mediaProvider.getFavourites().subscribe( response2 => {
-        console.log(response2);
+      this.mediaProvider.getFavourites().subscribe(response2 => {
+        //console.log(response2);
         this.favourites = response2;
         for (let i = 0; i < this.favourites.length; i++) {
           //console.log(this.favourites[i]);
           for (let j = 0; j < this.tagList.length; j++) {
             //console.log(this.tagList[j]);
             if (this.favourites[i].file_id === this.tagList[j].file_id) {
-              console.log(this.tagList[j]);
+              //console.log(this.tagList[j]);
               this.activities.push(this.tagList[j]);
             } else {
 
@@ -182,24 +182,24 @@ export class ProfilePage {
           }
         }
       });
-    }, (error:HttpErrorResponse) => {
+    }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
   }
 
   displayFavMeetups() {
-    this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe( response => {
-      console.log(response);
+    this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe(response => {
+      //console.log(response);
       this.tagList = response;
-      this.mediaProvider.getFavourites().subscribe( response2 => {
-        console.log(response2);
+      this.mediaProvider.getFavourites().subscribe(response2 => {
+        //console.log(response2);
         this.favourites = response2;
         for (let i = 0; i < this.favourites.length; i++) {
           //console.log(this.favourites[i]);
           for (let j = 0; j < this.tagList.length; j++) {
             //console.log(this.tagList[j]);
             if (this.favourites[i].file_id === this.tagList[j].file_id) {
-              console.log(this.tagList[j]);
+              //console.log(this.tagList[j]);
               this.meetups.push(this.tagList[j]);
             } else {
 
@@ -207,22 +207,12 @@ export class ProfilePage {
           }
         }
       });
-    }, (error:HttpErrorResponse) => {
+    }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
   }
-
-  emptyActivities() {
-    this.mediaProvider.getFavourites().subscribe(response => {
-      //console.log(response);
-      this.favourites = response;
-      this.activities = '';
-      for (let data of this.favourites) {
-        this.mediaProvider.apiUrl + 'tags/file/' + data['file_id'].tag == this.mediaProvider.activityTag;
-      }
-    });
-  }
 }
+
 
 //load images (user id)
 

@@ -11,6 +11,7 @@ export class MediaProvider {
   profileimgTag = 'shmuprofile';
   activityTag = 'shmuactivity';
   meetingTag = 'shmumeeting';
+  userImgTag = 'shmuimageuser'
 
   newComment: '';
   searchText: '';
@@ -99,7 +100,7 @@ export class MediaProvider {
   }
 
   public addFavourite(id: number) {
-    return this.http.post(this.favouriteUrl, id, this.tokenSettings);
+    return this.http.post(this.favouriteUrl + id, this.tokenSettings);
   }
 
   public deleteFavouite(id: number) {

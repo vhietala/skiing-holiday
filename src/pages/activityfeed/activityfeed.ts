@@ -20,6 +20,9 @@ export class ActivityfeedPage {
   }
 
   files: any;
+  tag : any;
+  tags: any = [];
+  tempList: any = [];
   //MediaFiles: Media[];
   //file: Media = {
   MediaFiles: any;
@@ -41,40 +44,50 @@ export class ActivityfeedPage {
 
   ionViewDidLoad() {
     this.mediaProvider.getUserData().subscribe(response => {
-      console.log('Welcome ' + response['full_name']);
       this.displayImages();
     }, (error: HttpErrorResponse) => {
       console.log(error);
-      this.navCtrl.setRoot(LoginPage);
     });
   }
 
-  public modalOpenImg(id) {
+  modalOpenImg(id) {
     let modal = this.modalCtrl.create(SinglefileviewPage, {mediaplayerid: id});
     modal.present();
   }
 
-  public displayImages() {
-
-    //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
-    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
+  displayImages() {
+    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
-      this.MediaFiles.reverse();
+      this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe(response2 => {
+        this.tempList = response2;
+        this.MediaFiles.reverse();
+        console.log(response2);
+        for (let i = 0; i < this.tempList.length; i++) {
+          this.MediaFiles.push(this.tempList[i]);
+        }
+        this.mediaProvider.getByTag(this.mediaProvider.userImgTag).subscribe(response3 => {
+          this.tempList = response3;
+          for (let k = 0; k < this.tempList.length; k++) {
+            this.MediaFiles.push(this.tempList[k]);
+            console.log(this.MediaFiles);
+          }
+        });
+      },( error: HttpErrorResponse) => {
+        console.log(error.error.message);
+      });
+      //this.MediaFiles.reverse();
       //make this response type media and try through it?
       //atm it shows 20 objects and it doenst go throoguh them even i have for loop
-      console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
-      for (let i = 0; i < this.MediaFiles.length; i++) {
-        console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
-        this.mediaProvider.getUserInfo(this.MediaFiles[i].user_id).subscribe((ressu: User) => {
+      //console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
+      for (let j = 0; j < this.MediaFiles.length; j++) {
+        //console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
+        this.mediaProvider.getUserInfo(this.MediaFiles[j].user_id).subscribe((ressu: User) => {
           this.meeduska = ressu;
-          this.MediaFiles[i].username = this.meeduska.username;
+          this.MediaFiles[j].username = this.meeduska.username;
         });
       }
     });
   }
 
-  openOneFile(id) {
-    this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
-  }
 }

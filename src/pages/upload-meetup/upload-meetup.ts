@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
 import {TabsPage} from "../tabs/tabs";
+import {Tag} from "../../interfaces/tag";
 
 @IonicPage()
 @Component({
@@ -35,6 +36,10 @@ export class UploadMeetupPage {
     time_added: '',
     username: '',
   };
+  tag: Tag = {
+    file_id: 0,
+    tagname: ''
+  };
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadActivityPage');
@@ -49,6 +54,9 @@ export class UploadMeetupPage {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
+      this.mediaProvider.setTag(this.tag.tagname.toLowerCase(), response['file_id']).subscribe(response => {
+        console.log(response);
+      });
       this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
         console.log(response);
       });
@@ -88,9 +96,5 @@ export class UploadMeetupPage {
         this.activities = response;
       });
     });
-  }
-
-  favourite() {
-
   }
 }

@@ -55,13 +55,13 @@ export class UploadPage {
     });
     setTimeout(() =>
       {
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.setRoot(TabsPage, {openTab: 2});
       },
       3500);
   }
 
   public dismiss() {
-    this.viewCtrl.dismiss();
+    this.navCtrl.setRoot(TabsPage,{openTab: 1});
   }
 
   public setFile(evt) {
