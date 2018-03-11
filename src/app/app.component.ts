@@ -10,6 +10,7 @@ import {LoginPage} from "../pages/login/login";
 import {AboutPage} from "../pages/about/about";
 import {UploadActivityPage} from "../pages/upload-activity/upload-activity";
 import {UploadMeetupPage} from "../pages/upload-meetup/upload-meetup";
+import {UploadPage} from "../pages/upload/upload";
 
 
 @Component({
@@ -29,6 +30,7 @@ export class MyApp {
     this.pages = [
       {title: 'Home', component: HomePage, icon: 'home'},
       {title: 'Profile', component: ProfilePage, icon: 'contact'},
+      {title: 'Upload an Image', component: UploadPage, icon: ''},
       {title: 'Create a new Activity', component: UploadActivityPage, icon: ''},
       {title: 'Create a new Meet Up', component: UploadMeetupPage, icon: ''},
       {title: 'Logout', component: LogoutPage, icon: 'log-out'},

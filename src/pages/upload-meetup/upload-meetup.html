@@ -16,12 +16,15 @@
           <ion-option *ngFor="let activity of activities">{{ activity }}</ion-option>
         </ion-select>
     </ion-item>
-    <ion-label>Choose an image</ion-label>
-    <input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)">
-    <ion-label>Choose a name for Meet Up</ion-label>
-    <ion-input [(ngModel)]="media.title" type="text" name="title" placeholder="required"></ion-input>
-    <ion-label>Choose a description for Meet Up</ion-label>
-    <ion-textarea [(ngModel)]="media.description" name="description" placeholder="optional"></ion-textarea>
-    <button ion-button color="secondary" type="submit">Create new Meet Up</button>
+    <ion-input type="file" name="file" (change)="setFile($event)"></ion-input>
+    <ion-item>
+      <ion-label floating>Choose a name</ion-label>
+      <ion-input [(ngModel)]="media.title" type="text" name="title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Write a description</ion-label>
+      <ion-textarea [(ngModel)]="media.description" name="description"></ion-textarea>
+    </ion-item>
+    <button ion-button color="darkish" clear type="submit">Create new Meet Up</button>
   </form>
 </ion-content>

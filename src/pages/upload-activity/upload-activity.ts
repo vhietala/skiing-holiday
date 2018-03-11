@@ -3,7 +3,6 @@ import {IonicPage, NavController, NavParams, ToastController, ViewController} fr
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
-import {TabsPage} from "../tabs/tabs";
 import {ActivityPage} from "../activity/activity";
 
 @IonicPage()
@@ -13,13 +12,13 @@ import {ActivityPage} from "../activity/activity";
 })
 export class UploadActivityPage {
 
-  pushTabs: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private toastCtrl: ToastController,
               public viewCtrl: ViewController, public mediaProvider: MediaProvider) {
-    this.pushTabs = TabsPage;
   }
 
   file: File;
+  tagList: any = [];
+  tagListById: any = [];
   media: Media = {
     file_id: 0,
     filename: '',
@@ -41,51 +40,62 @@ export class UploadActivityPage {
     formData.append('title', this.media.title);
     formData.append('description', this.media.description);
     formData.append('file', this.file);
-    this.mediaProvider.getByTag(this.media.title.toLowerCase()).subscribe( response => {
+    this.mediaProvider.getByTag(this.media.title.toLowerCase()).subscribe(response => {
       console.log(response);
-      if (!response) {
-        this.mediaProvider.uploading(formData).subscribe(response => {
-          //console.log(response);
-          //console.log(response.file_id);
-          //myfileid = response.file_id;
-          if (this.media.title.toLowerCase())
-            this.mediaProvider.setTag(this.mediaProvider.meetupTag,response['file_id']).subscribe( response => {
-              //console.log(response);
-            });
-          this.mediaProvider.setTag(this.mediaProvider.activityTag,response['file_id']).subscribe( response => {
-            //console.log(response);
-          });
-          this.mediaProvider.setTag(this.media.title.toLowerCase(),response['file_title']).subscribe( response => {
-            //console.log(response);
-          });
-        }, (error: HttpErrorResponse) => {
-          console.log(error.error.message);
-        });
-        setTimeout(() =>
-          {
-            this.navCtrl.push(ActivityPage);
-            let toast = this.toastCtrl.create({
-              message: 'New activity created',
-              duration: 3000,
-              position: 'top'
-            });
-            toast.onDidDismiss(() => {
-              console.log('Dismissed toast');
-            });
-            toast.present();
-          },
-          1000);
-      } else {
-        let toast = this.toastCtrl.create( {
-          message: 'This activity already exists!',
-          duration: 3000,
-          position: 'top'
-        });
-        toast.onDidDismiss( () => {
-          console.log('Dismissed toast')
-        });
-        toast.present()
-      }
+      this.tagList = response;
+      for (let i = 0; i < this.tagList.length; i++)
+        this.mediaProvider.getTagByFileId(this.tagList[i].file_id).subscribe(response2 => {
+          this.tagListById = response2;
+          console.log(response2);
+          for (let j=0; j < this.tagListById.length; j++) {
+            if (this.tagListById[j].tag != this.media.title.toLowerCase()) {
+              this.mediaProvider.uploading(formData).subscribe(response => {
+                //console.log(response);
+                //console.log(response.file_id);
+                //myfileid = response.file_id;
+                if (this.media.title.toLowerCase())
+                  this.mediaProvider.setTag(this.mediaProvider.meetupTag,response['file_id']).subscribe( response => {
+                    //console.log(response);
+                  });
+                  this.mediaProvider.setTag(this.mediaProvider.activityTag,response['file_id']).subscribe( response => {
+                    //console.log(response);
+                  });
+                  this.mediaProvider.setTag(this.media.title.toLowerCase(),response['file_title']).subscribe( response => {
+                    //console.log(response);
+                    this.mediaProvider.addFavourite(response['file_id']).subscribe( response2 => {
+                    console.log(response2);
+                    });
+                  });
+                }, (error: HttpErrorResponse) => {
+                  console.log(error.error.message);
+                });
+                setTimeout(() =>
+                  {
+                    this.navCtrl.setRoot(ActivityPage);
+                    let toast = this.toastCtrl.create({
+                      message: 'New activity created',
+                      duration: 3000,
+                      position: 'top'
+                    });
+                    toast.onDidDismiss(() => {
+                      console.log('Dismissed toast');
+                    });
+                    toast.present();
+                  },
+                  1000);
+            } else {
+              let toast = this.toastCtrl.create( {
+                message: 'This activity already exists!',
+                duration: 3000,
+                position: 'top'
+              });
+              toast.onDidDismiss( () => {
+                console.log('Dismissed toast')
+              });
+              toast.present();
+            }
+          }
+      });
     });
   }
 

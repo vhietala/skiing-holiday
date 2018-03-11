@@ -3,7 +3,7 @@ import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
-import {HomePage} from "../home/home";
+import {TabsPage} from "../tabs/tabs";
 
 
 @IonicPage()
@@ -46,13 +46,16 @@ export class UploadPage {
       //myfileid = response.file_id;
       this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
         console.log(response);
+        this.mediaProvider.getUserData().subscribe( response2 => {
+          this.mediaProvider.setTag(response2['username'].toLowerCase(),response['file_id']);
+        })
       });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
     setTimeout(() =>
       {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TabsPage);
       },
       3500);
   }

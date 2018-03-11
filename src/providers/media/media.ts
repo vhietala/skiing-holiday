@@ -99,10 +99,7 @@ export class MediaProvider {
   }
 
   public addFavourite(id: number) {
-    const body = {
-      file_id: id
-    };
-    return this.http.post(this.favouriteUrl, body, this.tokenSettings);
+    return this.http.post(this.favouriteUrl, id, this.tokenSettings);
   }
 
   public deleteFavouite(id: number) {

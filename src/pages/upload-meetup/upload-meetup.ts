@@ -54,6 +54,9 @@ export class UploadMeetupPage {
       });
       this.mediaProvider.setTag(this.mediaProvider.meetingTag, response['file_id']).subscribe(response => {
         console.log(response);
+        this.mediaProvider.addFavourite(response['file_id']).subscribe( response2 => {
+          console.log(response2);
+        });
       });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
