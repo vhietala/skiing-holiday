@@ -24,7 +24,7 @@ export class ProfilePage {
   file: File;
   postthis: string;
 
-  formData: FormData;
+  //formData: FormData;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -40,21 +40,21 @@ export class ProfilePage {
     this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
       //const profilePictures = response['files'];
       console.log(response);
-      this.postthis = response['length'];
-      this.postthis = response[0]['user_id'];
+      //this.postthis = response['length'];
+      //this.postthis = response[0]['user_id'];
 
-      if (response['length']>0) {
+      if (response['length'] > 0) {
         //this.postthis=response[0]['user_id'];
-          for(let i=0;i<response['length'];i++) {
-            if (response[i]['user_id'] == this.userId) {
-              this.postthis = "here 2";
-              this.profilePicture = this.mediaProvider.uploadUrl + '/' + response[i]['filename'];
-              this.profilePictureID = response[i]['file_id'];
-            } else {
-              //this.postthis = "here3";
-              this.profilePicture = "./assets/imgs/profileimg.png";
-            }
+        for (let i = 0; i < response['length']; i++) {
+          if (response[i]['user_id'] == this.userId) {
+            //this.postthis = "here 2";
+            this.profilePicture = this.mediaProvider.uploadUrl + '/' + response[i]['filename'];
+            this.profilePictureID = response[i]['file_id'];
+          } else {
+            //this.postthis = "here3";
+            this.profilePicture = "./assets/imgs/profileimg.png";
           }
+        }
       } else {
         this.profilePicture = "./assets/imgs/profileimg.png";
       }
@@ -62,7 +62,7 @@ export class ProfilePage {
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
-    this.postthis=this.profilePicture;
+    //this.postthis = this.profilePicture;
   }
 
   uploadImgActionSheet() {
