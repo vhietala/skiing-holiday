@@ -83,7 +83,7 @@ export class ProfilePage {
             //this.chooseProfileImg();
           }
         }, {
-          text: 'delete current image',
+          text: 'Delete current image',
           handler: () => {
             console.log('Delete clicked');
           }

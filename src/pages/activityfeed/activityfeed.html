@@ -11,7 +11,8 @@
   <div *ngFor="let file of MediaFiles">
     <ion-card *ngIf="file.media_type == 'image'">
       <ion-item item-start>
-        <h2>{{file.username}}</h2>
+        <h1>{{file.title}}</h1>
+        <h2>{{"By: " + file.username}}</h2>
       </ion-item>
       <img [alt]="file?.title" (click)="modalOpenActivity(file.file_id)"
              [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>

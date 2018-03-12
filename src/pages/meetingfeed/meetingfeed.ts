@@ -53,7 +53,7 @@ export class MeetingfeedPage {
   }
 
   modalOpenImg(id) {
-    let modal = this.modalCtrl.create(SinglefileviewPage, {meetupId: id});
+    let modal = this.modalCtrl.create(SinglefileviewPage, {mediaplayerid: id});
     modal.present();
   }
 

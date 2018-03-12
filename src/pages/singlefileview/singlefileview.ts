@@ -44,6 +44,7 @@ export class SinglefileviewPage {
   commentGuy: User;
   favourited: boolean = false;
   userId: number;
+  username: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
@@ -81,7 +82,9 @@ export class SinglefileviewPage {
             this.favouriteID[i].username = this.favTemp.username;
             this.mediaProvider.getUserData().subscribe(response => {
               this.userId = response['user_id'];
-              if (this.userId = this.favouriteID[i].user_id) {
+              this.username = response['username'];
+              console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
+              if (this.favTemp.username == this.username ) {
                 this.favourited = true;
               } else {
                 this.favourited = false;
