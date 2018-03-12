@@ -28,7 +28,7 @@
         <ion-item text-wrap> {{"Description: " + mediaFile.description}}</ion-item>
         <ion-item> {{"Uploaded by: " + mediaFile.username + " (" + mediaFile.user_id + ")"}}</ion-item>
         <!-- also add username-->
-        <ion-item> {{"Added: "}} {{mediaFile.time_added | date: 'dd:MM:yy hh:mm a'}}</ion-item>
+        <ion-item> {{"Added: "}} {{mediaFile.time_added | date: 'dd.MM.yy hh:mm a'}}</ion-item>
         <ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>
         <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
         <ion-list *ngFor="let favouriter of favouriteID">
