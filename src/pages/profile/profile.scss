@@ -1,5 +1,8 @@
 page-profile {
 
+  .scroll-content {
+  }
+
   #profileimg-container {
     margin: auto;
     text-align: center;
@@ -20,6 +23,12 @@ page-profile {
   #aboutme-container {
     margin: auto;
     text-align: center;
+    #aboutme-text {
+      background: rgba(78, 229, 252, 0.5);
+      border-radius: 3px 3px 3px 3px;
+      padding: 5% 5% 5% 5%;
+      margin: 0% 10% 0% 10%;
+    }
   }
 
   #activity-card, #meetup-card, #gallery-card {

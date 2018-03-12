@@ -11,16 +11,17 @@
   <div *ngFor="let file of MediaFiles">
     <ion-card>
       <ion-item item-start>
-        <h2>{{file.username}}</h2>
-        <p>created a new Meetup!</p>
+        <div class="item-content">
+          <h1>{{file.title}}</h1>
+          <h2>{{"by " + file.username}}</h2>
+        </div>
       </ion-item>
       <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="modalOpenImg(file.file_id)"
            [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
     </ion-card>
-    <ion-card *ngIf="file.media_type == 'audio'">
+    <!--<ion-card *ngIf="file.media_type == 'audio'">
       <ion-item item-start>
         <h2>{{file.username}}</h2>
-        <p>created a new Meetup!</p>
       </ion-item>
       <audio controls (click)="modalOpenImg(file.file_id)">
         <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
@@ -29,14 +30,13 @@
     <ion-card *ngIf="file.media_type == 'video'">
       <ion-item item-start>
         <h2>{{file.username}}</h2>
-        <p>created a new Meetup!</p>
       </ion-item>
       <video controls width="320" height="240" (click)="modalOpenImg(file.file_id)"
              [poster]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')">
         <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
         <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">
       </video>
-    </ion-card>
+    </ion-card>-->
   </div>
 </ion-content>
 

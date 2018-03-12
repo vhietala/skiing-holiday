@@ -11,21 +11,28 @@
   <div *ngFor="let file of MediaFiles">
     <ion-card *ngIf="file.media_type == 'image'">
       <ion-item item-start>
-        <h2>{{file.username}}</h2>
+        <div class="item-content">
+          <h1>{{file.title}}</h1>
+          <h2>{{"by " + file.username}}</h2>
+        </div>
       </ion-item>
       <img [alt]="file?.title" (click)="modalOpenActivity(file.file_id)"
              [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
     </ion-card>
     <ion-card *ngIf="file.media_type == 'audio'">
       <ion-item item-start>
-        <h2>{{file.username}}</h2>
+        <div class="item-content">
+          <h1>{{file.title}}</h1>
+          <h2>{{"by " + file.username}}</h2>
+        </div>
       </ion-item>
       <audio controls (click)="modalOpenActivity(file.file_id)">
         <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
       </audio>
     </ion-card>
     <ion-card *ngIf="file.media_type == 'video'">
-      <ion-item item-start>
+      <ion-item class="item item-bg">
+        <h1>{{file.title}}</h1>
         <h2>{{file.username}}</h2>
       </ion-item>
       <video controls width="320" height="240" click)="modalOpenActivity(file.file_id)"
