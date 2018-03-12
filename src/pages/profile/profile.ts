@@ -7,6 +7,7 @@ import {ActivityPage} from "../activity/activity";
 import {SinglefileviewPage} from "../singlefileview/singlefileview";
 import {Media} from "../../interfaces/media";
 
+
 @IonicPage()
 @Component({
   selector: 'page-profile',
@@ -15,6 +16,10 @@ import {Media} from "../../interfaces/media";
 export class ProfilePage {
 
   pushActivity: any;
+  public base64Image: string;
+  uplfiles: any;
+  uploadedFiles: any;
+
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
               public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
@@ -42,6 +47,7 @@ export class ProfilePage {
       this.profileName = response['username'];
       this.userId = response['user_id'];
       this.displayFavActivities();
+      this.getUserImages();
     }, (error: HttpErrorResponse) => {
       console.log(error);
     })
@@ -92,50 +98,6 @@ export class ProfilePage {
     actionSheet.present();
   }
 
-  /*chooseProfileImg() {
-    const formData: FormData = new FormData();
-    const options: CameraOptions = {
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
-      encodingType: this.camera.EncodingType.JPEG,
-      mediaType: this.camera.MediaType.PICTURE
-    };
-
-    this.camera.getPicture(options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      let contentType = 'image/jpeg';
-      let blob = this.b64toBlob(base64Image, contentType);
-      let filename = imageData.filename;
-      this.file = this.blobToFile(blob, filename);
-    }, (err) => {
-      console.log(err);
-    });
-    formData.append('file', this.file);
-    formData.append('title', 'profile pic');
-    this.mediaProvider.uploading(formData).subscribe(response => {
-      console.log(response);
-      //console.log(response.file_id);
-      //myfileid = response.file_id;
-      this.mediaProvider.deleteFile(this.profilePictureID);
-      this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response['file_id']).subscribe(response2 => {
-        console.log(response2);
-      });
-      this.profilePictureID = response['file_id'];
-    }, (error: HttpErrorResponse) => {
-      console.log(error.error.message);
-    });
-    setTimeout(() => {
-        this.navCtrl.setRoot(TabsPage);
-      },
-      3500);
-  }
-
-  takeProfileImg() {
-
-  }*/
 
   private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
     const byteCharacters = atob(b64Data);
@@ -211,6 +173,18 @@ export class ProfilePage {
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
+  }
+
+  public getUserImages() {
+    this.mediaProvider.getUsersMedia().subscribe(response => {
+      console.log(response);
+      this.uploadedFiles = response;
+      this.uploadedFiles.reverse();
+    });
+  }
+
+  openOneFile(id) {
+    this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
 }
 

@@ -37,17 +37,19 @@ export class RegisterPage {
 
   public register() {
     console.log(this.user);
+    if (this.hasToken()) {
+      this.mediaProvider.removeUserData();
+    }
     this.mediaProvider.register(this.user).subscribe(response => {
       console.log(response);
       //this.mediaProvider.username = this.user.username;
       //this.mediaProvider.password = this.user.password;
       console.log("username+pw: " + this.user.username + '+' + this.user.password);
-      if (this.hasToken()) {
-        this.mediaProvider.removeUserData();
-      }
-      this.mediaProvider.login(this.user);
-      this.mediaProvider.logged = true;
-      this.navCtrl.setRoot(TabsPage);
+      this.mediaProvider.login(this.user).subscribe(response => {
+        localStorage.setItem('token', response['token']);
+        this.mediaProvider.logged = true;
+        this.navCtrl.setRoot(TabsPage);
+      });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
