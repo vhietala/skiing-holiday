@@ -9,15 +9,18 @@
 <ion-content padding class="upload-action-sheet">
   <div id="profileimg-container">
     <ion-avatar id="profile-avatar">
-      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="{{profilePicture}}" alt="profileimg"/>
-      </button>
+      <!--<button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="./assets/imgs/profileimg.png" alt="profileimg"/></button>-->
+      <!--<button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="{{profilePicture}}" alt="profileimg"/></button>-->
+      <!--<button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="{{profilePicture}}" alt="profileimg"/></button>-->
+      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="{{profilePicture}}" alt="profileimg"/></button>
+
     </ion-avatar>
     <h3 id="profile-name">{{ profileName }}</h3>
   </div>
 
   <div id="aboutme-container">
-    <p class="profile-headings">About</p>
-    <p id="aboutme-text">Hello! Here are your favourited Activities and Meetups. Also your personal uploads are shown below!</p>
+    <p class="profile-headings" (click)="editDescription()">About me</p>
+    <p id="aboutme-text" >{{profileDescription}}</p>
   </div>
 
   <ion-card id="activity-card">
@@ -53,7 +56,6 @@
   </ion-card>
 
 
-  <!--*ngIf="file.media_type == 'image'" -->
   <ion-card id="gallery-card">
     <ion-card-header>Image Gallery</ion-card-header>
     <ion-card-content>
@@ -63,18 +65,7 @@
             <ion-avatar>
               <img [src]="mediaProvider.uploadUrl + file?.filename" alt="file?.title" (click)="openOneFile(file.file_id)">
             </ion-avatar>
-            <!-- <audio *ngIf="file.media_type == 'audio'" controls (click)="openOneFile(file.file_id)">
-               <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
-             </audio>
 
-             <ion-avatar>
-               <video *ngIf="file.media_type == 'video'" controls width="320" height="240"
-                      (click)="openOneFile(file.file_id)"
-                      [poster]="mediaProvider.uploadUrl + file?.filename">
-                 <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
-                 <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">
-               </video>
-             </ion-avatar>-->
           </ion-item>
         </ion-list>
       </ion-scroll>
