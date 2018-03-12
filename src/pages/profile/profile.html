@@ -3,8 +3,7 @@
     <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-searchbar *ngIf="!hasToken" [(ngModel)]="mediaProvider.searchText"
-                   (search)="getSearchedMedia(searchText)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="mediaProvider.searchText" (search)="getSearchedMedia(searchText)"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
@@ -34,7 +33,7 @@
           <ion-item *ngFor="let activity of activities">
             <button ion-button clear (click)="modalActivity(activity.file_id)">
               <ion-avatar>
-                <img [src]="mediaProvider.uploadUrl + (activity?.filename | thumbnail: 'largeThumb')" alt="activity-img">
+                <img [src]="mediaProvider.uploadUrl + (activity?.filename | thumbnail: 'smallThumb')" alt="activity-img">
                 <p>{{activity.title}}</p>
               </ion-avatar>
             </button>
@@ -45,14 +44,14 @@
   </ion-card>
 
   <ion-card id="meetup-card">
-    <ion-card-header>Meet Ups</ion-card-header>
+    <ion-card-header>Meetups</ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list style="display: inline-flex" id="meetup-list" *ngIf="meetups.length > 0">
           <ion-item *ngFor="let meetup of meetups">
             <button ion-button clear (click)="modalMeetup()">
               <ion-avatar>
-                <img [src]="mediaProvider.uploadUrl + (meetup?.filename | thumbnail: 'largeThumb')" alt="meetup-img">
+                <img [src]="mediaProvider.uploadUrl + (meetup?.filename | thumbnail: 'smallThumb')" alt="meetup-img">
                 <p>{{meetup.title}}</p>
               </ion-avatar>
             </button>

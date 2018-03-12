@@ -26,7 +26,8 @@ export class ProfilePage {
   activities: any = [];
   meetups: any = [];
   activity: Media;
-  tagList: any;
+  tagListActivity: any;
+  tagListMeetup: any;
   meetup: Media;
 
   profileName = '';
@@ -165,17 +166,17 @@ export class ProfilePage {
   displayFavActivities() {
     this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
       //console.log(response);
-      this.tagList = response;
+      this.tagListActivity = response;
       this.mediaProvider.getFavourites().subscribe(response2 => {
         //console.log(response2);
         this.favourites = response2;
         for (let i = 0; i < this.favourites.length; i++) {
           //console.log(this.favourites[i]);
-          for (let j = 0; j < this.tagList.length; j++) {
+          for (let j = 0; j < this.tagListActivity.length; j++) {
             //console.log(this.tagList[j]);
-            if (this.favourites[i].file_id === this.tagList[j].file_id) {
+            if (this.favourites[i].file_id === this.tagListActivity[j].file_id) {
               //console.log(this.tagList[j]);
-              this.activities.push(this.tagList[j]);
+              this.activities.push(this.tagListActivity[j]);
             } else {
 
             }
@@ -190,17 +191,17 @@ export class ProfilePage {
   displayFavMeetups() {
     this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe(response => {
       //console.log(response);
-      this.tagList = response;
+      this.tagListMeetup = response;
       this.mediaProvider.getFavourites().subscribe(response2 => {
         //console.log(response2);
         this.favourites = response2;
         for (let i = 0; i < this.favourites.length; i++) {
           //console.log(this.favourites[i]);
-          for (let j = 0; j < this.tagList.length; j++) {
+          for (let j = 0; j < this.tagListMeetup.length; j++) {
             //console.log(this.tagList[j]);
-            if (this.favourites[i].file_id === this.tagList[j].file_id) {
+            if (this.favourites[i].file_id === this.tagListMeetup[j].file_id) {
               //console.log(this.tagList[j]);
-              this.meetups.push(this.tagList[j]);
+              this.meetups.push(this.tagListMeetup[j]);
             } else {
 
             }

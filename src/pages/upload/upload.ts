@@ -48,7 +48,10 @@ export class UploadPage {
         console.log(response);
         this.mediaProvider.getUserData().subscribe( response2 => {
           this.mediaProvider.setTag(response2['username'].toLowerCase(),response['file_id']);
-        })
+        });
+        this.mediaProvider.getUserData().subscribe( response2 => {
+          this.mediaProvider.setTag(this.mediaProvider.userImgTag,response2['file_id'])
+        });
       });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);

@@ -9,13 +9,13 @@
 
 <ion-content class="card-background-page">
   <div *ngFor="let file of MediaFiles">
-    <ion-card *ngIf="file.media_type == 'image'">
+    <ion-card>
       <ion-item item-start>
         <h2>{{file.username}}</h2>
         <p>created a new Activity!</p>
       </ion-item>
-      <img [alt]="file?.title" (click)="modalOpenImg(file.file_id)"
-             [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
+      <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="modalOpenImg(file.file_id)"
+           [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
     </ion-card>
     <ion-card *ngIf="file.media_type == 'audio'">
       <ion-item item-start>

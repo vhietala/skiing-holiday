@@ -26,6 +26,7 @@ import {ActivityfeedPage} from "../pages/activityfeed/activityfeed";
 import {UploadActivityPage} from "../pages/upload-activity/upload-activity";
 import {ActivityPage} from "../pages/activity/activity";
 import {UploadMeetupPage} from "../pages/upload-meetup/upload-meetup";
+import {MeetingfeedPage} from "../pages/meetingfeed/meetingfeed";
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import {UploadMeetupPage} from "../pages/upload-meetup/upload-meetup";
     UploadPage,
     ActivityPage,
     UploadMeetupPage,
+    MeetingfeedPage,
   ],
   imports: [
     BrowserModule,
@@ -71,6 +73,7 @@ import {UploadMeetupPage} from "../pages/upload-meetup/upload-meetup";
     UploadActivityPage,
     ActivityPage,
     UploadMeetupPage,
+    MeetingfeedPage,
   ],
   providers: [
     StatusBar,
