@@ -1,16 +1,10 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {User} from "../../interfaces/user";
 import {MediaProvider} from "../../providers/media/media";
-import {HomePage} from "../home/home";
 import {HttpErrorResponse} from "@angular/common/http";
-
-/**
- * Generated class for the RegisterPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {LoginPage} from "../login/login";
+import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({
@@ -33,6 +27,10 @@ export class RegisterPage {
     console.log('ionViewDidLoad RegisterPage');
   }
 
+  public hasToken() {
+    return localStorage.getItem('token') !== null;
+  }
+
   public register() {
     console.log(this.user);
     this.mediaProvider.register(this.user).subscribe(response => {
@@ -40,13 +38,18 @@ export class RegisterPage {
       //this.mediaProvider.username = this.user.username;
       //this.mediaProvider.password = this.user.password;
       console.log("username+pw: " + this.user.username + '+' + this.user.password);
-      MediaProvider.removeUserData();
+      if (this.hasToken()) {
+        this.mediaProvider.removeUserData();
+      }
       this.mediaProvider.login(this.user);
       this.mediaProvider.logged = true;
-      this.navCtrl.setRoot(HomePage);
+      this.navCtrl.setRoot(TabsPage);
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
   }
 
+  public setLogin() {
+    this.navCtrl.setRoot(LoginPage);
+  }
 }

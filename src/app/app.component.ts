@@ -2,12 +2,13 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-
 import {HomePage} from '../pages/home/home';
-import {LoginPage} from "../pages/login/login";
-import {RegisterPage} from "../pages/register/register";
 import {ProfilePage} from "../pages/profile/profile";
 import {UploadPage} from "../pages/upload/upload";
+import {LogoutPage} from "../pages/logout/logout";
+import {TabsPage} from "../pages/tabs/tabs";
+import {LoginPage} from "../pages/login/login";
+
 
 @Component({
   templateUrl: 'app.html'
@@ -15,7 +16,7 @@ import {UploadPage} from "../pages/upload/upload";
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: any = LoginPage;
 
   pages: Array<{ title: string, component: any , icon: string}>;
 
@@ -25,12 +26,11 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Home', component: HomePage, icon: 'home'},
-      {title: 'Login', component: LoginPage, icon: 'log-in'},
-      {title: 'Register', component: RegisterPage, icon: 'options'},
       {title: 'Profile', component: ProfilePage, icon: 'contact'},
       {title: 'Upload', component: UploadPage, icon: 'add'},
+      {title: 'Logout', component: LogoutPage, icon: 'log-out'},
+      {title: 'Tabs', component: TabsPage, icon: 'settings'},
     ];
-
   }
 
   initializeApp() {

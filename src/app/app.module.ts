@@ -19,6 +19,13 @@ import {LoginPage} from "../pages/login/login";
 import {FormsModule} from "@angular/forms";
 import {HttpModule} from "@angular/http";
 import {PipesModule} from "../pipes/pipes.module";
+import {AboutPage} from "../pages/about/about";
+import {LogoutPage} from "../pages/logout/logout";
+import {TabsPage} from "../pages/tabs/tabs";
+import {ActivityfeedPage} from "../pages/activityfeed/activityfeed";
+import {MeetupfeedPage} from "../pages/meetupfeed/meetupfeed";
+import {Camera} from "@ionic-native/camera";
+
 
 @NgModule({
   declarations: [
@@ -30,6 +37,11 @@ import {PipesModule} from "../pipes/pipes.module";
     ProfilePage,
     UploadPage,
     SinglefileviewPage,
+    AboutPage,
+    LogoutPage,
+    TabsPage,
+    ActivityfeedPage,
+    MeetupfeedPage,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +49,7 @@ import {PipesModule} from "../pipes/pipes.module";
     HttpClientModule,
     FormsModule,
     HttpModule,
-    PipesModule
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -49,6 +61,11 @@ import {PipesModule} from "../pipes/pipes.module";
     ProfilePage,
     UploadPage,
     SinglefileviewPage,
+    AboutPage,
+    LogoutPage,
+    TabsPage,
+    ActivityfeedPage,
+    MeetupfeedPage,
   ],
   providers: [
     StatusBar,
@@ -57,7 +74,9 @@ import {PipesModule} from "../pipes/pipes.module";
     MediaProvider,
     HttpClientModule,
     PhotoViewer,
+    Camera,
   ]
 })
 export class AppModule {
 }
+

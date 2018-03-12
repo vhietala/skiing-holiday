@@ -1,3 +1,56 @@
 page-profile {
 
+  #profileimg-container {
+    margin: auto;
+    text-align: center;
+
+    #profile-avatar {
+      width: 50%;
+      margin: auto;
+      text-align: center;
+      border-radius: 50%;
+
+      img {
+        width: 100%;
+        border-radius: 50%;
+      }
+    }
+  }
+
+  #aboutme-container {
+    margin: auto;
+    text-align: center;
+  }
+
+  #activity-card, #meetup-card {
+    margin: auto;
+    text-align: center;
+  }
+
+  #activity-list, #meetup-list {
+
+    width: 500px;
+    display: flex;
+    flex-wrap: nowrap;
+
+    ion-item {
+      display: flex;
+      flex-wrap: nowrap;
+    }
+
+    ion-avatar {
+      margin: auto;
+    }
+  }
+
+  .side-scroll {
+    white-space: nowrap;
+    height: 100px;
+  }
+
+  .upload-action-sheet {
+    text-align: center;
+    color: #013b63;
+  }
+
 }

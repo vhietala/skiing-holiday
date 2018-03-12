@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component} from '@angular/core';
+import {IonicPage, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
+import {HomePage} from "../home/home";
 
 /**
  * Generated class for the UploadPage page.
@@ -30,7 +31,8 @@ export class UploadPage {
     user_id: 0,
     media_type: '',
     mime_type: '',
-    time_added: ''
+    time_added: '',
+    username: '',
   };
 
 
@@ -45,14 +47,23 @@ export class UploadPage {
     formData.append('file', this.file);
     this.mediaProvider.uploading(formData).subscribe(response => {
       console.log(response);
+      //console.log(response.file_id);
+      //myfileid = response.file_id;
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response["file_id"]).subscribe(response => {
+        console.log(response);
+      });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
+    setTimeout(() =>
+      {
+        this.navCtrl.setRoot(HomePage);
+      },
+      3500);
   }
 
   public setFile(evt) {
     console.log(evt.target.files[0]);
     this.file = evt.target.files[0];
   }
-
 }

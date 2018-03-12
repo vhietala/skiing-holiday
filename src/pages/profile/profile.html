@@ -1,23 +1,99 @@
-<!--
-  Generated template for the ProfilePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
 <ion-header>
-
   <ion-navbar>
-    <button ion-button menuToggle>
+    <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Profile</ion-title>
+    <ion-searchbar *ngIf="!hasToken" [(ngModel)]="mediaProvider.searchText"
+                   (search)="getSearchedMedia(searchText)"></ion-searchbar>
   </ion-navbar>
-
 </ion-header>
 
-
-<ion-content padding>
-  <div>
-    <p>Welcome {{ profileName }}</p>
+<ion-content padding class="upload-action-sheet">
+  <div id="profileimg-container">
+    <ion-avatar id="profile-avatar">
+      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="./assets/imgs/profileimg.png"
+                                                                       alt="profileimg"/></button>
+    </ion-avatar>
+    <h3 id="profile-name">{{ profileName }}</h3>
   </div>
+
+  <div id="aboutme-container">
+    <p class="profile-headings">About me</p>
+    <p id="aboutme-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim
+      tempor.
+      Vivamus gravida, purus vitae sollicitudin maximus, lorem sem sodales nunc, et laoreet turpis leo vel neque.
+      Donec laoreet at risus non bibendum. Etiam erat elit, placerat id quam tempus, facilisis feugiat leo.
+      Curabitur congue fermentum mi, interdum pellentesque dolor venenatis sit amet.
+      Duis sit amet dolor a diam tristique molestie sit amet at neque.</p>
+  </div>
+
+  <ion-card id="activity-card">
+    <ion-card-header>Activities
+      <ion-buttons end>
+        <button class="new-btn" ion-button clear>new</button>
+      </ion-buttons>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="activity-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card id="meetup-card">
+    <ion-card-header>Meet Ups</ion-card-header>
+    <ion-buttons end>
+      <button class="new-btn" ion-button clear>new</button>
+    </ion-buttons>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="meetup-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <button ion-button clear>About</button>
+    <button ion-button clear>Contact</button>
+  </ion-toolbar>
+</ion-footer>
