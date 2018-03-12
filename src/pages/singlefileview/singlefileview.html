@@ -10,6 +10,10 @@
 
 <ion-content padding>
   <ion-card>
+    <button (click)="deleteMedia()" style="float:right;">
+      <ion-icon name="remove-circle"></ion-icon>
+    </button>
+
     <!--<ion-card-title>{{mediaFile.title}}</ion-card-title>-->
     <img [src]="url" *ngIf="mediaFile.media_type == 'image'">
     <video [src]="url" *ngIf="mediaFile.media_type == 'video'" controls></video>
@@ -43,7 +47,6 @@
           <ion-icon name="heart"></ion-icon>
           Delete Favourite
         </button>
-        <ion-toggle [(ngModel)]="favouriteToggle"></ion-toggle>
       </ion-list>
     </ion-card-content>
   </ion-card>

@@ -26,9 +26,9 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       {title: 'Profile', component: TabsPage, icon: 'contact'},
-      {title: 'Upload an Image', component: UploadPage, icon: ''},
-      {title: 'Create a new Activity', component: UploadActivityPage, icon: ''},
-      {title: 'Create a new Meet Up', component: UploadMeetupPage, icon: ''},
+      {title: 'Upload an Image', component: UploadPage, icon: 'bicycle'},
+      {title: 'Create a new Activity', component: UploadActivityPage, icon: 'contacts'},
+      {title: 'Create a new Meet Up', component: UploadMeetupPage, icon: 'images'},
       {title: 'Logout', component: LogoutPage, icon: 'log-out'},
     ];
   }

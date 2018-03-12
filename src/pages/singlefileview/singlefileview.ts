@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {ActionSheetController, IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Favourites} from "../../interfaces/favourites";
@@ -7,6 +7,7 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {Media} from "../../interfaces/media";
 import {Comments} from "../../interfaces/comments";
 import {User} from "../../interfaces/user";
+import {TabsPage} from "../tabs/tabs";
 
 
 @IonicPage()
@@ -44,9 +45,10 @@ export class SinglefileviewPage {
   commentGuy: User;
   favourited: boolean = false;
   userId: number;
+  username: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
-              public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
+              public mediaProvider: MediaProvider, private photoViewer: PhotoViewer, public actionSheetCtrl: ActionSheetController) {
   }
 
   ionViewDidLoad() {
@@ -81,7 +83,9 @@ export class SinglefileviewPage {
             this.favouriteID[i].username = this.favTemp.username;
             this.mediaProvider.getUserData().subscribe(response => {
               this.userId = response['user_id'];
-              if (this.userId = this.favouriteID[i].user_id) {
+              this.username = response['username'];
+              console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
+              if (this.favTemp.username == this.username) {
                 this.favourited = true;
               } else {
                 this.favourited = false;
@@ -167,5 +171,29 @@ export class SinglefileviewPage {
 
   dismiss() {
     this.viewCtrl.dismiss();
+  }
+
+  deleteMedia() {
+    let actionSheet = this.actionSheetCtrl.create({
+      cssClass: 'upload-action-sheet',
+      buttons: [
+        {
+          text: 'Delete image',
+          handler: () => {
+            console.log('Delete clicked');
+            this.mediaProvider.deleteFile(this.filzu_id).subscribe(response => {
+              this.navCtrl.setRoot(TabsPage, {openTab: 1});
+            });
+          }
+        }, {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 }

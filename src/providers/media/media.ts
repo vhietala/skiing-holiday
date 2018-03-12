@@ -108,13 +108,6 @@ export class MediaProvider {
     return this.http.get(this.apiUrl + 'tags/file/' + id, tokenSettings);
   }
 
-  public deleteFile(id:number){
-    const tokenSettings = {
-      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
-    };
-    return this.http.delete(this.apiUrl+'/media/' + id,tokenSettings);
-  }
-
   public setTag(tag: string, id: number) {
     const body = {
       file_id: id,
@@ -143,6 +136,12 @@ export class MediaProvider {
     return this.http.delete(this.favouriteUrl + 'file/' + id, tokenSettings);
   }
 
+  public deleteFile(id:number){
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
+    };
+    return this.http.delete(this.apiUrl+ 'media/' + id, tokenSettings);
+  }
 
   public getFavourites(){
     const tokenSettings = {

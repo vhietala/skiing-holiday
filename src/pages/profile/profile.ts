@@ -105,7 +105,7 @@ export class ProfilePage {
             this.uploadProfileImg();
           }
         }, {
-          text: 'delete current image',
+          text: 'Delete current image',
           handler: () => {
             console.log('Delete clicked');
             this.deleteProfilePicture();
