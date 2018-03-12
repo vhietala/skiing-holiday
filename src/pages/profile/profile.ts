@@ -78,6 +78,7 @@ export class ProfilePage {
           text: 'delete current image',
           handler: () => {
             console.log('Delete clicked');
+            this.deleteProfilePicture();
           }
         }, {
           text: 'Cancel',
@@ -111,12 +112,7 @@ export class ProfilePage {
       formData.append('file', this.dataURItoBlob(this.file));
       this.mediaProvider.uploading(formData).subscribe(response => {
         console.log(response);
-        this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response => {
-          //this.postthis
-          console.log(response);
-        }, (error3: HttpErrorResponse) => {
-          this.postthis = error3.error.message + '5';
-        });
+        this.deleteProfilePicture();
         this.profilePictureID = response['file_id'];
         this.mediaProvider.getOneFile(this.profilePictureID).subscribe(response7 => {
           this.profilePicture = this.mediaProvider.mediaUrl + response7['filename'];
@@ -148,7 +144,7 @@ deleteProfilePicture(){
       console.log("current profile pic deleted");
     },(error:HttpErrorResponse)=>{
       console.log(error.error.message);
-    })
+    });
 }
 editDescription()
 {
