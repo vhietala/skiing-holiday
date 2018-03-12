@@ -11,7 +11,7 @@ export class MediaProvider {
   profileimgTag = 'shmuprofile';
   activityTag = 'shmuactivity';
   meetingTag = 'shmumeeting';
-  userImgTag = 'shmuimageuser'
+  userImgTag = 'shmuimageuser';
 
   newComment: '';
   searchText: '';
@@ -126,7 +126,7 @@ export class MediaProvider {
     const tokenSettings = {
       headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
     };
-    return this.http.post(this.favouriteUrl,body, tokenSettings);
+    return this.http.post(this.favouriteUrl, body, tokenSettings);
   }
 
   public deleteFavouite(id: number) {

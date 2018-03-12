@@ -1,7 +1,7 @@
 <ion-header>
 </ion-header>
 
-<ion-content class="scroll-content" padding>
+<ion-content class="scroll-content" padding style="background-image: url('./assets/imgs/meetup-bg4.jpeg')">
   <div text-center padding id="logo-container">
     <img id="meetup-logo" src="./assets/imgs/meetuplogotransparent.png">
   </div>
@@ -16,9 +16,11 @@
     </ion-item>
     <ion-buttons>
       <button ion-button color="darkish" outline id="login" class=slide type="submit">Login</button>
-      <button ion-button color="darkish" outline id="register" class=slide (click)="pushRegister()">Create an account</button>
     </ion-buttons>
   </form>
+  <ion-buttons>
+  <button ion-button color="darkish" outline id="register" class=slide (click)="pushRegister()">Create an account</button>
+  </ion-buttons>
 </ion-content>
 
 <ion-footer>

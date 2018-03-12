@@ -18,7 +18,7 @@ export class ProfilePage {
   pushActivity: any;
   public base64Image: string;
   uplfiles: any;
-  uploadedFiles: any;
+  uploadedFiles: any = [];
 
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
@@ -187,7 +187,3 @@ export class ProfilePage {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
 }
-
-
-//load images (user id)
-
