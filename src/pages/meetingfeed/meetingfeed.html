@@ -14,6 +14,7 @@
         <div class="item-content">
           <h1>{{file.title}}</h1>
           <h2>{{file.username}}</h2>
+          <h2>{{file.time_added | date: 'dd.MM.yy hh:mm a'}}</h2>
         </div>
       </ion-item>
       <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="modalOpenImg(file.file_id)"

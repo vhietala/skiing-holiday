@@ -14,6 +14,7 @@
         <div class="item-content">
           <h1>{{file.title}}</h1>
           <h2>{{file.username}}</h2>
+          <h2>{{file.time_added | date: 'dd.MM.yy hh:mm a'}}</h2>
         </div>
       </ion-item>
       <img [alt]="file?.title" (click)="modalOpenActivity(file.file_id)"
