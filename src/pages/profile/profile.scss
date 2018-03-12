@@ -1,5 +1,7 @@
 page-profile {
 
+  .scroll-content {
+  }
 
   #profileimg-container {
     margin: auto;
@@ -19,19 +21,29 @@ page-profile {
   }
 
   #aboutme-container {
-    margin: auto;
     text-align: center;
-    #aboutme-text {
-      background: rgba(78, 229, 252, 0.5);
-      border-radius: 3px 3px 3px 3px;
-      padding: 5% 5% 5% 5%;
-      margin: 0% 10% 0% 10%;
+    height: fit-content;
+    margin: 0% 0% 10% 0%;
+
+    .aboutme-text{
+      background-color: #e1cb44;
+      height: 100%;
     }
   }
 
+
+
   #activity-card, #meetup-card, #gallery-card {
-    margin: auto;
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
     text-align: center;
+
+    ion-card-header {
+      background-color: $color-app-green;
+      color: $color-app-grey;
+      letter-spacing: 2px;
+    }
   }
 
   #activity-list, #meetup-list, #gallery-list {
@@ -47,6 +59,7 @@ page-profile {
 
     ion-avatar {
       margin: auto;
+      object-fit: cover !important;
     }
 
     ion-avatar img {

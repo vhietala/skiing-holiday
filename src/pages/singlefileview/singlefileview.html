@@ -33,7 +33,7 @@
           </button>
         </ion-item>
         <ion-item text-wrap>
-          <h2>{{mediaFile.description}}</h2>
+          <h2 item-start>{{mediaFile.description}}</h2>
         </ion-item>
         <ion-list *ngFor="let commenterino of comment">
           <ion-item-group> {{ commenterino.username + ": "}}<strong> {{commenterino.comment }} </strong>

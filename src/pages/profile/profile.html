@@ -8,28 +8,33 @@
 </ion-header>
 
 <ion-content padding class="upload-action-sheet">
-  <div id="profileimg-container">
-    <ion-avatar id="profile-avatar">
-      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img [src]="profilePicture"></button>
-    </ion-avatar>
-    <h1 id="profile-name">{{ profileName }}</h1>
-  </div>
+    <div id="profileimg-container">
+      <ion-avatar id="profile-avatar">
+        <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img [src]="profilePicture"></button>
+      </ion-avatar>
+      <h1 id="profile-name">{{ profileName }}</h1>
+    </div>
 
-  <ion-item id="aboutme-container">
-    <p class="profile-headings" (click)="editDescription()">About me</p>
-    <p id="aboutme-text" >{{profileDescription}}</p>
-  </ion-item>
+    <ion-item id="aboutme-container">
+      <h3 class="profile-headings" (click)="editDescription()">About me
+        <ion-icon name="create"></ion-icon>
+      </h3>
+      <p id="aboutme-text" ></p>
+    </ion-item>
 
-  <ion-card id="activity-card">
-    <ion-card-header>Activities</ion-card-header>
+  <ion-card  padding id="activity-card">
+    <ion-card-header>Activities
+      <ion-icon item-start name="bicycle"></ion-icon>
+    </ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="activity-list">
           <ion-item *ngFor="let activity of activities">
-            <ion-avatar>
+            <ion-avatar style="object-fit: cover">
               <img [src]="mediaProvider.uploadUrl + activity?.filename" alt="activity-img"
                    (click)="modalActivity(activity.file_id)">
             </ion-avatar>
+            <ion-title>{{activity.title}}</ion-title>
           </ion-item>
         </ion-list>
       </ion-scroll>
@@ -37,7 +42,9 @@
   </ion-card>
 
   <ion-card id="meetup-card">
-    <ion-card-header>Meetups</ion-card-header>
+    <ion-card-header>Meetups
+      <ion-icon item-start name="contacts"></ion-icon>
+    </ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="meetup-list">
@@ -55,7 +62,9 @@
 
   <!--*ngIf="file.media_type == 'image'" -->
   <ion-card id="gallery-card">
-    <ion-card-header>Image Gallery</ion-card-header>
+    <ion-card-header>Image Gallery
+      <ion-icon item-start name="images"></ion-icon>
+    </ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="gallery-list">
