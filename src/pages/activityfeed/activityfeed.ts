@@ -46,7 +46,7 @@ export class ActivityfeedPage {
   }
 
   modalOpenActivity(id) {
-    let modal = this.modalCtrl.create(ActivityPage, {mediaId: id});
+    let modal = this.modalCtrl.create(ActivityPage, {activityId: id});
     modal.present();
   }
 

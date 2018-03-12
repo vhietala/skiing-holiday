@@ -37,7 +37,7 @@ export class ActivityPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivityPage');
-    this.mediaProvider.getOneFile(this.navParams.get('mediaId')).subscribe(response => {
+    this.mediaProvider.getOneFile(this.navParams.get('activityId')).subscribe(response => {
       this.file_id = response['file_id']
       this.imgUrl = this.mediaProvider.uploadUrl + response['filename'];
       this.ressuponseTemp = response;

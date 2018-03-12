@@ -55,12 +55,12 @@ export class ProfilePage {
   }
 
   modalActivity(id) {
-    let modal = this.modalCtrl.create(ActivityPage, {mediaId: id});
+    let modal = this.modalCtrl.create(ActivityPage, {activityId: id});
     modal.present();
   }
 
   modalMeetup(id) {
-    let modal = this.modalCtrl.create(SinglefileviewPage, {mediaId: id});
+    let modal = this.modalCtrl.create(SinglefileviewPage, {mediaplayerid: id});
     modal.present();
   }
 
