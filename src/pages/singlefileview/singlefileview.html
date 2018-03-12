@@ -38,7 +38,7 @@
         <ion-item> {{ "Comments: " + commentCounter}}</ion-item>
         <ion-list *ngFor="let commenterino of comment">
           <ion-item-group> {{ commenterino.username + ": "}}<strong> {{commenterino.comment }} </strong>
-            {{commenterino.time_added | date: 'dd:MM:yy hh:mm a'}}
+            {{commenterino.time_added | date: 'dd.MM.yy hh:mm a'}}
           </ion-item-group>
           <!-- comments here -->
         </ion-list>
