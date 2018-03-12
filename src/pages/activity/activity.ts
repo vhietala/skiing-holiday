@@ -34,6 +34,7 @@ export class ActivityPage {
   favTemp: User;
   imgUrl: string;
   ressuponseTemp: any;
+  favourited: boolean = false;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivityPage');
@@ -42,11 +43,16 @@ export class ActivityPage {
       this.imgUrl = this.mediaProvider.uploadUrl + response['filename'];
       this.ressuponseTemp = response;
       this.mediaFile = this.ressuponseTemp;
+      this.mediaProvider.favouritesByFileId(this.file_id).subscribe((ressu: Favourites[]) => {
+        this.favouriteID = ressu;
+        this.userIdCounter = Object.keys(ressu).length;
+      });
     });
   }
 
-  favourite() {
+  addFavourite() {
     this.mediaProvider.addFavourite(this.file_id).subscribe(response => {
+      this.favourited = true;
       this.mediaProvider.favouritesByFileId(this.file_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         this.userIdCounter = Object.keys(ressu).length;
@@ -54,23 +60,15 @@ export class ActivityPage {
           this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
             this.favTemp = ressu;
             this.favouriteID[i].username = this.favTemp.username;
-            let toast = this.toastCtrl.create({
-              message: 'Favourited',
-              duration: 3000,
-              position: 'top'
-            });
-            toast.onDidDismiss(() => {
-              console.log('Dismissed toast');
-            });
-            toast.present();
           });
         }
       });
     });
   }
 
-  unFavourite() {
+  deleteFavourite() {
     this.mediaProvider.deleteFavouite(this.file_id).subscribe(response => {
+      this.favourited = false;
       this.mediaProvider.favouritesByFileId(this.file_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         this.userIdCounter = Object.keys(ressu).length;
@@ -78,15 +76,6 @@ export class ActivityPage {
           this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
             this.favTemp = ressu;
             this.favouriteID[i].username = this.favTemp.username;
-            let toast = this.toastCtrl.create({
-              message: 'favourite removed',
-              duration: 3000,
-              position: 'top'
-            });
-            toast.onDidDismiss(() => {
-              console.log('Dismissed toast');
-            });
-            toast.present();
           });
         }
       });

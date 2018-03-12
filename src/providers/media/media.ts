@@ -176,7 +176,7 @@ export class MediaProvider {
       file_id: id,
       description: newDesc
     };
-    return this.http.put(this.mediaUrl +'/'+id , body, tokenSettings);
+    return this.http.put(this.mediaUrl + id , body, tokenSettings);
   }
 
 }

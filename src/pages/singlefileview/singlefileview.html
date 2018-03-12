@@ -1,9 +1,9 @@
 <ion-header>
-  <div style="display: inline-flex">
+  <div style="display: inline-block">
     <button clear ion-button (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
+      <ion-title>Back</ion-title>
     </button>
-    <ion-title>Back</ion-title>
   </div>
 </ion-header>
 
@@ -11,7 +11,7 @@
 <ion-content class="card-background-page">
   <ion-card>
     <div id="singleview-container">
-      <h1 padding>{{mediaFile.title}}</h1>
+      <h1 text-center padding>{{mediaFile.title}}</h1>
       <!--<ion-card-title>{{mediaFile.title}}</ion-card-title>-->
       <img [src]="url" *ngIf="mediaFile.media_type == 'image'">
       <video [src]="url" *ngIf="mediaFile.media_type == 'video'" controls></video>
