@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
-import {SinglefileviewPage} from "../singlefileview/singlefileview";
 import {User} from "../../interfaces/user";
 import {Media} from "../../interfaces/media";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
+import {ActivityPage} from "../activity/activity";
 
 @IonicPage()
 @Component({
@@ -45,8 +45,8 @@ export class ActivityfeedPage {
     });
   }
 
-  modalOpenImg(id) {
-    let modal = this.modalCtrl.create(SinglefileviewPage, {mediaplayerid: id});
+  modalOpenActivity(id) {
+    let modal = this.modalCtrl.create(ActivityPage, {mediaId: id});
     modal.present();
   }
 

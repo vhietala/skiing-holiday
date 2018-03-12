@@ -2,7 +2,7 @@
 </ion-header>
 
 <ion-content padding>
-  <div text-center padding id="logo-container">
+  <div text-center id="logo-container">
     <img id="meetup-logo" src="./assets/imgs/meetuplogotransparent.png">
   </div>
   <form id="registerform"(submit)="register()">
@@ -22,11 +22,11 @@
       <ion-label floating>fullname</ion-label>
       <ion-input [(ngModel)]="user.full_name" name="full_name"></ion-input><br>
     </ion-item>
-    <ion-buttons padding-top>
-      <button ion-button color="darkish" outline  class="slide" type="submit">Register</button>
-      <button ion-button color="darkish" outline class="slide"(click)="setLogin()">Already have an account?</button>
-    </ion-buttons>
   </form>
+  <ion-buttons padding-top>
+    <button ion-button form="registerform" color="darkish" outline  class="slide" type="submit">Register</button>
+    <button ion-button color="darkish" outline class="slide"(click)="setLogin()">Already have an account?</button>
+  </ion-buttons>
 </ion-content>
 
 <ion-footer>

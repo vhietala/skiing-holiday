@@ -4,6 +4,7 @@ import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
 
 import {TabsPage} from "../tabs/tabs";
+import {HttpErrorResponse} from "@angular/common/http";
 
 
 @IonicPage()
@@ -103,6 +104,16 @@ export class UploadActivityPage {
             }
           });
       }
+    }, (error: HttpErrorResponse) => {
+      let toast = this.toastCtrl.create({
+        message: error.error.message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast')
+      });
+      toast.present();
     });
   }
 

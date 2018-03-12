@@ -47,9 +47,9 @@
     <ion-card-header>Meetups</ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
-        <ion-list style="display: inline-flex" id="meetup-list">
+        <ion-list id="meetup-list">
           <ion-item *ngFor="let meetup of meetups">
-            <button ion-button clear (click)="modalMeetup()">
+            <button ion-button clear (click)="modalMeetup(meetup.file_id)">
               <ion-avatar>
                 <img [src]="mediaProvider.uploadUrl + (meetup?.filename | thumbnail: 'smallThumb')" alt="meetup-img">
                 <p>{{meetup.title}}</p>
@@ -85,7 +85,6 @@
                 </video>
               </ion-avatar>
             </ion-item>
-
           </ion-list>
       </ion-scroll>
     </ion-card-content>

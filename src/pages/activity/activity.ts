@@ -3,6 +3,7 @@ import {IonicPage, NavController, NavParams, ToastController, ViewController} fr
 import {MediaProvider} from "../../providers/media/media";
 import {User} from "../../interfaces/user";
 import {Favourites} from "../../interfaces/favourites";
+import {Media} from "../../interfaces/media";
 
 @IonicPage()
 @Component({
@@ -10,6 +11,18 @@ import {Favourites} from "../../interfaces/favourites";
   templateUrl: 'activity.html',
 })
 export class ActivityPage {
+
+  mediaFile: Media = {
+    title: '',
+    description: '',
+    file_id: 0,
+    filename: '',
+    user_id: 0,
+    mime_type: '',
+    media_type: '',
+    time_added: '',
+    username: ''
+  };
 
   constructor(public viewCtrl: ViewController, public navCtrl: NavController, public toastCtrl:ToastController,
               public navParams: NavParams, public mediaProvider: MediaProvider) {
@@ -19,11 +32,16 @@ export class ActivityPage {
   favouriteID: Favourites[];
   userIdCounter: number;
   favTemp: User;
+  imgUrl: string;
+  ressuponseTemp: any;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivityPage');
-    this.mediaProvider.getOneFile(this.navParams.get('activityId')).subscribe(response => {
+    this.mediaProvider.getOneFile(this.navParams.get('mediaId')).subscribe(response => {
       this.file_id = response['file_id']
+      this.imgUrl = this.mediaProvider.uploadUrl + response['filename'];
+      this.ressuponseTemp = response;
+      this.mediaFile = this.ressuponseTemp;
     });
   }
 

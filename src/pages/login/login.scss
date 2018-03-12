@@ -2,10 +2,13 @@ page-login {
 
   .scroll-content {
     background-image: url("../../assets/imgs/meetup-bg4.jpeg");
-    //background-image: url("../../assets/imgs/meetup-bg3.jpeg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
+  }
+
+  .register {
+    position:relative;
   }
 
   ion-content {
@@ -19,13 +22,18 @@ page-login {
 
     #loginform {
       background: rgba(215,241,252,0.7);
-      border-radius: 3px;
-      padding: auto;
-      padding-bottom: 2em;
+      border-radius: 3px 3px 0px 0px;
+      padding-bottom: 1em;
       padding-top: 2em;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
     }
 
+    ion-buttons {
+      background: rgba(215,241,252,0.7);
+      border-radius: 0px 0px 3px 3px;
+      padding: auto;
+      width: 100%;
+      padding-bottom: 3%;
+    }
     .item.item-input {
       background-color: transparent;
     }

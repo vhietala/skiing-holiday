@@ -68,6 +68,15 @@ export class UploadMeetupPage {
       });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
+      let toast = this.toastCtrl.create({
+        message: error.error.message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast')
+      });
+      toast.present();
     });
     setTimeout(() => {
         this.navCtrl.setRoot(TabsPage);
