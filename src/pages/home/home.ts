@@ -71,7 +71,6 @@ export class HomePage {
   }
 
   getSearchedMedia(value: string) {
-    //connectaa meetup tagi viel tähän ni GG.
     console.log(value);
     this.mediaProvider.searchImages().subscribe(response => {
       console.log(response);

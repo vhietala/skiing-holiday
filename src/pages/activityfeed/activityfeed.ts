@@ -70,4 +70,20 @@ export class ActivityfeedPage {
   openOneFile(id) {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
+
+  getSearchedMedia(value: string) {
+    console.log(value);
+    this.mediaProvider.searchImages().subscribe(response => {
+      console.log(response);
+      this.MediaFiles = response;
+      console.log("Searching media: " + this.MediaFiles);
+      for (let i = 0; i < this.MediaFiles.length; i++) {
+        console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
+        this.mediaProvider.getUserInfo(this.MediaFiles[i].user_id).subscribe((ressu: User) => {
+          this.meeduska = ressu;
+          this.MediaFiles[i].username = this.meeduska.username;
+        });
+      }
+    });
+  }
 }
