@@ -1,28 +1,35 @@
 page-meetingfeed {
 
   .scroll-content {
-    background-color: $color-app-lightblue;
+    background-color: #fff;
   }
 
   .card-background-page {
 
     h1 {
-      color: $color-app-light;
+      color: $color-app-grey;
+      //font-weight: bold;
+      font-size: 2em;
+      width: fit-content;
     }
 
     h2 {
-      color: $color-app-light;
-      font-weight: lighter;
+      color: $color-app-lightblue;
+      font-size: 1.5em;
+      letter-spacing: 1px;
+      padding-top: 1%;
+      font-weight: bold;
     }
 
     ion-card {
       width: 100%;
-      margin: 0% 1% 1% 0.5%;
-
+      margin: 1% 1% 4% 2%;
+      padding: 0% 0% 3% 0%;
+      background-color: $color-app-light;
     }
 
     ion-item {
-      background-color: $color-app-grey;
+      background-color: $color-app-light;
     }
 
   }

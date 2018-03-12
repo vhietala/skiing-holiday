@@ -10,17 +10,15 @@
 <ion-content padding class="upload-action-sheet">
   <div id="profileimg-container">
     <ion-avatar id="profile-avatar">
-      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="{{profilePicture}}" alt="profileimg"/>
-      </button>
+      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img [src]="profilePicture"></button>
     </ion-avatar>
     <h1 id="profile-name">{{ profileName }}</h1>
   </div>
 
-  <div id="aboutme-container">
-    <p class="profile-headings">About me</p>
-    <h4 id="aboutme-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim
-      tempor.</h4>
-  </div>
+  <ion-item id="aboutme-container">
+    <p class="profile-headings" (click)="editDescription()">About me</p>
+    <p id="aboutme-text" >{{profileDescription}}</p>
+  </ion-item>
 
   <ion-card id="activity-card">
     <ion-card-header>Activities</ion-card-header>

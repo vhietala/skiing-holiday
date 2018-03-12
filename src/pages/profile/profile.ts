@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
-import {ActionSheetController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {
+  ActionSheetController, AlertController, IonicPage, ModalController, NavController,
+  NavParams
+} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -16,13 +19,10 @@ import {Media} from "../../interfaces/media";
 export class ProfilePage {
 
   pushActivity: any;
-  public base64Image: string;
-  uplfiles: any;
-  uploadedFiles: any = [];
-
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
-              public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+              public alertCtrl: AlertController, public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController,
+              private camera: Camera) {
 
     this.pushActivity = ActivityPage;
   }
@@ -30,16 +30,18 @@ export class ProfilePage {
   favourites: any;
   activities: any = [];
   meetups: any = [];
-  activity: Media;
   tagListActivity: any;
   tagListMeetup: any;
-  meetup: Media;
-
+  uploadedFiles: any = [];
   profileName = '';
   profilePicture: string;
   profilePictureID: number;
   userId: number;
   file: File;
+  activity: Media;
+  meetup: Media;
+  profileDescription: string;
+  profileImgFile: string;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -98,6 +100,123 @@ export class ProfilePage {
     });
     actionSheet.present();
   }
+
+  uploadProfileImg() {
+
+    const formData: FormData = new FormData();
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    };
+
+
+    this.camera.getPicture(options).then((imageData) => {
+
+      this.profileImgFile = 'data:image/jpeg;base64,' + imageData;
+      formData.append('title', 'profile pic');
+      formData.append('description', this.profileDescription);
+      formData.append('file', this.dataURItoBlob(this.file));
+      this.mediaProvider.uploading(formData).subscribe(response => {
+        console.log(response);
+        this.deleteProfilePicture();
+        this.profilePictureID = response['file_id'];
+        this.mediaProvider.getOneFile(this.profilePictureID).subscribe(response7 => {
+          this.profilePicture = this.mediaProvider.mediaUrl + response7['filename'];
+        }, (error: HttpErrorResponse) => {
+          console.log(error.error.message);
+        });
+        this.mediaProvider.setTag(this.mediaProvider.profileimgTag, response['file_id']).subscribe(response2 => {
+          console.log(response2);
+          this.profilePictureID = response2['file_id'];
+        }, (error4: HttpErrorResponse) => {
+        });
+      }, (error: HttpErrorResponse) => {
+        console.log(error.error.message);
+      });
+      setTimeout(() => {
+          this.navCtrl.setRoot(ProfilePage);
+        },
+        3000);
+
+    }, (err) => {
+      console.log("photo error");
+    });
+
+  }
+
+  deleteProfilePicture() {
+    this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response => {
+      console.log("current profile pic deleted");
+    }, (error: HttpErrorResponse) => {
+      console.log(error.error.message);
+    });
+  }
+
+  editDescription() {
+    let prompt = this.alertCtrl.create({
+      title: 'Profile description',
+      message: "Enter here your new profile description",
+      inputs: [
+        {
+          name: 'description',
+          placeholder: 'Description'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Save clicked');
+            this.mediaProvider.editDescription(this.profilePictureID, data['description']).subscribe(response => {
+              console.log(response['description']);
+              this.profileDescription = response['description'];
+              setTimeout(() => {
+                  this.navCtrl.setRoot(ProfilePage);
+                },
+                3000);
+            })
+          }
+        }
+      ]
+    });
+    prompt.present();
+
+
+  }
+
+  dataURItoBlob(dataURI) {
+    // console.log(dataURI);
+    // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    var byteString = atob(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+    // write the bytes of the string to an ArrayBuffer
+    var ab = new ArrayBuffer(byteString.length);
+
+    // create a view into the buffer
+    var ia = new Uint8Array(ab);
+
+    // set the bytes of the buffer to the correct values
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    // write the ArrayBuffer to a blob, and you're done
+    var blob = new Blob([ab], {type: mimeString});
+    return blob;
+  }
+
 
   displayFavActivities() {
     this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {

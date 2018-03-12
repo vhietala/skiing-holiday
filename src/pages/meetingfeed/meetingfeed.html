@@ -13,7 +13,7 @@
       <ion-item item-start>
         <div class="item-content">
           <h1>{{file.title}}</h1>
-          <h2>{{"by " + file.username}}</h2>
+          <h2>{{file.username}}</h2>
         </div>
       </ion-item>
       <img *ngIf="file.media_type == 'image'" [alt]="file?.title" (click)="modalOpenImg(file.file_id)"

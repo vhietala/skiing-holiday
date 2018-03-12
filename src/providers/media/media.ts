@@ -167,5 +167,17 @@ export class MediaProvider {
     };
     return this.http.get(this.mediaUrl + 'user', tokenSettings);
   }
+
+  public editDescription(id: number, newDesc: string) {
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
+    };
+    const body = {
+      file_id: id,
+      description: newDesc
+    };
+    return this.http.put(this.mediaUrl +'/'+id , body, tokenSettings);
+  }
+
 }
 

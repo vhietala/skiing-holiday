@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, Toast, ToastController, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
