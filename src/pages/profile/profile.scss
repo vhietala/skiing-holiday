@@ -22,19 +22,20 @@ page-profile {
     text-align: center;
   }
 
-  #activity-card, #meetup-card {
+  #activity-card, #meetup-card, #gallery-card {
     margin: auto;
     text-align: center;
   }
 
-  #activity-list, #meetup-list {
+  #activity-list, #meetup-list, #gallery-list {
 
-    display: inline-block;
+    width: fit-content;
+    display: flex;
     flex-wrap: nowrap;
 
     ion-item {
       display: flex;
-      flex-wrap: nowrap;
+      flex-wrap: wrap;
     }
 
     ion-avatar {

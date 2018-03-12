@@ -16,11 +16,11 @@
     <audio *ngIf="mediaFile.media_type == 'audio'" [src]="url" controls></audio>
     <ion-card-content>
       <ion-list>
-        <ion-item> {{mediaFile.description}}</ion-item>
+        <ion-item text-wrap> {{"Description: " + mediaFile.description}}</ion-item>
         <ion-item> {{"Uploaded by: " + mediaFile.username + " (" + mediaFile.user_id + ")"}}</ion-item>
         <!-- also add username-->
-        <ion-item> {{"Added: " + mediaFile.time_added }}</ion-item>
-        <!--<ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>-->
+        <ion-item> {{"Added: "}} {{mediaFile.time_added | date: 'dd.MM.yy hh:mm a'}}</ion-item>
+        <ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>
         <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
         <ion-list *ngFor="let favouriter of favouriteID">
           <ion-item-group> {{favouriter.username + " (" + favouriter.user_id + ")"}}</ion-item-group>
@@ -28,8 +28,8 @@
         </ion-list>
         <ion-item> {{ "Comments: " + commentCounter}}</ion-item>
         <ion-list *ngFor="let commenterino of comment">
-          <ion-item-group> {{ commenterino.username + ": "}}<strong> {{commenterino.comment }} </strong> {{" - " +
-            commenterino.time_added}}
+          <ion-item-group> {{ commenterino.username + ": "}}<strong> {{commenterino.comment }} </strong>
+            {{commenterino.time_added | date: 'dd.MM.yy hh:mm a'}}
           </ion-item-group>
           <!-- comments here -->
         </ion-list>
