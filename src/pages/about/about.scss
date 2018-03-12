@@ -1,3 +1,29 @@
 page-about {
 
+  .scroll-content {
+    background-image: url("../../assets/imgs/register-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  #about-app-text {
+    padding: 0em 2em 1em 2em;
+  }
+  .about-container {
+    background: rgba(255, 255, 255, 0.35);
+    border-radius: 3px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    padding-top: 2em;
+  }
+
+  ion-content {
+    text-align: center;
+
+    .item.item-trns {
+      border-color: rgba(0, 0, 0, 0);
+      background-color: rgba(0, 0, 0, 0);
+      color: $color-app-grey;
+    }
+  }
 }

@@ -1,18 +1,64 @@
 <ion-header>
   <ion-navbar>
-    <button ion-button menuToggle *ngIf="!hasToken">
-      <ion-icon name="menu"></ion-icon>
+    <button ion-button clear (click)="dismiss()">
+      <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="upload-action-sheet">
+  <div id="activityImg-container">
+    <ion-avatar id="activity-avatar">
+      <img [src]="imgUrl">
+    </ion-avatar>
+    <h3 id="activity-name">{{mediaFile.title}}</h3>
+    <ion-buttons end="">
+      <button ion-button clear (click)="favourite()">
+        <ion-icon name="star"></ion-icon>
+      </button>
+      <button ion-button clear (click)="unFavourite()">
+        <ion-icon name="arrow-down"></ion-icon>
+      </button>
+    </ion-buttons>
+  </div>
+
+  <div id="about-activity-container">
+    <p id="about-activity-text">{{mediaFile.description}}</p>
+  </div>
+
+  <ion-card id="users">
+    <ion-card-header>Users in this Activity</ion-card-header>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="users-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/profileimg.png" alt="profile-img">
+              <p>username</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card id="meetup-card">
+    <ion-card-header>Meet Ups</ion-card-header>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="meetup-list">
+          <ion-item>
+            <ion-avatar>
+              <img src="./assets/imgs/hockey.png" alt="activity-img">
+              <p>Hockey</p>
+            </ion-avatar>
+          </ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <button ion-button clear>About</button>
-    <button ion-button clear>Contact</button>
-  </ion-toolbar>
 </ion-footer>
+

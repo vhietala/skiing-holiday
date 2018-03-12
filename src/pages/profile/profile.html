@@ -3,8 +3,7 @@
     <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-searchbar *ngIf="!hasToken" [(ngModel)]="mediaProvider.searchText"
-                   (search)="getSearchedMedia(searchText)"></ion-searchbar>
+    <ion-searchbar [(ngModel)]="mediaProvider.searchText" (search)="getSearchedMedia(searchText)"></ion-searchbar>
   </ion-navbar>
 </ion-header>
 
@@ -18,8 +17,6 @@
 
     </ion-avatar>
     <h3 id="profile-name">{{ profileName }}</h3>
-    <!--<h3 id="profile-id">Note: {{ postthis }}</h3>-->
-
   </div>
 
   <div id="aboutme-container">
@@ -28,30 +25,14 @@
   </div>
 
   <ion-card id="activity-card">
-    <ion-card-header>Activities
-      <ion-buttons end>
-        <button class="new-btn" ion-button clear>new</button>
-      </ion-buttons>
-    </ion-card-header>
+    <ion-card-header>Activities</ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="activity-list">
-          <ion-item>
+          <ion-item *ngFor="let activity of activities">
             <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
-            </ion-avatar>
-          </ion-item>
-          <ion-item>
-            <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
-            </ion-avatar>
-          </ion-item>
-          <ion-item>
-            <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
+              <img [src]="mediaProvider.uploadUrl + activity?.filename" alt="activity-img"
+                   (click)="modalActivity(activity.file_id)">
             </ion-avatar>
           </ion-item>
         </ion-list>
@@ -60,30 +41,44 @@
   </ion-card>
 
   <ion-card id="meetup-card">
-    <ion-card-header>Meet Ups</ion-card-header>
-    <ion-buttons end>
-      <button class="new-btn" ion-button clear>new</button>
-    </ion-buttons>
+    <ion-card-header>Meetups</ion-card-header>
     <ion-card-content>
       <ion-scroll class="side-scroll" scrollX="true">
         <ion-list id="meetup-list">
-          <ion-item>
+          <ion-item *ngFor="let meetup of meetups">
             <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
+              <img [src]="mediaProvider.uploadUrl + meetup?.filename" alt="meetup-img" (click)="modalMeetup(meetup.file_id)">
             </ion-avatar>
+            <ion-title>{{meetup.title}}</ion-title>
           </ion-item>
-          <ion-item>
+        </ion-list>
+      </ion-scroll>
+    </ion-card-content>
+  </ion-card>
+
+
+  <!--*ngIf="file.media_type == 'image'" -->
+  <ion-card id="gallery-card">
+    <ion-card-header>Image Gallery</ion-card-header>
+    <ion-card-content>
+      <ion-scroll class="side-scroll" scrollX="true">
+        <ion-list id="gallery-list">
+          <ion-item *ngFor="let file of uploadedFiles">
             <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
+              <img [src]="mediaProvider.uploadUrl + file?.filename" alt="file?.title" (click)="openOneFile(file.file_id)">
             </ion-avatar>
-          </ion-item>
-          <ion-item>
-            <ion-avatar>
-              <img src="./assets/imgs/hockey.png" alt="activity-img">
-              <p>Hockey</p>
-            </ion-avatar>
+            <!-- <audio *ngIf="file.media_type == 'audio'" controls (click)="openOneFile(file.file_id)">
+               <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
+             </audio>
+
+             <ion-avatar>
+               <video *ngIf="file.media_type == 'video'" controls width="320" height="240"
+                      (click)="openOneFile(file.file_id)"
+                      [poster]="mediaProvider.uploadUrl + file?.filename">
+                 <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
+                 <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">
+               </video>
+             </ion-avatar>-->
           </ion-item>
         </ion-list>
       </ion-scroll>
@@ -92,8 +87,4 @@
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <button ion-button clear>About</button>
-    <button ion-button clear>Contact</button>
-  </ion-toolbar>
 </ion-footer>

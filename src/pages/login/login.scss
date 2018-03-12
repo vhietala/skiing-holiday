@@ -1,17 +1,62 @@
 page-login {
 
-  .login-text {
-    background: rgba(255, 255, 255, 0.35);
-    border-radius: 3px;
-    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
-  }
-
-  ion-content {
-    background-image: url("../../assets/imgs/background-login.jpg");
+  .scroll-content {
+    //background-image: url("/src/assets/imgs/meetup-bg4.jpeg");
+    //background-image: url("../../assets/imgs/meetup-bg3.jpeg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    //filter: blur(5px) brightness(0.5);
+  }
 
+  .register {
+    position:relative;
+  }
+
+  ion-content {
+
+    text-align: center;
+    .login-text {
+      background: rgba(255, 255, 255, 0.35);
+      border-radius: 3px;
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    }
+
+    #loginform {
+      background: rgba(215,241,252,0.7);
+      border-radius: 3px 3px 0px 0px;
+      padding-bottom: 1em;
+      padding-top: 2em;
+    }
+
+    ion-buttons {
+      background: rgba(215,241,252,0.7);
+      border-radius: 0px 0px 3px 3px;
+      padding: auto;
+      width: 100%;
+      padding-bottom: 3%;
+    }
+    .item.item-input {
+      background-color: transparent;
+    }
+
+    .slide:hover,
+    .slide:focus {
+      box-shadow: inset 12.5em 0 0 0 $color-app-blue;
+    }
+
+    button {
+      color: $color-app-grey;
+      transition: 0.25s;
+
+      &:hover,
+      &:focus {
+        border-color: $color-app-blue;
+        color: #fff;
+      }
+    }
+
+    button {
+      width: 12.5em;
+    }
   }
 }

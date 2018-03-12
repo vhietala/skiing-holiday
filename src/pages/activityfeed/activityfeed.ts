@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {LoginPage} from "../login/login";
-import {SinglefileviewPage} from "../singlefileview/singlefileview";
+import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {User} from "../../interfaces/user";
 import {Media} from "../../interfaces/media";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
+import {ActivityPage} from "../activity/activity";
 
 @IonicPage()
 @Component({
@@ -14,13 +13,14 @@ import {MediaProvider} from "../../providers/media/media";
 })
 export class ActivityfeedPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,
+              public modalCtrl: ModalController, public mediaProvider: MediaProvider) {
   }
 
   files: any;
-  //MediaFiles: Media[];
-  //file: Media = {
-  MediaFiles: any;
+  tag : any;
+  tags: any = [];
+  MediaFiles: any = [];
   file: Media;
   /* = {
       file_id: 0,
@@ -39,24 +39,49 @@ export class ActivityfeedPage {
 
   ionViewDidLoad() {
     this.mediaProvider.getUserData().subscribe(response => {
-      console.log('Welcome ' + response['full_name']);
       this.displayImages();
     }, (error: HttpErrorResponse) => {
       console.log(error);
-      this.navCtrl.setRoot(LoginPage);
     });
   }
 
-  displayImages() {
+  modalOpenActivity(id) {
+    let modal = this.modalCtrl.create(ActivityPage, {activityId: id});
+    modal.present();
+  }
 
-    //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
-    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
-      console.log(response);
+  displayImages() {
+    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
+      //console.log(response);
       this.MediaFiles = response;
+      this.MediaFiles.reverse();
+      for (let j = 0; j < this.MediaFiles.length; j++) {
+        //console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
+        this.mediaProvider.getTagByFileId(this.MediaFiles[j].file_id).subscribe(response => {
+          console.log(response);
+          this.tags = response;
+          this.mediaProvider.getUserInfo(this.MediaFiles[j].user_id).subscribe((ressu: User) => {
+            this.meeduska = ressu;
+            this.MediaFiles[j].username = this.meeduska.username;
+          });
+        });
+        //console.log(this.MediaFiles[j].tag);
+      }
+
+      },( error: HttpErrorResponse) => {
+        console.log(error.error.message);
+      });
       //make this response type media and try through it?
       //atm it shows 20 objects and it doenst go throoguh them even i have for loop
+      //console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
+  }
 
-      console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
+  getSearchedMedia(value: string) {
+    console.log(value);
+    this.mediaProvider.searchImages().subscribe(response => {
+      console.log(response);
+      this.MediaFiles = response;
+      console.log("Searching media: " + this.MediaFiles);
       for (let i = 0; i < this.MediaFiles.length; i++) {
         console.log(this.MediaFiles[i] + " MEDIAFILES ARR I ");
         this.mediaProvider.getUserInfo(this.MediaFiles[i].user_id).subscribe((ressu: User) => {
@@ -65,9 +90,5 @@ export class ActivityfeedPage {
         });
       }
     });
-  }
-
-  openOneFile(id) {
-    this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
 }

@@ -1,10 +1,10 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle *ngIf="!hasToken">
-      <ion-icon name="menu"></ion-icon>
+  <div style="display: inline-flex">
+    <button ion-button clear (click)="dismiss()">
+      <ion-icon name="arrow-back"></ion-icon>
     </button>
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
-  </ion-navbar>
+    <ion-title>About & Contact</ion-title>
+  </div>
 </ion-header>
 
 <ion-content padding>
@@ -12,21 +12,31 @@
     <img id="meetup-logo" src="./assets/imgs/meetuplogotransparent.png">
   </div>
   <div class="about-container">
-    <p text-center>About Meet Up app</p>
-  </div>
-  <div class="contact-container">
-    <p text-center>Creators of Meet Up app</p>
-    <ul>
-      <li>Mikael Meinander</li>
-      <li>Anni Luonuankoski</li>
-      <li>Ville Hietala</li>
-    </ul>
+    <p id="about-app-text"text-center>Meet Up was created as a school Project for Metropolia University
+    of Applied Sciences.</p>
+    <ion-list class="contact-list">
+      <ion-list-header>Creators of Meet Up</ion-list-header>
+      <ion-item class="item item-trns">
+        <ion-label>Ville Hietala</ion-label>
+        <ion-avatar item-start>
+          <img src="./assets/imgs/profileimg.png">
+        </ion-avatar>
+      </ion-item>
+      <ion-item class="item item-trns">
+        <ion-label>Anni Luonuankoski</ion-label>
+        <ion-avatar item-start>
+          <img src="./assets/imgs/profileimg.png">
+        </ion-avatar>
+      </ion-item>
+      <ion-item class="item item-trns">
+        <ion-label>Mikael Meinander</ion-label>
+        <ion-avatar item-start>
+          <img src="./assets/imgs/profileimg.png">
+        </ion-avatar>
+      </ion-item>
+    </ion-list>
   </div>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar>
-    <button ion-button clear>About</button>
-    <button ion-button clear>Contact</button>
-  </ion-toolbar>
 </ion-footer>

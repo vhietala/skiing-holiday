@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Favourites} from "../../interfaces/favourites";
@@ -8,12 +8,6 @@ import {Media} from "../../interfaces/media";
 import {Comments} from "../../interfaces/comments";
 import {User} from "../../interfaces/user";
 
-/**
- * Generated class for the SinglefileviewPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -48,8 +42,11 @@ export class SinglefileviewPage {
   userIdCounter: number;
   commentCounter: number;
   commentGuy: User;
+  favourited: boolean = false;
+  userId: number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+              public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
   }
 
   ionViewDidLoad() {
@@ -82,6 +79,14 @@ export class SinglefileviewPage {
           this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
             this.favTemp = ressu;
             this.favouriteID[i].username = this.favTemp.username;
+            this.mediaProvider.getUserData().subscribe(response => {
+              this.userId = response['user_id'];
+              if (this.userId = this.favouriteID[i].user_id) {
+                this.favourited = true;
+              } else {
+                this.favourited = false;
+              }
+            });
           });
         }
       });
@@ -130,6 +135,7 @@ export class SinglefileviewPage {
 
   addFavourite() {
     this.mediaProvider.addFavourite(this.filzu_id).subscribe(response => {
+      this.favourited = true;
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         this.userIdCounter = Object.keys(ressu).length;
@@ -145,6 +151,7 @@ export class SinglefileviewPage {
 
   deleteFavourite() {
     this.mediaProvider.deleteFavouite(this.filzu_id).subscribe(response => {
+      this.favourited = false;
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         this.userIdCounter = Object.keys(ressu).length;
@@ -156,5 +163,9 @@ export class SinglefileviewPage {
         }
       });
     });
+  }
+
+  dismiss() {
+    this.viewCtrl.dismiss();
   }
 }

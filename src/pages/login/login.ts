@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {RegisterPage} from "../register/register";
@@ -15,7 +15,8 @@ interface User {}
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController,
+              public mediaProvider: MediaProvider, public modalCtrl: ModalController) {
   }
 
   user: User = {
@@ -28,7 +29,7 @@ export class LoginPage {
     if (this.hasToken()) {
       this.mediaProvider.getUserData().subscribe(response => {
         console.log('Welcome ' + response['username']);
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.setRoot(TabsPage, {openTab: 1});
         this.mediaProvider.logged = true;
       }, (error: HttpErrorResponse) => {
         console.log(error);
@@ -36,11 +37,17 @@ export class LoginPage {
     }
   }
 
-  public hasToken() {
+  modalAbout() {
+      let modal = this.modalCtrl.create(AboutPage);
+      modal.present();
+  }
+
+
+  hasToken() {
     return localStorage.getItem('token') !== null;
   }
 
-  public login() {
+  login() {
     // console.log('uname: ' + this.user.username);
     // console.log('pwd: ' + this.password);
     /* const body = {
@@ -54,14 +61,19 @@ export class LoginPage {
       this.mediaProvider.logged = true;
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
+      let toast = this.toastCtrl.create({
+        message: error.error.message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast')
+      });
+      toast.present();
     });
   }
 
-  public pushRegister(){
+  pushRegister(){
     this.navCtrl.push(RegisterPage);
-  }
-
-  public pushAbout() {
-    this.navCtrl.push(AboutPage);
   }
 }

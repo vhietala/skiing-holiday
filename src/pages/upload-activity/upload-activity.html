@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear [navPush]="pushTabs">cancel</button>
+    </ion-buttons>
+    <ion-title>Create a new Activity</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form id="upload-form" padding (submit)="uploadActivity()">
+    <ion-item>
+      <ion-input type="file" name="file" (change)="setFile($event)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Choose a name</ion-label>
+      <ion-input [(ngModel)]="media.title" type="text" name="title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Write a description</ion-label>
+      <ion-textarea [(ngModel)]="media.description" name="description"></ion-textarea>
+    </ion-item>
+    <button class="slide" clear ion-button color="secondary" type="submit">create a new activity</button>
+  </form>
+</ion-content>

@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons start>
+      <button ion-button clear [navPush]="pushTabs">cancel</button>
+    </ion-buttons>
+    <ion-title>Create a new Meetup</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding text-center>
+  <form id="upload-form"padding (submit)="uploadMeetup()">
+    <!--<ion-item>
+      <ion-label>Choose the activity</ion-label>
+      <input [(ngModel)]="activity" name="activity">
+        <ion-select>
+          <ion-option *ngFor="let activity of activities">{{ activity }}</ion-option>
+        </ion-select>
+    </ion-item>-->
+    <ion-item>
+      <ion-input type="file" name="file" (change)="setFile($event)"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Choose an activity related to meeting</ion-label>
+      <ion-input [(ngModel)]="tag.tagname" type="text" name="title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Choose a name</ion-label>
+      <ion-input [(ngModel)]="media.title" type="text" name="title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Write a description</ion-label>
+      <ion-textarea [(ngModel)]="media.description" name="description"></ion-textarea>
+    </ion-item>
+    <button class="slide" ion-button color="darkish" clear type="submit">Create a new Meetup</button>
+  </form>
+</ion-content>
