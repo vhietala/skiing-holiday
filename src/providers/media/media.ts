@@ -58,7 +58,10 @@ export class MediaProvider {
   }
 
   public uploading(file) {
-    return this.http.post(this.mediaUrl, file, this.tokenSettings);
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
+    };
+    return this.http.post(this.mediaUrl, file, tokenSettings);
   }
 
   public favouritesByFileId(id: number) {
@@ -85,16 +88,23 @@ export class MediaProvider {
     return this.http.get(this.apiUrl + '/tags/' + tag);
   }
 
-  public deleteFile(id:number){
-    return this.http.delete(this.apiUrl+'/media/' + id,this.tokenSettings);
+  public deleteFile(id: number) {
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
+    };
+
+    return this.http.delete(this.apiUrl + '/media/' + id, tokenSettings);
   }
 
   public setTag(tag: string, id: number) {
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
+    };
     const body = {
       file_id: id,
       tag: tag
     };
-    return this.http.post(this.apiUrl + '/tags', body, this.tokenSettings);
+    return this.http.post(this.apiUrl + '/tags', body, tokenSettings);
   }
 
   public addFavourite(id: number) {
@@ -114,6 +124,17 @@ export class MediaProvider {
       description: this.searchText
     };
     return this.http.post(this.mediaUrl + '/search', body, this.tokenSettings);
+  }
+
+  public editDescription(id: number, newDesc: string) {
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token')),
+    };
+    const body = {
+      file_id: id,
+      description: newDesc
+    };
+    return this.http.put(this.mediaUrl +'/'+id , body, tokenSettings);
   }
 }
 

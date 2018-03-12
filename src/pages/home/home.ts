@@ -50,7 +50,7 @@ export class HomePage {
   displayImages() {
 
     //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
-    this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
+    this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;
       this.MediaFiles.reverse();
