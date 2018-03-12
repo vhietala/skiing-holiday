@@ -1,8 +1,12 @@
 import {Component} from '@angular/core';
 import {
-  ActionSheetController, AlertController, IonicPage, NavController, NavParams, Platform,
+  ActionSheetController,
+  AlertController,
+  IonicPage,
+  ModalController,
+  NavController,
+  NavParams,
 } from 'ionic-angular';
-import {ActionSheetController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -18,16 +22,13 @@ import {Media} from "../../interfaces/media";
 })
 export class ProfilePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider,
-              public actionSheetCtrl: ActionSheetController, private camera: Camera, public platform: Platform, public alertCtrl: AlertController) {
   pushActivity: any;
-  public base64Image: string;
-  uplfiles: any;
   uploadedFiles: any = [];
 
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
-              public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+              public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera,
+              public alertCtrl: AlertController,) {
 
     this.pushActivity = ActivityPage;
   }
@@ -45,9 +46,7 @@ export class ProfilePage {
   profilePictureID: number;
   userId = '';
   file: string;
-  postthis: string;
   profileDescription: string;
-
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -61,7 +60,6 @@ export class ProfilePage {
     }, (error: HttpErrorResponse) => {
       console.log(error);
     });
-    this.postthis = this.profilePicture;
 
     this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
       console.log(response);
@@ -148,6 +146,7 @@ export class ProfilePage {
       console.log(error.error.message);
     });
   }
+
   uploadProfileImg() {
 
     const formData: FormData = new FormData();
@@ -158,28 +157,7 @@ export class ProfilePage {
       mediaType: this.camera.MediaType.PICTURE
     };
 
-  displayFavMeetups() {
-    this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe(response => {
-      //console.log(response);
-      this.tagListMeetup = response;
-      this.mediaProvider.getFavourites().subscribe(response2 => {
-        //console.log(response2);
-        this.favourites = response2;
-        for (let i = 0; i < this.favourites.length; i++) {
-          //console.log(this.favourites[i]);
-          for (let j = 0; j < this.tagListMeetup.length; j++) {
-            //console.log(this.tagList[j]);
-            if (this.favourites[i].file_id === this.tagListMeetup[j].file_id) {
-              //console.log(this.tagList[j]);
-              this.meetups.push(this.tagListMeetup[j]);
-            } else {
 
-            }
-          }
-        }
-      });
-    }, (error: HttpErrorResponse) => {
-      console.log(error.error.message);
     this.camera.getPicture(options).then((imageData) => {
 
       this.file = 'data:image/jpeg;base64,' + imageData;
@@ -199,10 +177,8 @@ export class ProfilePage {
           console.log(response2);
           this.profilePictureID = response2['file_id'];
         }, (error4: HttpErrorResponse) => {
-          this.postthis = error4.error.message + '4';
         });
       }, (error: HttpErrorResponse) => {
-        this.postthis = error.error.message + '3';
         console.log(error.error.message);
       });
       setTimeout(() => {
@@ -245,7 +221,6 @@ export class ProfilePage {
           text: 'Save',
           handler: data => {
             console.log('Save clicked');
-            this.postthis = data['description'];
             this.mediaProvider.editDescription(this.profilePictureID, data['description']).subscribe(response => {
               console.log(response['description']);
               this.profileDescription = response['description'];
@@ -286,8 +261,9 @@ export class ProfilePage {
     // write the ArrayBuffer to a blob, and you're done
     var blob = new Blob([ab], {type: mimeString});
     return blob;
+  }
 
-  public getUserImages() {
+  getUserImages() {
     this.mediaProvider.getUsersMedia().subscribe(response => {
       console.log(response);
       this.uploadedFiles = response;
@@ -298,6 +274,33 @@ export class ProfilePage {
   openOneFile(id) {
     this.navCtrl.push(SinglefileviewPage, {mediaplayerid: id});
   }
+
+  displayFavMeetups() {
+    this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe(response => {
+      //console.log(response);
+      this.tagListMeetup = response;
+      this.mediaProvider.getFavourites().subscribe(response2 => {
+        //console.log(response2);
+        this.favourites = response2;
+        for (let i = 0; i < this.favourites.length; i++) {
+          //console.log(this.favourites[i]);
+          for (let j = 0; j < this.tagListMeetup.length; j++) {
+            //console.log(this.tagList[j]);
+            if (this.favourites[i].file_id === this.tagListMeetup[j].file_id) {
+              //console.log(this.tagList[j]);
+              this.meetups.push(this.tagListMeetup[j]);
+            } else {
+
+            }
+          }
+        }
+      });
+    }, (error: HttpErrorResponse) => {
+      console.log(error.error.message);
+    });
+  }
+
+
 }
 
 
