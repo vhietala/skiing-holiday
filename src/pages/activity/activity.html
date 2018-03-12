@@ -8,10 +8,10 @@
 
 <ion-content padding class="upload-action-sheet">
   <div id="activityImg-container">
-    <ion-avatar id="profile-avatar">
-      <img src="./assets/imgs/hockey.png" alt="profileimg"/>
+    <ion-avatar id="activity-avatar">
+      <img [src]="imgUrl">
     </ion-avatar>
-    <h3 id="profile-name">Activity name</h3>
+    <h3 id="activity-name">{{mediaFile.title}}</h3>
     <ion-buttons end="">
       <button ion-button clear (click)="favourite()">
         <ion-icon name="star"></ion-icon>
@@ -23,9 +23,7 @@
   </div>
 
   <div id="about-activity-container">
-    <p id="about-activity-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim tempor.
-        Vivamus gravida, purus vitae sollicitudin maximus, lorem sem sodales nunc, et laoreet turpis leo vel neque.
-        Donec laoreet at risus non bibendum.</p>
+    <p id="about-activity-text">{{mediaFile.description}}</p>
   </div>
 
   <ion-card id="users">

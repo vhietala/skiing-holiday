@@ -47,6 +47,7 @@ export class ProfilePage {
       this.profileName = response['username'];
       this.userId = response['user_id'];
       this.displayFavActivities();
+      this.displayFavMeetups();
       this.getUserImages();
     }, (error: HttpErrorResponse) => {
       console.log(error);
@@ -58,8 +59,8 @@ export class ProfilePage {
     modal.present();
   }
 
-  modalMeetup() {
-    let modal = this.modalCtrl.create(SinglefileviewPage);
+  modalMeetup(id) {
+    let modal = this.modalCtrl.create(SinglefileviewPage, {mediaplayerid: id});
     modal.present();
   }
 
@@ -96,33 +97,6 @@ export class ProfilePage {
       ]
     });
     actionSheet.present();
-  }
-
-
-  private b64toBlob(b64Data, contentType = '', sliceSize = 512) {
-    const byteCharacters = atob(b64Data);
-    const byteArrays = [];
-    for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      const slice = byteCharacters.slice(offset, offset + sliceSize);
-      const byteNumbers = new Array(slice.length);
-      for (let i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
-      }
-      const byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-    const blob = new Blob(byteArrays, {type: contentType});
-    return blob;
-  }
-
-  blobToFile = (theBlob: Blob, fileName: string): File => {
-    var b: any = theBlob;
-    //A Blob() is almost a File() - it's just missing the two properties below which we will add
-    b.lastModifiedDate = new Date();
-    b.name = fileName;
-
-    //Cast to a File() type
-    return <File>theBlob;
   }
 
   displayFavActivities() {

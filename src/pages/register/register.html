@@ -1,6 +1,7 @@
 <ion-header>
 </ion-header>
 
+
 <ion-content padding
              style="background-image: url('./assets/imgs/register-bg2.jpg');background-repeat: no-repeat;background-position: right;background-size: cover;">
   <div text-center padding id="logo-container">
@@ -25,11 +26,11 @@
       <ion-input [(ngModel)]="user.full_name" name="full_name"></ion-input>
       <br>
     </ion-item>
-    <ion-buttons padding-top>
-      <button ion-button color="darkish" outline class="slide" type="submit">Register</button>
-      <button ion-button color="darkish" outline class="slide" (click)="setLogin()">Already have an account?</button>
-    </ion-buttons>
   </form>
+  <ion-buttons padding-top>
+    <button ion-button form="registerform" color="darkish" outline  class="slide" type="submit">Register</button>
+    <button ion-button color="darkish" outline class="slide"(click)="setLogin()">Already have an account?</button>
+  </ion-buttons>
 </ion-content>
 
 <ion-footer>

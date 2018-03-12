@@ -12,26 +12,23 @@
     <ion-card *ngIf="file.media_type == 'image'">
       <ion-item item-start>
         <h2>{{file.username}}</h2>
-        <p>created a new Activity!</p>
       </ion-item>
-      <img [alt]="file?.title" (click)="modalOpenImg(file.file_id)"
+      <img [alt]="file?.title" (click)="modalOpenActivity(file.file_id)"
              [src]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')"/>
     </ion-card>
     <ion-card *ngIf="file.media_type == 'audio'">
       <ion-item item-start>
         <h2>{{file.username}}</h2>
-        <p>created a new Activity!</p>
       </ion-item>
-      <audio controls (click)="modalOpenImg(file.file_id)">
+      <audio controls (click)="modalOpenActivity(file.file_id)">
         <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
       </audio>
     </ion-card>
     <ion-card *ngIf="file.media_type == 'video'">
       <ion-item item-start>
         <h2>{{file.username}}</h2>
-        <p>created a new Activity!</p>
       </ion-item>
-      <video controls width="320" height="240" (click)="modalOpenImg(file.file_id)"
+      <video controls width="320" height="240" click)="modalOpenActivity(file.file_id)"
              [poster]="mediaProvider.uploadUrl + (file?.filename | thumbnail: 'largeThumb')">
         <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/mp4">
         <source [src]="mediaProvider.uploadUrl + file?.filename" type="video/ogg">

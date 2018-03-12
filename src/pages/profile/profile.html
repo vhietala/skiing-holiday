@@ -51,6 +51,7 @@
             <ion-avatar>
               <img [src]="mediaProvider.uploadUrl + meetup?.filename" alt="meetup-img" (click)="modalMeetup(meetup.file_id)">
             </ion-avatar>
+            <ion-title>{{meetup.title}}</ion-title>
           </ion-item>
         </ion-list>
       </ion-scroll>
@@ -68,7 +69,6 @@
             <ion-avatar>
               <img [src]="mediaProvider.uploadUrl + file?.filename" alt="file?.title" (click)="openOneFile(file.file_id)">
             </ion-avatar>
-
             <!-- <audio *ngIf="file.media_type == 'audio'" controls (click)="openOneFile(file.file_id)">
                <source [src]="mediaProvider.uploadUrl + file?.filename" type="audio/ogg">
              </audio>

@@ -11,7 +11,6 @@ import {PhotoViewer} from "@ionic-native/photo-viewer";
 import {FormsModule} from "@angular/forms";
 import {Camera} from "@ionic-native/camera";
 
-import {ListPage} from '../pages/list/list';
 import {SinglefileviewPage} from "../pages/singlefileview/singlefileview";
 import {UploadPage} from "../pages/upload/upload";
 import {ProfilePage} from "../pages/profile/profile";
@@ -30,7 +29,6 @@ import {MeetingfeedPage} from "../pages/meetingfeed/meetingfeed";
 @NgModule({
   declarations: [
     MyApp,
-    ListPage,
     LoginPage,
     RegisterPage,
     ProfilePage,
@@ -57,7 +55,6 @@ import {MeetingfeedPage} from "../pages/meetingfeed/meetingfeed";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ListPage,
     LoginPage,
     RegisterPage,
     ProfilePage,

@@ -13,9 +13,16 @@ page-register {
 
     #registerform {
       background: rgba(215,241,252,0.8);
-      border-radius: 3px;
-      padding: 1em 1em 1em 0.5em;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+      border-radius: 3px 3px 0px 0px;
+      padding: 0.5em 1em 1em 0.5em;
+    }
+
+    ion-buttons {
+      background: rgba(215,241,252,0.8);
+      border-radius: 0px 0px 3px 3px;
+      padding: auto;
+      width: 99%;
+      padding-bottom: 1%;
     }
 
     .item.item-input {

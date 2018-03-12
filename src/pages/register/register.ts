@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 import {User} from "../../interfaces/user";
 import {MediaProvider} from "../../providers/media/media";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -16,7 +16,8 @@ export class RegisterPage {
 
   pushAbout: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController,
+              public mediaProvider: MediaProvider) {
     this.pushAbout = AboutPage;
   }
 
@@ -42,16 +43,23 @@ export class RegisterPage {
     }
     this.mediaProvider.register(this.user).subscribe(response => {
       console.log(response);
-      //this.mediaProvider.username = this.user.username;
-      //this.mediaProvider.password = this.user.password;
-      console.log("username+pw: " + this.user.username + '+' + this.user.password);
+      //console.log("username+pw: " + this.user.username + '+' + this.user.password);
       this.mediaProvider.login(this.user).subscribe(response => {
         localStorage.setItem('token', response['token']);
         this.mediaProvider.logged = true;
-        this.navCtrl.setRoot(TabsPage);
+        this.navCtrl.setRoot(TabsPage, {openTab: 1});
       });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
+      let toast = this.toastCtrl.create({
+        message: error.error.message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast')
+      });
+      toast.present();
     });
   }
 
