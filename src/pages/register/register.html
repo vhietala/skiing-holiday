@@ -1,11 +1,12 @@
 <ion-header>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding
+             style="background-image: url('./assets/imgs/register-bg2.jpg');background-repeat: no-repeat;background-position: right;background-size: cover;">
   <div text-center padding id="logo-container">
     <img id="meetup-logo" src="./assets/imgs/meetuplogotransparent.png">
   </div>
-  <form id="registerform"(submit)="register()">
+  <form id="registerform" (submit)="register()">
     <ion-item>
       <ion-label floating>username</ion-label>
       <ion-input [(ngModel)]="user.username" name="username" required></ion-input>
@@ -16,21 +17,23 @@
     </ion-item>
     <ion-item>
       <ion-label floating>email</ion-label>
-      <ion-input [(ngModel)]="user.email" name="email"></ion-input><br>
+      <ion-input [(ngModel)]="user.email" name="email"></ion-input>
+      <br>
     </ion-item>
     <ion-item>
       <ion-label floating>fullname</ion-label>
-      <ion-input [(ngModel)]="user.full_name" name="full_name"></ion-input><br>
+      <ion-input [(ngModel)]="user.full_name" name="full_name"></ion-input>
+      <br>
     </ion-item>
     <ion-buttons padding-top>
-      <button ion-button color="darkish" outline  class="slide" type="submit">Register</button>
-      <button ion-button color="darkish" outline class="slide"(click)="setLogin()">Already have an account?</button>
+      <button ion-button color="darkish" outline class="slide" type="submit">Register</button>
+      <button ion-button color="darkish" outline class="slide" (click)="setLogin()">Already have an account?</button>
     </ion-buttons>
   </form>
 </ion-content>
 
 <ion-footer>
-  <ion-toolbar >
+  <ion-toolbar>
     <button ion-button color="secondary" strong clear [navPush]="pushAbout">About & Contact</button>
   </ion-toolbar>
 </ion-footer>
