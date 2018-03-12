@@ -140,7 +140,7 @@ export class MediaProvider {
     const tokenSettings = {
       headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
     };
-    return this.http.delete(this.apiUrl+' media/' + id, tokenSettings);
+    return this.http.delete(this.apiUrl+ 'media/' + id, tokenSettings);
   }
 
   public getFavourites(){
