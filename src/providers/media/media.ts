@@ -95,11 +95,17 @@ export class MediaProvider {
   }
 
   public getByTag(tag: string) {
-    return this.http.get(this.apiUrl + 'tags/' + tag, this.tokenSettings);
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
+    };
+    return this.http.get(this.apiUrl + 'tags/' + tag, tokenSettings);
   }
 
   public getTagByFileId(id: number) {
-    return this.http.get(this.apiUrl + 'tags/file/' + id, this.tokenSettings);
+    const tokenSettings = {
+      headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
+    };
+    return this.http.get(this.apiUrl + 'tags/file/' + id, tokenSettings);
   }
 
   public setTag(tag: string, id: number) {
@@ -141,7 +147,7 @@ export class MediaProvider {
     const tokenSettings = {
       headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
     };
-    return this.http.get(this.favouriteUrl + '', tokenSettings);
+    return this.http.get(this.favouriteUrl, tokenSettings);
   }
 
   public searchImages() {
