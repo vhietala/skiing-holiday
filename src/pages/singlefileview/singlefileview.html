@@ -35,11 +35,11 @@
         </ion-list>
         <ion-input [(ngModel)]="mediaProvider.newComment" type="text" placeholder="Write a comment..."></ion-input>
         <button (click)="addComment()" ion-button>Comment</button>
-        <button (click)="addFavourite()" ion-button icon-start>
+        <button *ngIf=!favourited (click)="addFavourite()" ion-button icon-start> <!--!favourited-->
           <ion-icon name="heart-outline"></ion-icon>
           Favourite
         </button>
-        <button (click)="deleteFavourite()" ion-button icon-start>
+        <button *ngIf=favourited (click)="deleteFavourite()" ion-button icon-start> <!--favourited-->
           <ion-icon name="heart"></ion-icon>
           Delete Favourite
         </button>

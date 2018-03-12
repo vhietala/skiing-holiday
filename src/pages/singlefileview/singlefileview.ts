@@ -42,6 +42,8 @@ export class SinglefileviewPage {
   userIdCounter: number;
   commentCounter: number;
   commentGuy: User;
+  favourited: boolean = false;
+  userId: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
               public mediaProvider: MediaProvider, private photoViewer: PhotoViewer) {
@@ -77,6 +79,14 @@ export class SinglefileviewPage {
           this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
             this.favTemp = ressu;
             this.favouriteID[i].username = this.favTemp.username;
+            this.mediaProvider.getUserData().subscribe(response => {
+              this.userId = response['user_id'];
+              if (this.userId = this.favouriteID[i].user_id) {
+                this.favourited = true;
+              } else {
+                this.favourited = false;
+              }
+            });
           });
         }
       });
@@ -125,6 +135,7 @@ export class SinglefileviewPage {
 
   addFavourite() {
     this.mediaProvider.addFavourite(this.filzu_id).subscribe(response => {
+      this.favourited = true;
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         this.userIdCounter = Object.keys(ressu).length;
@@ -140,6 +151,7 @@ export class SinglefileviewPage {
 
   deleteFavourite() {
     this.mediaProvider.deleteFavouite(this.filzu_id).subscribe(response => {
+      this.favourited = false;
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         this.userIdCounter = Object.keys(ressu).length;

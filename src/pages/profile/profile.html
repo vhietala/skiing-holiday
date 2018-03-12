@@ -49,7 +49,7 @@
         <ion-list id="meetup-list">
           <ion-item *ngFor="let meetup of meetups">
             <ion-avatar>
-              <img [src]="mediaProvider.uploadUrl + meetup?.filename" alt="meetup-img" (click)="modalMeetup()">
+              <img [src]="mediaProvider.uploadUrl + meetup?.filename" alt="meetup-img" (click)="modalMeetup(meetup.file_id)">
             </ion-avatar>
           </ion-item>
         </ion-list>
