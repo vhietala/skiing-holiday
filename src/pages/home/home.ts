@@ -36,6 +36,7 @@ export class HomePage {
 
   meeduska: User;
 
+
   ionViewDidLoad() {
     this.mediaProvider.getUserData().subscribe(response => {
       console.log('Welcome ' + response['full_name']);
@@ -49,7 +50,6 @@ export class HomePage {
   displayImages() {
 
     //this.mediaProvider.getNewFiles().subscribe((response: Media[]) => {
-    //this.mediaProvider.getByTag(this.mediaProvider.profileimgTag).subscribe(response => {
     this.mediaProvider.getByTag(this.mediaProvider.meetupTag).subscribe(response => {
       console.log(response);
       this.MediaFiles = response;

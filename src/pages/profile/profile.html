@@ -11,16 +11,20 @@
 <ion-content padding class="upload-action-sheet">
   <div id="profileimg-container">
     <ion-avatar id="profile-avatar">
-      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="./assets/imgs/profileimg.png"
-                                                                       alt="profileimg"/></button>
+      <!--<button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="./assets/imgs/profileimg.png" alt="profileimg"/></button>-->
+      <!--<button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="{{profilePicture}}" alt="profileimg"/></button>-->
+      <!--<button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img src="{{profilePicture}}" alt="profileimg"/></button>-->
+      <button id="uploadimg-btn" (click)="uploadImgActionSheet()"><img [src]="profilePicture"></button>
+
     </ion-avatar>
     <h3 id="profile-name">{{ profileName }}</h3>
+    <h3 id="profile-id">Note: {{ postthis }}</h3>
+
   </div>
 
   <div id="aboutme-container">
     <p class="profile-headings">About me</p>
-    <p id="aboutme-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim
-      tempor.
+    <p id="aboutme-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam ultrices ante a dignissim tempor.
       Vivamus gravida, purus vitae sollicitudin maximus, lorem sem sodales nunc, et laoreet turpis leo vel neque.
       Donec laoreet at risus non bibendum. Etiam erat elit, placerat id quam tempus, facilisis feugiat leo.
       Curabitur congue fermentum mi, interdum pellentesque dolor venenatis sit amet.
