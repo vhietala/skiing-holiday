@@ -3,11 +3,7 @@
     <button ion-button menuToggle *ngIf="!hasToken">
       <ion-icon name="menu"></ion-icon>
     </button>
-<<<<<<< HEAD
     <ion-searchbar [(ngModel)]="mediaProvider.searchText" (search)="getSearchedMedia(searchText)"></ion-searchbar>
-=======
-    <ion-searchbar *ngIf="!hasToken"></ion-searchbar>
->>>>>>> a09e64edd38256dfc113160925d1127e643617e1
   </ion-navbar>
 </ion-header>
 
@@ -68,15 +64,6 @@
   <ion-card id="gallery-card">
     <ion-card-header>Image Gallery</ion-card-header>
     <ion-card-content>
-<<<<<<< HEAD
-      <ion-list id="gallery-list">
-        <ion-item>
-          <img src="../../assets/imgs/background2.jpg" alt="activity-img">
-        </ion-item>
-      </ion-list>
-    </ion-card-content>
-  </ion-card>
-=======
       <ion-scroll class="side-scroll" scrollX="true">
           <ion-list id="gallery-list">
             <ion-item *ngFor="let file of uploadedFiles">
@@ -103,9 +90,6 @@
       </ion-scroll>
     </ion-card-content>
   </ion-card>
-
-
->>>>>>> a09e64edd38256dfc113160925d1127e643617e1
 </ion-content>
 
 <ion-footer>
