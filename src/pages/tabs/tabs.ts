@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ProfilePage} from "../profile/profile";
 import {ActivityfeedPage} from "../activityfeed/activityfeed";
-import {HomePage} from "../home/home";
 import {MeetingfeedPage} from "../meetingfeed/meetingfeed";
 
 @IonicPage()
