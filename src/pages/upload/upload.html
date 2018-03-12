@@ -7,7 +7,9 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding style="background-image: url('./assets/imgs/meetup-bg2.jpg');background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;">
   <form id="upload-form" (submit)="upload()">
     <ion-item>
       <ion-input type="file" placeholder="Upload a file" name="file" (change)="setFile($event)"></ion-input>
