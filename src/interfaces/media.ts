@@ -1,7 +1,6 @@
 export interface Media {
   description: string;
   title: string;
-
   file_id: number;
   filename: string;
   user_id: number;

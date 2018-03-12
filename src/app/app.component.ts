@@ -2,12 +2,12 @@ import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
-import {HomePage} from '../pages/home/home';
-import {ProfilePage} from "../pages/profile/profile";
-import {UploadPage} from "../pages/upload/upload";
 import {LogoutPage} from "../pages/logout/logout";
 import {TabsPage} from "../pages/tabs/tabs";
 import {LoginPage} from "../pages/login/login";
+import {UploadActivityPage} from "../pages/upload-activity/upload-activity";
+import {UploadMeetupPage} from "../pages/upload-meetup/upload-meetup";
+import {UploadPage} from "../pages/upload/upload";
 
 
 @Component({
@@ -25,11 +25,11 @@ export class MyApp {
 
     // used for an example of ngFor and navigation
     this.pages = [
-      {title: 'Home', component: HomePage, icon: 'home'},
-      {title: 'Profile', component: ProfilePage, icon: 'contact'},
-      {title: 'Upload', component: UploadPage, icon: 'add'},
+      {title: 'Profile', component: TabsPage, icon: 'contact'},
+      {title: 'Upload an Image', component: UploadPage, icon: ''},
+      {title: 'Create a new Activity', component: UploadActivityPage, icon: ''},
+      {title: 'Create a new Meet Up', component: UploadMeetupPage, icon: ''},
       {title: 'Logout', component: LogoutPage, icon: 'log-out'},
-      {title: 'Tabs', component: TabsPage, icon: 'settings'},
     ];
   }
 

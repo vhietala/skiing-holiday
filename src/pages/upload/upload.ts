@@ -1,16 +1,10 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
-import {HomePage} from "../home/home";
+import {TabsPage} from "../tabs/tabs";
 
-/**
- * Generated class for the UploadPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -19,7 +13,8 @@ import {HomePage} from "../home/home";
 })
 export class UploadPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public mediaProvider: MediaProvider) {
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController,
+              public navParams: NavParams, public mediaProvider: MediaProvider) {
   }
 
   file: File;
@@ -49,17 +44,27 @@ export class UploadPage {
       console.log(response);
       //console.log(response.file_id);
       //myfileid = response.file_id;
-      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response["file_id"]).subscribe(response => {
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
         console.log(response);
+        this.mediaProvider.getUserData().subscribe( response2 => {
+          this.mediaProvider.setTag(response2['username'].toLowerCase(),response['file_id']);
+        });
+        this.mediaProvider.getUserData().subscribe( response2 => {
+          this.mediaProvider.setTag(this.mediaProvider.userImgTag,response2['file_id'])
+        });
       });
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
     setTimeout(() =>
       {
-        this.navCtrl.setRoot(HomePage);
+        this.navCtrl.setRoot(TabsPage, {openTab: 2});
       },
       3500);
+  }
+
+  public dismiss() {
+    this.navCtrl.setRoot(TabsPage,{openTab: 1});
   }
 
   public setFile(evt) {

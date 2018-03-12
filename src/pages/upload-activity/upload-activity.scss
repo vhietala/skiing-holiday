@@ -1,4 +1,4 @@
-page-upload {
+page-upload-activity {
 
   text-align: center;
 
@@ -9,19 +9,16 @@ page-upload {
     background-size: cover;
   }
 
-  .item.item-input {
-    background-color: transparent;
-  }
+  #upload-form {
+    background: rgba(215, 241, 252, 0.7);
+    border-radius: 3px;
+    padding: auto;
+    padding-bottom: 2em;
+    padding-top: 2em;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
 
-  ion-content {
-
-    #upload-form {
-      background: rgba(215, 241, 252, 0.7);
-      border-radius: 3px;
-      padding: auto;
-      padding-bottom: 2em;
-      padding-top: 2em;
-      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.25);
+    .item.item-input {
+      background-color: transparent;
     }
 
     .slide:hover,
@@ -44,5 +41,4 @@ page-upload {
       width: 12.5em;
     }
   }
-
 }

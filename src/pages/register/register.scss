@@ -1,3 +1,53 @@
 page-register {
 
+  .scroll-content {
+    //background-image: url("./assets/imgs/register-bg2.jpg");
+    //background-repeat: no-repeat;
+   // background-position: right;
+    //background-size: cover;
+  }
+
+  ion-content {
+
+    text-align: center;
+
+    #registerform {
+      background: rgba(215,241,252,0.8);
+      border-radius: 3px 3px 0px 0px;
+      padding: 0.5em 1em 1em 0.5em;
+    }
+
+    ion-buttons {
+      background: rgba(215,241,252,0.8);
+      border-radius: 0px 0px 3px 3px;
+      padding: auto;
+      width: 99%;
+      padding-bottom: 1%;
+    }
+
+    .item.item-input {
+      background-color: transparent;
+    }
+
+    .slide:hover,
+    .slide:focus {
+      box-shadow: inset 15.5em 0 0 0 $color-app-blue;
+    }
+
+    button {
+      color: $color-app-grey;
+      transition: 0.25s;
+
+      &:hover,
+      &:focus {
+        border-color: $color-app-blue;
+        color: #fff;
+      }
+    }
+
+    button {
+      width: 15.5em;
+
+    }
+  }
 }

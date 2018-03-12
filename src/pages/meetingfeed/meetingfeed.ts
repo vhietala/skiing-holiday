@@ -1,17 +1,24 @@
 import { Component } from '@angular/core';
 import {IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {SinglefileviewPage} from "../singlefileview/singlefileview";
 import {User} from "../../interfaces/user";
-import {Media} from "../../interfaces/media";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
-import {ActivityPage} from "../activity/activity";
+import {Media} from "../../interfaces/media";
+
+/**
+ * Generated class for the MeetingfeedPage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
 
 @IonicPage()
 @Component({
-  selector: 'page-activityfeed',
-  templateUrl: 'activityfeed.html',
+  selector: 'page-meetingfeed',
+  templateUrl: 'meetingfeed.html',
 })
-export class ActivityfeedPage {
+export class MeetingfeedPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
               public modalCtrl: ModalController, public mediaProvider: MediaProvider) {
@@ -45,13 +52,13 @@ export class ActivityfeedPage {
     });
   }
 
-  modalOpenActivity(id) {
-    let modal = this.modalCtrl.create(ActivityPage, {activityId: id});
+  modalOpenImg(id) {
+    let modal = this.modalCtrl.create(SinglefileviewPage, {meetupId: id});
     modal.present();
   }
 
   displayImages() {
-    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
+    this.mediaProvider.getByTag(this.mediaProvider.meetingTag).subscribe(response => {
       //console.log(response);
       this.MediaFiles = response;
       this.MediaFiles.reverse();
@@ -68,12 +75,12 @@ export class ActivityfeedPage {
         //console.log(this.MediaFiles[j].tag);
       }
 
-      },( error: HttpErrorResponse) => {
-        console.log(error.error.message);
-      });
-      //make this response type media and try through it?
-      //atm it shows 20 objects and it doenst go throoguh them even i have for loop
-      //console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
+    },( error: HttpErrorResponse) => {
+      console.log(error.error.message);
+    });
+    //make this response type media and try through it?
+    //atm it shows 20 objects and it doenst go throoguh them even i have for loop
+    //console.log(this.MediaFiles[0].user_id + "EKAN FILEN USERID");
   }
 
   getSearchedMedia(value: string) {

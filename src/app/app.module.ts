@@ -1,37 +1,34 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {ErrorHandler, NgModule} from '@angular/core';
+import {HttpClientModule} from "@angular/common/http";
+import {HttpModule} from "@angular/http";
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
-
 import {MyApp} from './app.component';
-import {ListPage} from '../pages/list/list';
-import {HomePage} from '../pages/home/home';
-
-import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {MediaProvider} from '../providers/media/media';
-import {HttpClientModule} from "@angular/common/http";
+import {StatusBar} from '@ionic-native/status-bar';
 import {PhotoViewer} from "@ionic-native/photo-viewer";
+import {FormsModule} from "@angular/forms";
+import {Camera} from "@ionic-native/camera";
+
 import {SinglefileviewPage} from "../pages/singlefileview/singlefileview";
 import {UploadPage} from "../pages/upload/upload";
 import {ProfilePage} from "../pages/profile/profile";
 import {RegisterPage} from "../pages/register/register";
 import {LoginPage} from "../pages/login/login";
-import {FormsModule} from "@angular/forms";
-import {HttpModule} from "@angular/http";
 import {PipesModule} from "../pipes/pipes.module";
 import {AboutPage} from "../pages/about/about";
 import {LogoutPage} from "../pages/logout/logout";
 import {TabsPage} from "../pages/tabs/tabs";
 import {ActivityfeedPage} from "../pages/activityfeed/activityfeed";
-import {MeetupfeedPage} from "../pages/meetupfeed/meetupfeed";
-import {Camera} from "@ionic-native/camera";
-
+import {UploadActivityPage} from "../pages/upload-activity/upload-activity";
+import {ActivityPage} from "../pages/activity/activity";
+import {UploadMeetupPage} from "../pages/upload-meetup/upload-meetup";
+import {MeetingfeedPage} from "../pages/meetingfeed/meetingfeed";
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
-    ListPage,
     LoginPage,
     RegisterPage,
     ProfilePage,
@@ -41,7 +38,11 @@ import {Camera} from "@ionic-native/camera";
     LogoutPage,
     TabsPage,
     ActivityfeedPage,
-    MeetupfeedPage,
+    UploadActivityPage,
+    UploadPage,
+    ActivityPage,
+    UploadMeetupPage,
+    MeetingfeedPage,
   ],
   imports: [
     BrowserModule,
@@ -54,8 +55,6 @@ import {Camera} from "@ionic-native/camera";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
-    ListPage,
     LoginPage,
     RegisterPage,
     ProfilePage,
@@ -65,7 +64,10 @@ import {Camera} from "@ionic-native/camera";
     LogoutPage,
     TabsPage,
     ActivityfeedPage,
-    MeetupfeedPage,
+    UploadActivityPage,
+    ActivityPage,
+    UploadMeetupPage,
+    MeetingfeedPage,
   ],
   providers: [
     StatusBar,
