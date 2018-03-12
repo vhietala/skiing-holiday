@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {
   ActionSheetController, AlertController, IonicPage, NavController, NavParams, Platform,
-  Toast
 } from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
@@ -27,7 +26,6 @@ export class ProfilePage {
   postthis: string;
   profileDescription: string;
 
-  //formData: FormData;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -49,7 +47,6 @@ export class ProfilePage {
             this.profilePictureID = response[i]['file_id'];
             this.profileDescription = response[i]['description']
           } else {
-            //this.postthis = "here3";
             this.profilePicture = "./assets/imgs/profileimg.png";
           }
         }
@@ -105,7 +102,6 @@ export class ProfilePage {
 
     this.camera.getPicture(options).then((imageData) => {
 
-      // console.log('imageData =' + imageData);
       this.file = 'data:image/jpeg;base64,' + imageData;
       formData.append('title', 'profile pic');
       formData.append('description', this.profileDescription);
@@ -129,89 +125,89 @@ export class ProfilePage {
         this.postthis = error.error.message + '3';
         console.log(error.error.message);
       });
+      setTimeout(() => {
+          this.navCtrl.setRoot(ProfilePage);
+        },
+        3000);
 
     }, (err) => {
       console.log("photo error");
     });
 
-    setTimeout(() => {
-        this.navCtrl.setRoot(ProfilePage);
-      },
-      3000);
-}
-deleteProfilePicture(){
-    this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response=>{
-      console.log("current profile pic deleted");
-    },(error:HttpErrorResponse)=>{
-      console.log(error.error.message);
-    });
-}
-editDescription()
-{
-  let prompt = this.alertCtrl.create({
-    title: 'Profile description',
-    message: "Enter here your new profile description",
-    inputs: [
-      {
-        name: 'description',
-        placeholder: 'Description'
-      },
-    ],
-    buttons: [
-      {
-        text: 'Cancel',
-        handler: data => {
-          console.log('Cancel clicked');
-        }
-      },
-      {
-        text: 'Save',
-        handler: data => {
-          console.log('Save clicked');
-          this.postthis = data['description'];
-          this.mediaProvider.editDescription(this.profilePictureID, data['description']).subscribe(response => {
-            console.log(response['description']);
-            this.profileDescription = response['description'];
-            setTimeout(() => {
-                this.navCtrl.setRoot(ProfilePage);
-              },
-              3000);
-          })
-        }
-      }
-    ]
-  });
-  prompt.present();
-
-
-}
-
-dataURItoBlob(dataURI)
-{
-  // console.log(dataURI);
-  // convert base64 to raw binary data held in a string
-  // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
-  var byteString = atob(dataURI.split(',')[1]);
-
-  // separate out the mime component
-  var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
-
-  // write the bytes of the string to an ArrayBuffer
-  var ab = new ArrayBuffer(byteString.length);
-
-  // create a view into the buffer
-  var ia = new Uint8Array(ab);
-
-  // set the bytes of the buffer to the correct values
-  for (var i = 0; i < byteString.length; i++) {
-    ia[i] = byteString.charCodeAt(i);
   }
 
-  // write the ArrayBuffer to a blob, and you're done
-  var blob = new Blob([ab], {type: mimeString});
-  return blob;
+  deleteProfilePicture() {
+    this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response => {
+      console.log("current profile pic deleted");
+    }, (error: HttpErrorResponse) => {
+      console.log(error.error.message);
+    });
+  }
 
-}
+  editDescription() {
+    let prompt = this.alertCtrl.create({
+      title: 'Profile description',
+      message: "Enter here your new profile description",
+      inputs: [
+        {
+          name: 'description',
+          placeholder: 'Description'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Save',
+          handler: data => {
+            console.log('Save clicked');
+            this.postthis = data['description'];
+            this.mediaProvider.editDescription(this.profilePictureID, data['description']).subscribe(response => {
+              console.log(response['description']);
+              this.profileDescription = response['description'];
+              setTimeout(() => {
+                  this.navCtrl.setRoot(ProfilePage);
+                },
+                3000);
+            })
+          }
+        }
+      ]
+    });
+    prompt.present();
+
+
+  }
+
+  dataURItoBlob(dataURI) {
+    // console.log(dataURI);
+    // convert base64 to raw binary data held in a string
+    // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+    var byteString = atob(dataURI.split(',')[1]);
+
+    // separate out the mime component
+    var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+
+    // write the bytes of the string to an ArrayBuffer
+    var ab = new ArrayBuffer(byteString.length);
+
+    // create a view into the buffer
+    var ia = new Uint8Array(ab);
+
+    // set the bytes of the buffer to the correct values
+    for (var i = 0; i < byteString.length; i++) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+
+    // write the ArrayBuffer to a blob, and you're done
+    var blob = new Blob([ab], {type: mimeString});
+    return blob;
+
+  }
 }
 
 
