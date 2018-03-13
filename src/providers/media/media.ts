@@ -116,7 +116,7 @@ export class MediaProvider {
     const tokenSettings = {
       headers: new HttpHeaders().set('x-access-token', localStorage.getItem('token'))
     };
-    return this.http.post( this.apiUrl + 'tags', body, tokenSettings );
+    return this.http.post( this.apiUrl + 'tags/', body, tokenSettings );
   }
 
   public addFavourite(id: number) {

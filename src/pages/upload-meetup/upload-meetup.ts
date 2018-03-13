@@ -78,7 +78,7 @@ export class UploadMeetupPage {
           });
           toast.present();
         },
-        3000);
+        2000);
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
       let toast = this.toastCtrl.create({
