@@ -85,10 +85,10 @@ export class SinglefileviewPage {
           this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
             this.favTemp = ressu;
             this.favouriteID[i].username = this.favTemp.username;
-            console.log(i);
-            console.log(this.favouriteID.length);
-            console.log(this.favTemp.username);
-            console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
+            //console.log(i);
+            //console.log(this.favouriteID.length);
+            //console.log(this.favTemp.username);
+            //console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
             if (this.favTemp.username = this.username) {
               this.favourited = true;
             } else {
