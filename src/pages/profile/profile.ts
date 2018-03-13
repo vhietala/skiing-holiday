@@ -1,12 +1,5 @@
 import {Component} from '@angular/core';
-import {
-  ActionSheetController,
-  AlertController,
-  IonicPage,
-  ModalController,
-  NavController,
-  NavParams,
-} from 'ionic-angular';
+import {ActionSheetController, AlertController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -27,26 +20,25 @@ export class ProfilePage {
 
 
   constructor(public modalCtrl: ModalController, public navCtrl: NavController, public navParams: NavParams,
-              public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController, private camera: Camera,
-              public alertCtrl: AlertController,) {
-
+              public alertCtrl: AlertController, public mediaProvider: MediaProvider, public actionSheetCtrl: ActionSheetController,
+              private camera: Camera) {
     this.pushActivity = ActivityPage;
   }
 
   favourites: any;
   activities: any = [];
   meetups: any = [];
-  activity: Media;
   tagListActivity: any;
   tagListMeetup: any;
-  meetup: Media;
-
   profileName = '';
   profilePicture: string;
   profilePictureID: number;
   userId = '';
-  file: string;
+  file: File;
+  activity: Media;
+  meetup: Media;
   profileDescription: string;
+  profileImgFile: string;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -122,31 +114,6 @@ export class ProfilePage {
     actionSheet.present();
   }
 
-  displayFavActivities() {
-    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
-      //console.log(response);
-      this.tagListActivity = response;
-      this.mediaProvider.getFavourites().subscribe(response2 => {
-        //console.log(response2);
-        this.favourites = response2;
-        for (let i = 0; i < this.favourites.length; i++) {
-          //console.log(this.favourites[i]);
-          for (let j = 0; j < this.tagListActivity.length; j++) {
-            //console.log(this.tagList[j]);
-            if (this.favourites[i].file_id === this.tagListActivity[j].file_id) {
-              //console.log(this.tagList[j]);
-              this.activities.push(this.tagListActivity[j]);
-            } else {
-
-            }
-          }
-        }
-      });
-    }, (error: HttpErrorResponse) => {
-      console.log(error.error.message);
-    });
-  }
-
   uploadProfileImg() {
 
     const formData: FormData = new FormData();
@@ -157,10 +124,9 @@ export class ProfilePage {
       mediaType: this.camera.MediaType.PICTURE
     };
 
-
     this.camera.getPicture(options).then((imageData) => {
 
-      this.file = 'data:image/jpeg;base64,' + imageData;
+      this.profileImgFile = 'data:image/jpeg;base64,' + imageData;
       formData.append('title', 'profile pic');
       formData.append('description', this.profileDescription);
       formData.append('file', this.dataURItoBlob(this.file));
@@ -263,11 +229,37 @@ export class ProfilePage {
     return blob;
   }
 
+
   getUserImages() {
     this.mediaProvider.getUsersMedia().subscribe(response => {
       console.log(response);
       this.uploadedFiles = response;
       this.uploadedFiles.reverse();
+    });
+  }
+
+  displayFavActivities() {
+    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
+      //console.log(response);
+      this.tagListActivity = response;
+      this.mediaProvider.getFavourites().subscribe(response2 => {
+        //console.log(response2);
+        this.favourites = response2;
+        for (let i = 0; i < this.favourites.length; i++) {
+          //console.log(this.favourites[i]);
+          for (let j = 0; j < this.tagListActivity.length; j++) {
+            //console.log(this.tagList[j]);
+            if (this.favourites[i].file_id === this.tagListActivity[j].file_id) {
+              //console.log(this.tagList[j]);
+              this.activities.push(this.tagListActivity[j]);
+            } else {
+
+            }
+          }
+        }
+      });
+    }, (error: HttpErrorResponse) => {
+      console.log(error.error.message);
     });
   }
 
