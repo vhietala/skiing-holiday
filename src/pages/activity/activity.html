@@ -12,7 +12,7 @@
     <ion-avatar id="activity-avatar">
       <img [src]="imgUrl">
     </ion-avatar>
-    <ion-title padding>{{mediaFile.title}}</ion-title>
+    <h1 padding>{{mediaFile.title}}</h1>
     <div id="favourite-container">
       <h4 item-end id="favourites-text" padding>{{userIdCounter}}</h4> <!-- amount NUMBER -->
       <button ion-button color="dark" *ngIf=!favourited (click)="addFavourite()" icon-start> <!--!favourited-->

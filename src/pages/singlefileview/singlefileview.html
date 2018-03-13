@@ -23,16 +23,14 @@
           <h2>{{mediaFile.time_added | date: 'dd.MM.yy hh:mm a'}}</h2>
           <h2>{{mediaFile.username}}</h2>
         </ion-item>
-        <ion-item item-end no-padding>
-          <h2>{{userIdCounter}}</h2> <!-- amount NUMBER -->
-          <button *ngIf=!favourited (click)="addFavourite()" ion-button icon-start> <!--!favourited-->
+        <ion-item id="favourite-container" no-padding>
+          <button padding *ngIf=!favourited (click)="addFavourite()" ion-button icon-start> <!--!favourited-->
             <ion-icon name="heart-outline"></ion-icon>
-            Favourite
           </button>
-          <button *ngIf=favourited (click)="deleteFavourite()" ion-button icon-start> <!--favourited-->
+          <button padding *ngIf=favourited (click)="deleteFavourite()" ion-button icon-start> <!--favourited-->
             <ion-icon name="heart"></ion-icon>
-            Delete Favourite
           </button>
+          <h2>{{userIdCounter}}</h2> <!-- amount NUMBER -->
         </ion-item>
         <ion-item text-wrap>
           <h2 item-start>{{mediaFile.description}}</h2>

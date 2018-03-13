@@ -70,7 +70,6 @@ export class SinglefileviewPage {
         this.mediaFile.username = this.ressuponseTemp1.username;
       });
 
-
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         //this.userIdCounter = (this.temp.match(/user_id/g) || []).length;

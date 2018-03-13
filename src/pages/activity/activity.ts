@@ -35,6 +35,8 @@ export class ActivityPage {
   imgUrl: string;
   ressuponseTemp: any;
   favourited: boolean = false;
+  userId: number;
+  username: string;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ActivityPage');
@@ -46,6 +48,22 @@ export class ActivityPage {
       this.mediaProvider.favouritesByFileId(this.file_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         this.userIdCounter = Object.keys(ressu).length;
+        for (let i = 0; i < this.favouriteID.length; i++) {
+          this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
+            this.favTemp = ressu;
+            this.favouriteID[i].username = this.favTemp.username;
+            this.mediaProvider.getUserData().subscribe(response => {
+              this.userId = response['user_id'];
+              this.username = response['username'];
+              console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
+              if (this.favTemp.username == this.username) {
+                this.favourited = true;
+              } else {
+                this.favourited = false;
+              }
+            });
+          });
+        }
       });
     });
   }
