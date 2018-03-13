@@ -21,8 +21,6 @@ export class UploadActivityPage {
   }
 
   file: File;
-  tagList: any = [];
-  tagListById: any = [];
   media: Media = {
     file_id: 0,
     filename: '',
@@ -44,67 +42,26 @@ export class UploadActivityPage {
     formData.append('title', this.media.title);
     formData.append('description', this.media.description);
     formData.append('file', this.file);
-    this.mediaProvider.getByTag(this.mediaProvider.activityTag).subscribe(response => {
+    this.mediaProvider.uploading(formData).subscribe(response => {
       console.log(response);
-      this.tagList = response;
-      let keepGoing = true;
-      while (keepGoing) {
-        for (let i = 0; i < this.tagList.length; i++)
-          this.mediaProvider.getTagByFileId(this.tagList[i].file_id).subscribe(response2 => {
-            this.tagListById = response2;
-            console.log(response2);
-            for (let j = 0; j < this.tagListById.length; j++) {
-              if (this.tagListById[j].tag !== this.media.title.toLowerCase()) {
-                console.log('activity available');
-                console.log(this.media.title.toLowerCase());
-                /*this.mediaProvider.uploading(formData).subscribe(response => {
-                  //console.log(response);
-                  //console.log(response.file_id);
-                  //myfileid = response.file_id;
-                  this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
-                    //console.log(response);
-                  });
-                  this.mediaProvider.setTag(this.mediaProvider.activityTag, response['file_id']).subscribe(response => {
-                    //console.log(response);
-                  });
-                  this.mediaProvider.setTag(this.media.title.toLowerCase(), response['file_title']).subscribe(response => {
-                    //console.log(response);
-                  });
-                  this.mediaProvider.addFavourite(response['file_id']).subscribe(response2 => {
-                    console.log(response2);
-                  });
-                }, (error: HttpErrorResponse) => {
-                  console.log(error.error.message);
-                });*/
-                setTimeout(() => {
-                    this.navCtrl.setRoot(TabsPage, {openTab: 2});
-                    let toast = this.toastCtrl.create({
-                      message: 'New activity created',
-                      duration: 3000,
-                      position: 'top'
-                    });
-                    toast.onDidDismiss(() => {
-                      console.log('Dismissed toast');
-                    });
-                    keepGoing = false;
-                    toast.present();
-                  },
-                  1000);
-              } else {
-                let toast = this.toastCtrl.create({
-                  message: 'This activity already exists!',
-                  duration: 3000,
-                  position: 'top'
-                });
-                toast.onDidDismiss(() => {
-                  console.log('Dismissed toast')
-                });
-                toast.present();
-              }
-            }
-          });
-      }
+      //console.log(response.file_id);
+      //myfileid = response.file_id;
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
+        //console.log(response);
+      });
+      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
+        //console.log(response);
+      });
+      this.mediaProvider.addFavourite(response['file_id']).subscribe( response2 => {
+        console.log(response2);
+      });
+      setTimeout(() =>
+        {
+          this.navCtrl.setRoot(TabsPage, {openTab: 2});
+        },
+        3500);
     }, (error: HttpErrorResponse) => {
+      //console.log(error.error.message);
       let toast = this.toastCtrl.create({
         message: error.error.message,
         duration: 3000,
