@@ -1,5 +1,12 @@
 import {Component} from '@angular/core';
-import {ActionSheetController, AlertController, IonicPage, ModalController, NavController, NavParams} from 'ionic-angular';
+import {
+  ActionSheetController,
+  AlertController,
+  IonicPage,
+  ModalController,
+  NavController,
+  NavParams
+} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {MediaProvider} from "../../providers/media/media";
 import {Camera, CameraOptions} from "@ionic-native/camera";
@@ -117,6 +124,9 @@ export class ProfilePage {
     actionSheet.present();
   }
 
+  /*****************************
+  *opens camera to and lets you take a picture, then uploads it to API
+   ******************************/
   uploadProfileImg() {
 
     const formData: FormData = new FormData();
@@ -163,14 +173,24 @@ export class ProfilePage {
 
   }
 
+  /************************************************
+  *deletes your current profile image
+   ***************************************/
   deleteProfilePicture() {
     this.mediaProvider.deleteFile(this.profilePictureID).subscribe(response => {
       console.log("current profile pic deleted");
+      setTimeout(() => {
+          this.navCtrl.setRoot(ProfilePage);
+        },
+        3000);
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
     });
   }
 
+  /*****************************************
+  *pops up a prompt to edit your profile description
+   ******************************************/
   editDescription() {
     let prompt = this.alertCtrl.create({
       title: 'Profile description',
@@ -209,6 +229,9 @@ export class ProfilePage {
 
   }
 
+  /**********************************************
+  *changes the image string to blob so it can be uploaded to server
+   ***********************************************/
   dataURItoBlob(dataURI) {
     // console.log(dataURI);
     // convert base64 to raw binary data held in a string
