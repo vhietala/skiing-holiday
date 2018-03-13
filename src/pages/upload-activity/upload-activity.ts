@@ -45,11 +45,10 @@ export class UploadActivityPage {
     this.mediaProvider.uploading(formData).subscribe(response => {
       console.log(response);
       //console.log(response.file_id);
-      //myfileid = response.file_id;
       this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
         //console.log(response);
       });
-      this.mediaProvider.setTag(this.mediaProvider.meetupTag, response['file_id']).subscribe(response => {
+      this.mediaProvider.setTag(this.mediaProvider.activityTag, response['file_id']).subscribe(response => {
         //console.log(response);
       });
       this.mediaProvider.addFavourite(response['file_id']).subscribe( response2 => {
@@ -58,13 +57,22 @@ export class UploadActivityPage {
       setTimeout(() =>
         {
           this.navCtrl.setRoot(TabsPage, {openTab: 2});
+          let toast = this.toastCtrl.create({
+            message: 'New activity created!',
+            duration: 2000,
+            position: 'top'
+          });
+          toast.onDidDismiss(() => {
+            console.log('Dismissed toast')
+          });
+          toast.present();
         },
-        3500);
+        2000);
     }, (error: HttpErrorResponse) => {
       //console.log(error.error.message);
       let toast = this.toastCtrl.create({
         message: error.error.message,
-        duration: 3000,
+        duration: 2000,
         position: 'top'
       });
       toast.onDidDismiss(() => {

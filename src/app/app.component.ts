@@ -27,7 +27,7 @@ export class MyApp {
     this.pages = [
       {title: 'Profile', component: TabsPage, icon: 'contact'},
       {title: 'Create a new Activity', component: UploadActivityPage, icon: 'bicycle'},
-      {title: 'Create a new Meet Up', component: UploadMeetupPage, icon: 'contacts'},
+      {title: 'Create a new Meetup', component: UploadMeetupPage, icon: 'contacts'},
       {title: 'Upload an Image', component: UploadPage, icon: 'images'},
       {title: 'Logout', component: LogoutPage, icon: 'log-out'},
     ];

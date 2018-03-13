@@ -78,12 +78,12 @@ export class UploadMeetupPage {
           });
           toast.present();
         },
-        3000);
+        2000);
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
       let toast = this.toastCtrl.create({
         message: error.error.message,
-        duration: 3000,
+        duration: 2000,
         position: 'top'
       });
       toast.onDidDismiss(() => {
