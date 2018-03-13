@@ -56,7 +56,7 @@ export class ActivityPage {
           this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
             this.favTemp = ressu;
             this.favouriteID[i].username = this.favTemp.username;
-            if (this.favTemp.username = this.username) {
+            if (this.favTemp.username == this.username) {
               this.favourited = true;
             } else {
               this.favourited = false;
