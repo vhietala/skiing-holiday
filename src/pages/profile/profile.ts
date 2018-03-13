@@ -92,7 +92,7 @@ export class ProfilePage {
     let modal = this.modalCtrl.create(SinglefileviewPage, {mediaplayerid: id});
     modal.present();
   }
-
+  
   uploadImgActionSheet() {
     let actionSheet = this.actionSheetCtrl.create({
       cssClass: 'upload-action-sheet',
