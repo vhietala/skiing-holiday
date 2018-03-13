@@ -4,9 +4,13 @@ page-activity {
   ion-content {
 
     #activity-content {
-      background-color: $color-app-green;
+      background-color: $color-app-lightblue;
       width: 100%;
       padding-bottom: 13%;
+      h1 {
+        padding-top: 0%;
+        color: $color-app-darkgrey;
+      }
     }
   }
 
@@ -22,6 +26,7 @@ page-activity {
       position: absolute;
       flex-wrap: nowrap;
       top: 42%;
+      font-size: 1em;
     }
   }
 

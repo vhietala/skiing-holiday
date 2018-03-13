@@ -69,6 +69,10 @@ export class SinglefileviewPage {
         this.ressuponseTemp1 = ressu;
         this.mediaFile.username = this.ressuponseTemp1.username;
       });
+      this.mediaProvider.getUserData().subscribe(response => {
+        this.userId = response['user_id'];
+        this.username = response['username'];
+      });
 
 
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
@@ -81,19 +85,20 @@ export class SinglefileviewPage {
           this.mediaProvider.getUserInfo(this.favouriteID[i].user_id).subscribe((ressu: User) => {
             this.favTemp = ressu;
             this.favouriteID[i].username = this.favTemp.username;
-            this.mediaProvider.getUserData().subscribe(response => {
-              this.userId = response['user_id'];
-              this.username = response['username'];
-              console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
-              if (this.favTemp.username == this.username) {
-                this.favourited = true;
-              } else {
-                this.favourited = false;
-              }
-            });
+            //console.log(i);
+            //console.log(this.favouriteID.length);
+            //console.log(this.favTemp.username);
+            //console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
+            if (this.favTemp.username == this.username) {
+              this.favourited = true;
+            } else {
+              this.favourited = false;
+            }
           });
+
         }
       });
+
 
       this.mediaProvider.getCommentsByFileId(this.filzu_id).subscribe((resbond: Comments[]) => {
         this.comment = resbond;
@@ -104,12 +109,10 @@ export class SinglefileviewPage {
             this.comment[i].username = this.commentGuy.username;
           });
         }
-
       });
     }, (error: HttpErrorResponse) => {
       console.log(error);
     });
-
   }
 
   openImage() {
