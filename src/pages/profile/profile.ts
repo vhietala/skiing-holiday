@@ -34,11 +34,10 @@ export class ProfilePage {
   profilePicture: string;
   profilePictureID: number;
   userId = '';
-  file: File;
   activity: Media;
   meetup: Media;
   profileDescription: string;
-  profileImgFile: string;
+  file: string;
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProfilePage');
@@ -126,7 +125,7 @@ export class ProfilePage {
 
     this.camera.getPicture(options).then((imageData) => {
 
-      this.profileImgFile = 'data:image/jpeg;base64,' + imageData;
+      this.file = 'data:image/jpeg;base64,' + imageData;
       formData.append('title', 'profile pic');
       formData.append('description', this.profileDescription);
       formData.append('file', this.dataURItoBlob(this.file));

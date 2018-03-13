@@ -57,7 +57,7 @@ export class UploadActivityPage {
       });
       setTimeout(() =>
         {
-          this.navCtrl.setRoot(TabsPage, {openTab: 2});
+          //this.navCtrl.setRoot(TabsPage, {openTab: 2});
         },
         3500);
     }, (error: HttpErrorResponse) => {
