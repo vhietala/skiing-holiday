@@ -1,25 +1,27 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button clear (click)="dismiss()">
+  <div style="display: inline-block">
+    <button clear ion-button (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
+      <ion-title>Back</ion-title>
     </button>
-  </ion-navbar>
+  </div>
 </ion-header>
 
-<ion-content padding class="upload-action-sheet">
-  <div id="activityImg-container">
+<ion-content>
+  <div id="activity-content">
     <ion-avatar id="activity-avatar">
       <img [src]="imgUrl">
     </ion-avatar>
-    <h3 id="activity-name">{{mediaFile.title}}</h3>
-    <ion-buttons end="">
-      <button ion-button clear (click)="favourite()">
-        <ion-icon name="star"></ion-icon>
+    <h1 padding>{{mediaFile.title}}</h1>
+    <div id="favourite-container">
+      <h4 item-end id="favourites-text" padding>{{userIdCounter}}</h4> <!-- amount NUMBER -->
+      <button ion-button color="dark" *ngIf=!favourited (click)="addFavourite()" icon-start> <!--!favourited-->
+        <ion-icon name="heart-outline"></ion-icon>
       </button>
-      <button ion-button clear (click)="unFavourite()">
-        <ion-icon name="arrow-down"></ion-icon>
+      <button item-right ion-button color="brightgreen" *ngIf=favourited (click)="deleteFavourite()" icon-start> <!--favourited-->
+        <ion-icon name="heart"></ion-icon>
       </button>
-    </ion-buttons>
+    </div>
   </div>
 
   <div id="about-activity-container">

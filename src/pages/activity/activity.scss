@@ -1,3 +1,37 @@
 page-activity {
 
+
+  ion-content {
+
+    #activity-content {
+      background-color: $color-app-lightblue;
+      width: 100%;
+      padding-bottom: 13%;
+      h1 {
+        padding-top: 0%;
+        color: $color-app-darkgrey;
+      }
+    }
+  }
+
+  #favourite-container {
+    position: absolute;
+    left: 75%;
+    top: 42%;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    color: $color-app-grey;
+
+    #favourites-text {
+      position: absolute;
+      flex-wrap: nowrap;
+      top: 42%;
+      font-size: 1em;
+    }
+  }
+
+  #about-activity-container {
+    padding: 10% 2% 5% 2%;
+    text-align: center;
+  }
 }

@@ -1,10 +1,35 @@
 page-activityfeed {
 
+  .scroll-content {
+    background-color: #fff;
+  }
+
   .card-background-page {
+
+    h1 {
+      color: $color-app-grey;
+      //font-weight: bold;
+      width: fit-content;
+    }
+
+    h2 {
+      color: $color-app-lightblue;
+      letter-spacing: 1px;
+      font-size: 0.8em;
+      padding-top: 1%;
+      font-weight: bold;
+    }
 
     ion-card {
       width: 100%;
-      margin: 0%;
+      margin: 1% 0% 3% 0%;
+      padding: 0% 0% 3% 0%;
+      background-color: $color-app-light;
     }
+
+    ion-item {
+      background-color: $color-app-light;
+    }
+
   }
 }

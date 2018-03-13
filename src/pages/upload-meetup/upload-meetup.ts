@@ -62,10 +62,23 @@ export class UploadMeetupPage {
       });
       this.mediaProvider.setTag(this.mediaProvider.meetingTag, response['file_id']).subscribe(response => {
         console.log(response);
-        this.mediaProvider.addFavourite(response['file_id']).subscribe( response2 => {
-          console.log(response2);
-        });
       });
+      this.mediaProvider.addFavourite(response['file_id']).subscribe( response2 => {
+        console.log(response2);
+      });
+      setTimeout(() => {
+          this.navCtrl.setRoot(TabsPage, {openTab: 3});
+          let toast = this.toastCtrl.create({
+            message: 'New Meetup created!',
+            duration: 3000,
+            position: 'top'
+          });
+          toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+          });
+          toast.present();
+        },
+        3000);
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
       let toast = this.toastCtrl.create({
@@ -78,19 +91,6 @@ export class UploadMeetupPage {
       });
       toast.present();
     });
-    setTimeout(() => {
-        this.navCtrl.setRoot(TabsPage);
-        let toast = this.toastCtrl.create({
-          message: 'New activity created',
-          duration: 3000,
-          position: 'top'
-        });
-        toast.onDidDismiss(() => {
-          console.log('Dismissed toast');
-        });
-        toast.present();
-      },
-      3500);
   }
 
   setFile(evt) {

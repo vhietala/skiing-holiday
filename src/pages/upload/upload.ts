@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, ViewController} from 'ionic-angular';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Media} from "../../interfaces/media";
 import {MediaProvider} from "../../providers/media/media";
@@ -13,7 +13,7 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class UploadPage {
 
-  constructor(public viewCtrl: ViewController, public navCtrl: NavController,
+  constructor(public viewCtrl: ViewController, public navCtrl: NavController, public toastCtrl: ToastController,
               public navParams: NavParams, public mediaProvider: MediaProvider) {
   }
 
@@ -49,18 +49,36 @@ export class UploadPage {
         this.mediaProvider.getUserData().subscribe( response2 => {
           this.mediaProvider.setTag(response2['username'].toLowerCase(),response['file_id']);
         });
-        this.mediaProvider.getUserData().subscribe( response2 => {
-          this.mediaProvider.setTag(this.mediaProvider.userImgTag,response2['file_id'])
+        this.mediaProvider.setTag(this.mediaProvider.userImgTag,response['file_id']).subscribe(response => {
+          console.log(response);
         });
       });
+      setTimeout(() =>
+        {
+          this.navCtrl.setRoot(TabsPage, {openTab: 1});
+          let toast = this.toastCtrl.create({
+            message: 'New Image Uploaded!',
+            duration: 3000,
+            position: 'top'
+          });
+          toast.onDidDismiss(() => {
+            console.log('Dismissed toast')
+          });
+          toast.present();
+        },
+        3000);
     }, (error: HttpErrorResponse) => {
       console.log(error.error.message);
+      let toast = this.toastCtrl.create({
+        message: error.error.message,
+        duration: 3000,
+        position: 'top'
+      });
+      toast.onDidDismiss(() => {
+        console.log('Dismissed toast')
+      });
+      toast.present();
     });
-    setTimeout(() =>
-      {
-        this.navCtrl.setRoot(TabsPage, {openTab: 2});
-      },
-      3500);
   }
 
   public dismiss() {

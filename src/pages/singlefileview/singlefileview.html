@@ -1,52 +1,51 @@
 <ion-header>
-  <div style="display: inline-flex">
+  <div style="display: inline-block">
     <button clear ion-button (click)="dismiss()">
       <ion-icon name="arrow-back"></ion-icon>
+      <ion-title>Back</ion-title>
     </button>
-    <ion-title>{{mediaFile.title}}</ion-title>
   </div>
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="card-background-page">
   <ion-card>
-    <button (click)="deleteMedia()" style="float:right;">
-      <ion-icon name="remove-circle"></ion-icon>
-    </button>
-
-    <!--<ion-card-title>{{mediaFile.title}}</ion-card-title>-->
-    <img [src]="url" *ngIf="mediaFile.media_type == 'image'">
-    <video [src]="url" *ngIf="mediaFile.media_type == 'video'" controls></video>
-    <audio *ngIf="mediaFile.media_type == 'audio'" [src]="url" controls></audio>
+    <div id="singleview-container">
+      <h1 text-center padding>{{mediaFile.title}}</h1>
+      <!--<ion-card-title>{{mediaFile.title}}</ion-card-title>-->
+      <img [src]="url" *ngIf="mediaFile.media_type == 'image'">
+      <video [src]="url" *ngIf="mediaFile.media_type == 'video'" controls></video>
+      <audio *ngIf="mediaFile.media_type == 'audio'" [src]="url" controls></audio>
+    </div>
     <ion-card-content>
       <ion-list>
-        <ion-item text-wrap> {{"Description: " + mediaFile.description}}</ion-item>
-        <ion-item> {{"Uploaded by: " + mediaFile.username + " (" + mediaFile.user_id + ")"}}</ion-item>
-        <!-- also add username-->
-        <ion-item> {{"Added: "}} {{mediaFile.time_added | date: 'dd.MM.yy hh:mm a'}}</ion-item>
-        <ion-item> {{"File id: " + mediaFile.file_id}}</ion-item>
-        <ion-item> {{"Favourites: " + userIdCounter}}</ion-item> <!-- amount NUMBER -->
-        <ion-list *ngFor="let favouriter of favouriteID">
-          <ion-item-group> {{favouriter.username + " (" + favouriter.user_id + ")"}}</ion-item-group>
-          <!-- USERID (+USERNAME?) -->
-        </ion-list>
-        <ion-item> {{ "Comments: " + commentCounter}}</ion-item>
+        <ion-item no-padding>
+          <h2>{{mediaFile.time_added | date: 'dd.MM.yy hh:mm a'}}</h2>
+          <h2>{{mediaFile.username}}</h2>
+        </ion-item>
+        <ion-item id="favourite-container" no-padding>
+          <button padding *ngIf=!favourited (click)="addFavourite()" ion-button icon-start> <!--!favourited-->
+            <ion-icon name="heart-outline"></ion-icon>
+          </button>
+          <button padding *ngIf=favourited (click)="deleteFavourite()" ion-button icon-start> <!--favourited-->
+            <ion-icon name="heart"></ion-icon>
+          </button>
+          <h2>{{userIdCounter}}</h2> <!-- amount NUMBER -->
+        </ion-item>
+        <ion-item text-wrap>
+          <h2 item-start>{{mediaFile.description}}</h2>
+        </ion-item>
         <ion-list *ngFor="let commenterino of comment">
           <ion-item-group> {{ commenterino.username + ": "}}<strong> {{commenterino.comment }} </strong>
             {{commenterino.time_added | date: 'dd.MM.yy hh:mm a'}}
           </ion-item-group>
           <!-- comments here -->
         </ion-list>
+        <h2 item-right> {{ "Comments: " + commentCounter}}</h2>
         <ion-input [(ngModel)]="mediaProvider.newComment" type="text" placeholder="Write a comment..."></ion-input>
-        <button (click)="addComment()" ion-button>Comment</button>
-        <button *ngIf=!favourited (click)="addFavourite()" ion-button icon-start> <!--!favourited-->
-          <ion-icon name="heart-outline"></ion-icon>
-          Favourite
-        </button>
-        <button *ngIf=favourited (click)="deleteFavourite()" ion-button icon-start> <!--favourited-->
-          <ion-icon name="heart"></ion-icon>
-          Delete Favourite
-        </button>
+        <ion-item no-padding text-center>
+          <button padding block ion-button color="dark" (click)="addComment()">Comment</button>
+        </ion-item>
       </ion-list>
     </ion-card-content>
   </ion-card>

@@ -1,3 +1,47 @@
 page-singlefileview {
 
+  .scroll-content {
+    background-color: #fff;
+  }
+
+  #singleview-container {
+    background-color: $color-app-lightblue;
+    padding-bottom: 6%;
+  }
+
+  #favourite-container {
+
+    h2 {
+      position: relative;
+      left: 10%;
+    }
+
+  }
+  .card-background-page {
+
+    h1 {
+      color: $color-app-darkgrey;
+      //font-weight: bold;
+      letter-spacing: 1px;
+      width: fit-content;
+    }
+
+    h2 {
+      color: $color-app-grey;
+      font-size: 1em;
+      //font-weight: bold;
+    }
+
+    ion-card {
+      width: 100%;
+      margin: 0% 0% 2% 0%;
+      padding: 0% 0% 3% 0%;
+      background-color: $color-app-light;
+    }
+
+    ion-item {
+      background-color: $color-app-light;
+    }
+
+  }
 }
