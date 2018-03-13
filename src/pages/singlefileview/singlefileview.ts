@@ -87,7 +87,7 @@ export class SinglefileviewPage {
             //console.log(this.favouriteID.length);
             //console.log(this.favTemp.username);
             //console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
-            if (this.favTemp.username = this.username) {
+            if (this.favTemp.username == this.username) {
               this.favourited = true;
             } else {
               this.favourited = false;
