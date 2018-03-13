@@ -25,13 +25,11 @@ page-profile {
     height: fit-content;
     margin: 0% 0% 10% 0%;
 
-    .aboutme-text{
+    .aboutme-text {
       background-color: #e1cb44;
       height: 100%;
     }
   }
-
-
 
   #activity-card, #meetup-card, #gallery-card {
     margin: 0%;
@@ -63,25 +61,23 @@ page-profile {
     }
 
     ion-avatar img {
-      width: 100% !important;
-      height: 100% !important;
-      max-width: 100% !important;
+      width: 95% !important;
+      height: 95% !important;
+      max-width: 95% !important;
       min-width: 90px !important;
-      max-height: 100% !important;
+      max-height: 95% !important;
       min-height: 90px !important;
     }
-
   }
 
   .side-scroll {
     white-space: nowrap;
-    height: 150px;
+    height: 170px;
   }
 
   .upload-action-sheet {
     text-align: center;
     color: #013b63;
   }
-
 
 }
