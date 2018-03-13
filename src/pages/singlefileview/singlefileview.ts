@@ -69,7 +69,6 @@ export class SinglefileviewPage {
         this.ressuponseTemp1 = ressu;
         this.mediaFile.username = this.ressuponseTemp1.username;
       });
-
       this.mediaProvider.favouritesByFileId(this.filzu_id).subscribe((ressu: Favourites[]) => {
         this.favouriteID = ressu;
         //this.userIdCounter = (this.temp.match(/user_id/g) || []).length;
@@ -84,7 +83,7 @@ export class SinglefileviewPage {
               this.userId = response['user_id'];
               this.username = response['username'];
               console.log("OKAY LETS TRY THIS MF FAVOURITING AGAIN : " + this.username + this.favTemp.username);
-              if (this.favTemp.username == this.username) {
+              if (this.favTemp.username === this.username) {
                 this.favourited = true;
               } else {
                 this.favourited = false;
